@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sql 설정 : sql문, 반환 타입, 파라미터 설정 -->
+<mapper namespace="com.aia.it.planner.dao.PlannerDaoInterface">
+
+	<resultMap id="resultPlanner"
+			   type="com.aia.it.planner.model.Planner" >
+			   
+		<id property="pidx" column="pidx"/>		
+		<result property="ptitle" column="ptitle"/>	   
+		<result property="pstartdate" column="pstartdate"/>
+		<result property="penddate" column="penddate"/>
+		<result property="uidx" column="uidx"/>
+	</resultMap>
+	
+	<resultMap id="resultPlannerJoinDaily"
+		type="com.aia.it.planner.model.PlannerJoinDaily">
+
+		<id property="pidx" column="pidx" />
+		<result property="ptitle" column="ptitle" />
+		<result property="pstartdate" column="pstartdate" />
+		<result property="penddate" column="penddate" />
+		<result property="dloc" column="dloc" />
+		<result property="dloclon" column="dloclon" />
+		<result property="dloclat" column="dloclat" />
+		<result property="dmsg" column="dmsg" />
+		<result property="dphoto" column="dphoto" />
+		<result property="dtype" column="dtype" />
+		<result property="ddate" column="ddate" />
+		<result property="ddidx" column="ddidx" />
+		<result property="uidx" column="uidx" />
+		<result property="didx" column="didx" />
+
+	
+		</resultMap>
+
+	<insert id="insertPlanner"
+		parameterType="com.aia.it.planner.model.Planner" 
+		useGeneratedKeys="true"
+		keyProperty="pidx">
+		
+		INSERT INTO planit.planner (ptitle, pstartdate, penddate, uidx)
+		VALUES (#{ptitle},#{pstartdate},#{penddate},#{uidx})
+
+	</insert>
+	
+	
+	<!-- 플래너의 전체 개수 구하기 -->
+	 <select id="totalCnt"
+			resultType="int">
+			
+		select count(*) from planit.planner
+	
+	</select>
+	
+	
+	<!-- 플래너의 전체 리스트 출력 -->
+	<select id="selectTotalList" resultMap="resultPlanner">
+	select * from planit.planner order by pidx desc
+	</select>
+	
+	<!-- 데일리 리스트 출력  -->
+	<select id="selectDailyList" resultMap="resultPlannerJoinDaily">
+		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+
+	</select>
+
+
+	<!-- 데일리 리스트 출력  -->
+	<select id="selectDailyJoinList" resultMap="resultPlannerJoinDaily">
+		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+
+	</select>
+
+	
+	
+
+<!-- 	<select id="plannerJoinDaily"
+			resultMap="com.aia.it.planner.model.Planner">
+			
+		select p.pidx, p.ptitle, m.uidx, d.dmsg from member m join planner p
+		on m.uidx=p.uidx left outer join daily_plan d on p.pidx=d.pidx 
+		where m.uidx=#{uidx}	
+	
+	</select> -->
+	
+
+</mapper>

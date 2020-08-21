@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aia.it.member.dao.MemberDaoInterface">
+
+	<!-- select의 결과를 객체에 바인딩 역할 : 테이블의 컬럼명과 java beans의 변수의 이름 이 틀린 경우 -->
+	<resultMap type="com.aia.it.member.model.Member"
+		id="resultMember">
+		<id property="uidx" column="uidx" />
+		<id property="uid" column="uid" />
+		<id property="upw" column="upw" />
+	</resultMap>
+
+	<select id="selectByIdpw"
+		resultType="com.aia.it.member.model.Member">
+		select * from planit.member where uid=#{param1} and
+		upw=#{param2}
+	</select>
+
+	<select id="selectByIdx"
+		resultType="com.aia.it.member.model.Member">
+		select * from planit.member where uidx=#{id}
+	</select>
+
+	<select id="selectTotalList" resultMap="resultMember">
+		select * from
+		planit.member order by uidx desc
+	</select>
+
+	<select id="selectById" resultType="int">
+		select count(*) from
+		planit.member where uid=#{uid}
+	</select>
+
+	<select id="selectMemberById" resultMap="resultMember">
+		select * from planit.member where uid=#{uid}
+	</select>
+	
+	<select id="selectByUname" resultType="int">
+		select count(*) from
+		planit.member where uname=#{uname}
+	</select>
+
+	<!-- 한페이지에 보이게 -->
+	<select id="selectList" resultMap="resultMember">
+		select * from planit.member
+		order by uidx desc limit #{param1}, #{param2}
+	</select>
+
+	<!-- 전체가입자수 개수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from
+		planit.member
+	</select>
+
+
+	<insert id="insertMember"
+		parameterType="com.aia.it.member.model.Member" useGeneratedKeys="true"
+		keyProperty="uidx">
+
+		INSERT INTO planit.member (uid, upw, uname, uphonenum, uphoto, uverify)
+		VALUES (#{uid}, #{upw}, #{uname}, #{uphonenum}, #{uphoto},'Y')
+
+	</insert>
+	
+
+	
+	<!-- 이메일 인증 여부 수정 -->
+	<update id="verify">
+		update planit.member set uverify='Y'
+		where uid=#{param1} and ucode=#{param2}
+	</update>
+
+	<!--카카오 회원추가 -->
+	<insert id="insertKakaoMember"
+		parameterType="com.aia.it.member.model.Member" useGeneratedKeys="true"
+		keyProperty="uidx">
+	
+		INSERT INTO planit.member (uid, uname, upw, uphonenum, uphoto, ukakao, uverify)
+		VALUES (#{uid}, #{uname}, '임의로넣어줌', #{uphonenum}, #{uphoto}, 'Y', 'Y')
+
+
+	</insert>
+
+</mapper>

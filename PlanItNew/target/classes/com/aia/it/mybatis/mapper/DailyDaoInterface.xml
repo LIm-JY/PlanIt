@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sql 설정 : sql문, 반환 타입, 파라미터 설정 -->
+<mapper namespace="com.aia.it.daily.dao.DailyDaoInterface">
+
+<resultMap id="resultDaily"
+		type="com.aia.it.daily.model.Daily">
+
+		<id property="didx" column="didx" />
+		<result property="dloc" column="dloc" />
+		<result property="dloclon" column="dloclon" />
+		<result property="dloclat" column="dloclat" />
+		<result property="dmsg" column="dmsg" />
+		<result property="dphoto" column="dphoto" />
+		<result property="dtype" column="dtype" />
+		<result property="ddate" column="ddate" />		
+		<result property="ddidx" column="ddidx" />		
+		<result property="pidx" column="pidx" />		
+	</resultMap>
+
+
+	<insert id="insertDaily"
+		parameterType="com.aia.it.daily.model.Daily" 
+		useGeneratedKeys="true"
+		keyProperty="didx">
+
+		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, dmsg, dphoto, dtype, ddate, ddidx, pidx)
+		VALUES (#{dloc},#{dloclon},#{dloclat},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
+	</insert>
+	
+	<!-- 데일리 전체 개수 -->
+	<select id="totalCnt"
+			resultType="int">
+		select count(*) from planit.planner p left outer join planit.daily_plan d  
+		on p.pidx=d.pidx where p.pidx=#{pidx}
+	</select>
+	
+	
+	<!-- 데일리 목록 출력 -->
+	<select id="selectTotalList"
+			resultMap="resultDaily">
+		select count(*) from planit.planner p left outer join planit.daily_plan d  
+		on p.pidx=d.pidx where p.pidx=#{pidx}
+	</select>
+
+</mapper>

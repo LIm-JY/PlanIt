@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aia.it.board.dao.BoardDaoInterface">
+
+	<resultMap id="resultBoard"
+		type="com.aia.it.board.model.Board">
+
+		<id property="bidx" column="bidx" />
+		<result property="btitle" column="btitle" />
+		<result property="bmsg" column="bmsg" />
+		<result property="bphoto1" column="bphoto1" />
+		<result property="bphoto2" column="bphoto2" />
+		<result property="pidx" column="pidx" />
+		<result property="uidx" column="uidx" />
+	</resultMap>
+
+	<!-- 게시글 입력 -->
+
+	<insert id="insertBoard"
+		parameterType="com.aia.it.board.model.Board" useGeneratedKeys="true"
+		keyProperty="bidx">
+		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2)
+		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2})
+	</insert>
+
+	<!-- 게시판 리스트 출력 -->
+	<select id="selectTotalList" resultMap="resultBoard">
+		select * from
+		planit.board order by bidx desc
+	</select>
+
+	<!-- 전체게시글 개수 -->
+	<select id="totalCnt" resultType="int">
+		select count(*) from
+		planit.board
+	</select>
+
+	<!-- 한페이지에 보이게 될 게시글 수 -->
+	<select id="selectList" resultMap="resultBoard">
+		select * from planit.board 
+		order by bidx desc limit #{param1}, #{param2}
+	</select>
+
+
+	<!-- 게시글 수정 -->
+
+	<update id="editBoard"
+		parameterType="com.aia.it.board.model.Board">
+		UPDATE planit.board
+		SET
+		btitle = #{btitle},
+		bmsg = #{bmsg},
+		
+		
+		bphoto1 = #{bphoto1},
+		bphoto2 = #{bphoto2}
+		WHERE bidx = #{bidx}
+	</update>
+
+	<!-- 게시글 bidx로 조회 -->
+	<select id="selectByBidx"
+		resultType="com.aia.it.board.model.Board">
+		select * from planit.board where bidx=#{bidx}
+	</select>
+	
+	
+	<delete id="boardDelete" parameterType="com.aia.it.board.model.Board">
+      delete from planit.board where bidx=#{bidx}
+	</delete>
+   
+   <!-- 내가쓴 플래너 리스트 -->
+ 
+</mapper>

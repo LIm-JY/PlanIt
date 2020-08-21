@@ -1,0 +1,136 @@
+@charset "UTF-8";
+ * {margin: 0; padding: 0;}
+        body {background-color: #e3f2fd;}
+		#wrap {width: 1200px; margin: 0 auto;}
+		header {width: 100%; height: 100px; background: #81d4fa;}
+		.aside {float: left; width: 30%; height: 900px; background: #4fc3f7;}
+		.article1 {float: left; width: 70%; height: 300px; background: #29b6f6;}
+		.article2 {float: left; width: 70%; height: 300px; background: #03a9f4;}
+		.article3 {float: left; width: 70%; height: 300px; background: #039be5;}
+		footer {clear: both; width: 100%; height: 100px; background: #0288d1;}
+
+		/* 화면 너비 0 ~ 1000px */
+		@media (max-width: 1240px){
+			#wrap {width: 100%;}
+			.article1 {height: 300px;}
+			.article2 {height: 300px;}
+			.article3 {width: 100%;}
+		}
+
+		/* 화면 너비 0 ~ 768px */
+		@media (max-width: 768px){
+			.aside {width: 100%; height: 300px;}
+			.article1 {width: 50%;}
+			.article2 {width: 50%;}
+		}
+
+		/* 화면 너비 0 ~ 480px */
+		@media (max-width: 480px){
+			.article1 {width: 100%;}
+			.article2 {width: 100%;}
+		}
+
+#header {
+/* 	padding: 15px 20px;
+ */}
+
+#nav {
+	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #DDD;
+	overflow: hidden;
+	list-style: none;
+	font-size: 14px;
+}
+
+#nav>li {
+	float: left;
+	padding: 15px 20px;
+}
+
+footer {
+	text-align: center;
+	border: 1px solid #DDD;
+	/* padding: 20px 0; */
+	margin-top: 10px;
+}
+
+#nav+div {
+	padding : 25px;
+}
+
+.subtitle{
+	padding : 15px 0;
+	font-size: 1.2em;
+}
+
+hr {
+	border : 0px;
+	border-top:thin solid #ddd;
+	margin : 15px 0;
+}
+
+table.table {
+	
+	width : 80%;
+	border : 1px solid #DDD;
+	border-collapse: collapse;;
+	
+}
+
+table.table td, table.table th {
+	padding : 15px;
+	border: 1px solid #DDD;
+	
+	font-size: 14px;
+}
+
+table.table tr>td:nth-child(1){
+	text-align: center;
+	width : 200px;	
+	font-weight: bold;
+}
+
+input[type=text], input[type=password], input[type=email] {
+	padding : 3px;
+	width : 50%;
+	height : 30px;
+	font-size: 24px;
+}
+
+
+div.paging{
+	overflow: hidden;
+	margin-top : 20px;
+}
+
+div.paging>a.paging_num {
+	
+	display: block;
+	
+	float : left;
+
+	width : 30px;
+	height : 30px;
+	
+	text-align: center;
+	line-height: 30px;
+	
+	border : 2px solid #666;
+	
+	border-radius: 50%;
+	
+	padding : 5px;
+	margin : 0 10px;
+	
+}
+
+.now_page {
+	background-color:olive;
+	color : #FFF;
+	font-weight: bold;
+	
+}
+
+a {
+	text-decoration: none;	
+}
