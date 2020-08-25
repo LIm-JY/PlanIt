@@ -132,9 +132,12 @@ function regComment(){
        data : regFormData,
        
        success : function(data){
+    	  console.log(data);
           alert(data); 
+          
           /* dailyList(); */
           document.getElementById('commentRegForm').reset();
+          
           
 
        }
