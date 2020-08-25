@@ -22,4 +22,12 @@
             </c:if>
 
 </body>
+
+
 </html>
+
+<script>
+function Hi(){  
+      setTimeout('location.reload()',10000); 
+}
+</script>

@@ -14,14 +14,18 @@
 	
 		<c:if test="${result gt 0}">
 		<script>
-		alert(' 완료');
+		alert('완료');
+		history.go(-2);
+		window.reload();
+
 		</script>
 		</c:if>
 
 		<c:if test="${result lt 1}">
 		<script>
-		alert(' 실패');
-		
+		alert('실패');
+		history.back();
+
 	</script>
 	
 </c:if>

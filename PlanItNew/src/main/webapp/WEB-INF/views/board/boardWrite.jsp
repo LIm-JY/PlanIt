@@ -14,8 +14,8 @@
 	<script>
 	
 	alert(' 완료');
-	/* location.href = '<c:url value="/login/login"/>'; */
-
+	location.href='<c:url value="/board/boardList"/>';
+	
 	</script>
 		
 	
@@ -26,7 +26,9 @@
 	<script>
 	
 	alert(' 실패');
+	history.go(-1);
 
+	
 	</script>
 	
 	</c:if>

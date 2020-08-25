@@ -11,7 +11,6 @@
 
 </head>
 <body>
-<div>
 		<h1 class="subtitle">댓글 작성</h1>
 		<form action="<c:url value='/comment/comment'/>" method="post" enctype="multipart/form-data">
 			<table class="table" border="1">
@@ -23,7 +22,7 @@
 			
 				<tr>
 					<th><input type="text" id="bidx" name="bidx" value ="${viewBoard.bidx}" readonly></th>
-					<th><input type="text" name="uname" id="uname" value="${loginInfo.uname}"></th>
+					<th><input type="text" name="uname" id="uname" value="${loginInfo.uname}" readonly></th>
 					<th><input type="text" name="cmsg" id="cmsg"	required placeholder="댓글을 입력해주세요"></th>
 				</tr>
 				<tr>
@@ -31,6 +30,9 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+		
+
 </body>
+
+
 </html>

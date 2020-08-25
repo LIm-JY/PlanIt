@@ -15,12 +15,14 @@
 		<c:if test="${result gt 0}">
 		<script>
 		alert(' 완료');
+		history.go(-2);
 		</script>
 		</c:if>
 
 		<c:if test="${result lt 1}">
 		<script>
 		alert(' 실패');
+		history.go(-2);
 		
 	</script>
 	

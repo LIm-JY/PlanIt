@@ -16,7 +16,7 @@
 	<script>
 	
 	alert('댓글 등록 완료');
-	location.reload();
+	history.back();
 	</script>
 		
 	

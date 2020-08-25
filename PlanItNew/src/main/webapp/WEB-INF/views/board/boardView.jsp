@@ -51,9 +51,13 @@
 
 		</div>
 		
+		<div>
+		<%@ include file="/WEB-INF/views/comment/commentForm.jsp"%>
+		</div>
 		
 		
-	<div>
+		
+	<%-- <div>
 		<h1 class="subtitle">댓글 작성</h1>
 		<form id="commentRegForm" onsubmit="return false;" >
 			<table class="table" border="1">
@@ -73,7 +77,7 @@
 				</tr>
 			</table>
 		</form>
-	</div>
+	</div> --%>
 	
 		
 <c:if test="${not empty commentistView}">
@@ -117,16 +121,16 @@
 <script>
 
 
-function regComment(){
+ /* function regComment(){
     
     var regFormData = new FormData();
     regFormData.append('bidx', $('#bidx').val());
     regFormData.append('uname', $('#uname').val());
     regFormData.append('cmsg', $('#cmsg').val());
   
-    console.log(regFormData);
+    console.log(FormData);
     $.ajax({
-       url : 'http://localhost:8080/it/comment/comment',
+       url : 'http://localhost:8080/it/board/{bidx}/',
        type : 'post',
      
        data : regFormData,
@@ -135,7 +139,7 @@ function regComment(){
     	  console.log(data);
           alert(data); 
           
-          /* dailyList(); */
+          dailyList();
           document.getElementById('commentRegForm').reset();
           
           
@@ -144,6 +148,7 @@ function regComment(){
     });
     
  }
+ */
 
 
 
@@ -152,8 +157,7 @@ function regComment(){
 
 
 
-
-function commentDel(cidx){
+/* function commentDel(cidx){
 	   if(confirm('정말 삭제하시겠습니까?')){
 	      
 	      $.ajax({
@@ -162,14 +166,21 @@ function commentDel(cidx){
 	         success : function(data){
 	            
 	            alert(data);
-				/* commentList(); */
+				 commentList(); 
 	         }
 	      });
 	      
 	   }
+	} */
+	
+	
+	function commentDel(cidx) {
+		if (confirm('선택하신 댓글을 삭제하시겠습니까?')) {
+			location.href = '../comment/commentDelete?cidx=' + cidx;
+			
+		}
+	
 	}
-
-
 
 
 

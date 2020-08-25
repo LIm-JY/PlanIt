@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aia.it.board.model.BoardEditRequest;
 import com.aia.it.board.service.BoardEditService;
+import com.aia.it.comment.model.Comment;
 import com.aia.it.comment.model.CommentEditRequest;
 import com.aia.it.comment.service.CommentEditService;
 
@@ -36,14 +37,14 @@ public class CommentEditController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String getCommentEdit(
-			CommentEditRequest editRequest,
+			Comment comment,
 			HttpServletRequest request,
 			Model model
 			) throws IllegalStateException, IOException, SQLException {
 		
-		System.out.println("controller: "+editRequest);
+		System.out.println("controller: "+comment);
 		
-		model.addAttribute("result", editService.commentEdit(editRequest,request));
+		model.addAttribute("result", editService.commentEdit(comment));
 				return "comment/commentEdit";
 		
 	}

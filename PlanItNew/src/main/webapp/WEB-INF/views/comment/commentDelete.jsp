@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <script>
+
 	alert('${msg}');
-	opener.location.reload();
+	history.back();
 </script>

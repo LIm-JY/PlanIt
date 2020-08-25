@@ -29,18 +29,15 @@ public class CommentEditService {
 		return comment;
 	}
 	
-	public int commentEdit(CommentEditRequest editRequest, HttpServletRequest request) {
+	public int commentEdit(Comment comment) {
 		
 		dao = sessionTemplate.getMapper(CommentDaoInterface.class);
 
 		int result = 0;
 		System.out.println("수정전%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%result!"+result);
 
-		// MemberEditRequest -> Member : 이전 파일을 photo에 저장하고 시작
-		Comment comment = editRequest.toComment();
 		System.out.println("###########수@정@전!!"+comment);
 		System.out.println("입력 전 IDX ===> " + comment.getCidx());
-
 	
 
 		result=dao.editComment(comment);
