@@ -1,7 +1,5 @@
 package com.aia.it.comment.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,7 @@ public class CommentService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	public int commentWrite(Comment comment, HttpServletRequest request) {
+	public int commentWrite(Comment comment) {
 		
 		dao = sessionTemplate.getMapper(CommentDaoInterface.class);
 		

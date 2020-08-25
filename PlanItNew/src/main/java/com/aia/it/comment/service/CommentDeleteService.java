@@ -18,7 +18,7 @@ public class CommentDeleteService {
    private SqlSessionTemplate sessionTemplate;
    
    
-   public String commentDelete(int cidx, HttpServletRequest request) {
+   public String commentDelete(int cidx) {
       
       dao = sessionTemplate.getMapper(CommentDaoInterface.class);
       int result = 0;
