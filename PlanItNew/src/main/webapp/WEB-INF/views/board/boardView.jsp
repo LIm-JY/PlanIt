@@ -96,6 +96,7 @@
                      <th>${comment.uname}</th>
                      <th>${comment.cmsg}</th>
                      <th>${comment.cregdate}</th>
+                     
                      <th><a href="javascript:commentDel(${comment.cidx})">댓글삭제</a>|
 						 <a href="../comment/commentEdit?cidx=${comment.cidx}">댓글수정</a></th>
                   </tr>
