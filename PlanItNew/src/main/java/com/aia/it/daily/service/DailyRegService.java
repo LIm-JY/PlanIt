@@ -22,12 +22,16 @@ private DailyDaoInterface dao;
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	public int dailyReg(DailyRegRequest regRequest, HttpServletRequest request) {
+	public int dailyReg(
+			DailyRegRequest regRequest, 
+			HttpServletRequest request) {
+		
+		Daily daily = regRequest.toDaily();
+		
 		dao = sessionTemplate.getMapper(DailyDaoInterface.class);
 		
 		int result = 0;
 		System.out.println(regRequest.getDphoto());
-		Daily daily = regRequest.toDaily();
 
 		try {
 

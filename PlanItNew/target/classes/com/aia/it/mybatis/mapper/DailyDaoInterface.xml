@@ -21,7 +21,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pidx" column="pidx" />		
 	</resultMap>
 
+<resultMap id="editDaily"
+		type="com.aia.it.daily.model.DailyOrderEditForm">
 
+		<id property="didx" column="didx" />
+
+		<result property="ddate" column="ddate" />		
+		<result property="ddidx" column="ddidx" />		
+		
+	</resultMap>
+
+
+
+
+	<!-- 데일리 등록 -->
 	<insert id="insertDaily"
 		parameterType="com.aia.it.daily.model.Daily" 
 		useGeneratedKeys="true"
@@ -39,11 +52,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+
+	
+
+		
+	<!-- 데일리 순서 수정 -->
+	<update id="editMember"
+			parameterType="com.aia.it.daily.model.DailyOrderEditForm"
+	>
+	
+	update planit.member set ddate=#{ddate} , ddidx=#{ddidx} where didx=#{didx}
+	
+	</update>
+	
+	
+	
+	
+	
 	<!-- 데일리 목록 출력 -->
 	<select id="selectTotalList"
 			resultMap="resultDaily">
 		select count(*) from planit.planner p left outer join planit.daily_plan d  
 		on p.pidx=d.pidx where p.pidx=#{pidx}
 	</select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

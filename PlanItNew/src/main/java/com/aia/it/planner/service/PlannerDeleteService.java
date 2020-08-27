@@ -17,13 +17,15 @@ private PlannerDaoInterface dao;
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-public int plannerEdit(Planner planner, HttpServletRequest request) {
+	
+	
+public int deleteMember(int pidx) {
 		
 		dao = sessionTemplate.getMapper(PlannerDaoInterface.class);
 		
 		int result = 0;
 		
-//		result = dao.deletePlannerByIdx(planner);
+		result = dao.deletePlannerByIdx(pidx);
 		
 		return result;
 	}

@@ -15,7 +15,7 @@ public interface PlannerDaoInterface {
 	int totalCnt();
 	
 	//플래너 한페이지에 노출할 개수와 인덱스(데일리조인)
-	List<Planner> selectList();
+	List<Planner> selectPlannerByIdx(int uidx);
 	
 	//플래너의 리스트 목록
 	List<Planner> selectTotalList();
@@ -29,7 +29,7 @@ public interface PlannerDaoInterface {
 	
 	Planner plannerJoinDaily(int uidx);
 
-	public int deletePlannerByIdx(Planner planner);
+	public int deletePlannerByIdx(int pidx);
 
 	public int editPlanner(Planner planner);
 

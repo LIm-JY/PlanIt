@@ -29,8 +29,9 @@ public class PlannerDeleteController {
 									Planner planner,
 									Model model) {
 			System.out.println(planner);
-			model.addAttribute("result", deleteService.plannerEdit(planner, request));
-			return "planner/plannerDelete";
+			/*
+			 * model.addAttribute("result", deleteService.deleteMember(pidx);
+			 */			return "planner/plannerDelete";
 		}
 	
 	
