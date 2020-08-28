@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		id="resultMember">
 		<id property="uidx" column="uidx" />
 		<id property="uid" column="uid" />
-		<id property="upw" column="upw" />
+		<id property ="upw" column="upw" />
 	</resultMap>
 
 	<select id="selectByIdpw"
