@@ -1,6 +1,5 @@
 package com.aia.it.daily.model;
 
-import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 

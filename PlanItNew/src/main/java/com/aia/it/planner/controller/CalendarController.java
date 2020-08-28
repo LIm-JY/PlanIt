@@ -25,7 +25,7 @@ public class CalendarController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getCalendarForm() {
-		return "planner/calendarForm";
+		return "planner/calendarRegForm";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -38,7 +38,9 @@ public class CalendarController {
 			Model model) {
 		
 		model.addAttribute("result", regService.plannerReg(planner, request));
+		
 		model.addAttribute("dateList", calService.getDateList(pstartdate, penddate));
+		
 		model.addAttribute("startdate",pstartdate);
 		model.addAttribute("enddate",penddate);
 		model.addAttribute("ptitle",ptitle);

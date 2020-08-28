@@ -1,5 +1,7 @@
 package com.aia.it.planner.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,15 +21,14 @@ private PlannerDaoInterface dao;
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-public int plannerList(HttpServletResponse response, HttpServletRequest request) {
+	List<Planner> plannerList = null;
+	
+public List<Planner> plannerList(int uidx) {
 		
 		dao = sessionTemplate.getMapper(PlannerDaoInterface.class);
 		
-		int result = 0;
-		
-//		result = dao.selectList();
-		
-		return result;
+	
+		return dao.selectPlannerByIdx(uidx);
 	}
 	
 	

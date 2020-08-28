@@ -28,8 +28,9 @@ public class DailyListService {
 	DailyList listView = null;
 	
 	public List<PlannerJoinDaily> getView(
-			HttpServletRequest request, 
-			int uidx) {
+			 
+			int uidx,
+			int pidx) {
 		
 		//view로 전달할 결과 데이터
 		

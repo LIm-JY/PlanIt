@@ -2,7 +2,6 @@ package com.aia.it.daily.model;
 
 import java.util.List;
 
-import com.aia.it.planner.model.Planner;
 import com.aia.it.planner.model.PlannerJoinDaily;
 
 public class DailyList {
