@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     
 <!DOCTYPE html>
 <html>
@@ -9,7 +10,7 @@
 <title>Sign up</title>
 </head>
 <body>
-	<%@ include file = "/WEB-INF/views/include/header.jsp" %>
+	<%@ include file = "/WEB-INF/views/include/header2.jsp" %>
 	
 	<div> 
 		<h2 class = "subtitle">회원가입</h2>
@@ -22,6 +23,9 @@
 			<c:if test = "${result lt 1}">
 				<div>회원가입 실패</div>
 			</c:if>
+<!-- 			<script> 
+			location.href = "home"
+			</script> -->
 			
 		</h3>
 	</div>

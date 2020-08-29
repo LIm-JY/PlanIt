@@ -8,9 +8,33 @@
 <title>Register Form</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/default.css"/>
-
+	href="${pageContext.request.contextPath}/css/default.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+html, body, h1, h2, h3, h4 {
+	font-family: "Lato", sans-serif
+}
+
+.mySlides {
+	display: none
+}
+
+.w3-tag, .fa {
+	cursor: pointer
+}
+
+.w3-tag {
+	height: 15px;
+	width: 15px;
+	padding: 0;
+	margin-top: 6px
+}
+
+/* 아이디 체크 시 글씨 색상 */
 .check_ok {
 	color: blue;
 }
@@ -24,51 +48,47 @@
 }
 </style>
 </head>
+
 <body>
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<div>
-		<h2 class="subtitie">회원가입</h2>
-		<hr>
-		<form id="regForm" method="post" enctype="multipart/form-data">
-			<table class="table">
-				<tr>
-					<td>이메일</td>
-					<td><input type="email" name="uid" id="uid">
-					<span id="checkmsg"></span>
-					<input type="checkbox" name="idchk" id="idchk">
-					</td>
-				</tr>
-				
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="upw" required></td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="uname" id = 'uname'>
-					<span id="checkmsg02"></span>
-					<input type="checkbox" name="namechk" id="namechk">
-					</td>
-				</tr>
-				
-				<tr>
-					<td>전화번호</td>
-					<td><input type="text" name="uphonenum" required></td>
-				</tr>
-				
-				<tr>
-					<td>프로필</td>
-					<td><input type="file" name="photo"></td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td><input type="submit" name="회원가입"> <input
-						type="reset"></td>
-				</tr>
-			</table>
-		</form>
+	<%@ include file="/WEB-INF/views/include/header2.jsp"%>
+
+	<!-- Contact -->
+	<div class="w3-center w3-padding-64" id="registerForm">
+		<span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">회원가입</span>
 	</div>
+
+	<form class="w3-container" id="regForm" method="post" enctype="multipart/form-data">
+		<div class="w3-section">
+			<label>Name</label> 
+			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
+				type="text" name="uname" id ="uname" required>
+			<input type="checkbox" name="namechk" id="namechk">
+		</div>
+		<div class="w3-section">
+			<label>Email</label> 
+			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
+				type="email" name="uid" id = "uid" required>
+			<input type="checkbox" name="idchk" id="idchk">
+		</div>
+		<div class="w3-section">
+			<label>Password</label> 
+			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
+				type ="password" name="upw" required>	
+		</div>
+		<div class="w3-section">
+			<label>Phone Number</label> 
+			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
+				type = "text" name="uphonenum" required>
+		</div>
+		<div class="w3-section">
+			<label>Profile</label> 
+			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
+				type = "file" name = "photo">
+		</div>
+		<button type="submit" class="w3-button w3-block w3-black">가입하기</button>
+
+	</form>
+
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
@@ -165,7 +185,7 @@
 		});
 
 	});
-</script> 
+</script>
 
 <!-- <script>
 

@@ -62,11 +62,11 @@ public class LoginService {
 			}
 
 			// 로그인 이 필요했던 이전 페이지
-			loginResult = "<script>" + "alert('hi~');" + "location.href='" + loginRequest.getRedirectUri() + "'" + "</script>";
+			loginResult = "<script>" + "location.href='" + loginRequest.getRedirectUri() + "'" + "</script>";
 
 		} else if(member != null && member.getUverify() == 'N') {
 
-			loginResult = "<script>"; 
+			loginResult = "<script>"  ; 
 			loginResult += "	if(confirm('회원 가입 후 메일인증이 안되었습니다.\n인증메일을 다시 보내시겠습니까?')) {";
 			loginResult += "		$.ajax(\'../member/verify/reMailSend?uid="+member.getUid()+"\',{})";
 			loginResult += "	}";
@@ -74,7 +74,7 @@ public class LoginService {
 			loginResult += "</script>";
 			
 		} else{
-			loginResult = "<script>" + "alert('아이디 또는 비밀번호가 잘못되었습니다.');" + "history.go(-1);" + "</script>";
+			loginResult = "<script>" + "alert('please enter a correct password.');" + "history.go(-1);" + "</script>";
 		}
 
 		return loginResult;

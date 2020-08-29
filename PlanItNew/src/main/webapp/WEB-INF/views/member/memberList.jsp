@@ -10,6 +10,10 @@
 <link rel="stylesheet" href="<c:url value="/css/default.css" />">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+<!-- table/paging css -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 <style>
 	td>img{
@@ -41,8 +45,11 @@
 </style>
 </head>
 <body>
+
+
+
 	
-	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/include/header2.jsp"%>
 
 	<div>
 		<h1 class="subtitle">회원 리스트</h1>
@@ -54,6 +61,7 @@
 		
 		<div class="searchBox">
 			<form>
+			
 				<select name="searchType">
 					<option value="id">ID</option>
 					<option value="name">NAME</option>
@@ -62,10 +70,12 @@
 				<input type="text" name="keyword">
 				<input type="submit" value="검색">
 				<input type="button" value="전체리스트 보기" onclick="memberList();">
+			
 			</form>		
 		</div>
 
-		<table class="table">
+		<table class="table table-hover">
+			<thead>
 			<tr>
 				<th>no</th>
 				<th>아이디</th>
@@ -74,10 +84,11 @@
 				<th>사진</th>
 				<th>관리</th>
 			</tr>
-			
+			</thead>
 		<c:if test="${not empty listView.memberList }">
 		<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
 		<c:forEach items="${listView.memberList}" var="member">
+			<tbody>
 			<tr>
 				<td>${member.uidx}</td>
 				<td>${member.uid}</td>
@@ -93,6 +104,7 @@
 				
 				</td>
 			</tr>
+			</tbody>
 		</c:forEach>
 		</c:if>
 		
@@ -106,11 +118,15 @@
 		</table>
 		
 		<div class="paging">
-			<c:forEach begin="1" end="${listView.pageTotalCnt}" var="i">
 			
+			<c:forEach begin="1" end="${listView.pageTotalCnt}" var="i">
+			<ul class = "pagination pagination"> 
+			<li>
 			<a class="paging_num ${i == listView.currentPageNum ? 'now_page' : ''}" 
 			href="memberList?page=${i}" >${i}</a>
-			
+			</li>		
+			</ul>
+	
 			</c:forEach>
 		</div>
 

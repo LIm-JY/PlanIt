@@ -3,75 +3,108 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Welcome</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<%-- <link rel="stylesheet" href="<c:url value="/css/default.css"/>"/> --%>
-<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/default.css"/> --%>
-<link rel="stylesheet" href="<c:url value='/css/default.css'/>"> 
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>로그인</title>
+    <style> 
+      
+    html {height: 100%;}  
+    
+    body {
+	    width:100%;
+	    height:100%;
+	    margin: 0;
+  		padding-top: 80px;
+  		padding-bottom: 40px;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		background:linear-gradient(to bottom right);
+	}
+    
+    /*로그인 폼(카드) 위치*/
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	
+	.btn-primary {
+	    color: #fff;
+	    background-color: #00CED1; /* DarkTurquoise #00CED1 */
+	    border-color: #00CED1;
+	
+    </style>
+    
+    
+    </head>
+    
+    
+
+
+ <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
  
-</head>
-<body>
-
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<div>
-		<h2 class="subtitle">로그인</h2>
-		<hr>
-		<c:if test="${!empty loginInfo}">
-		
-		<script> location.href = 'member/memberList';  </script>
-		
+    <!--로그인 폼 전체-->
+	<div class="card align-middle" style="width:20rem; border-radius:20px;">
+	
+		<c:if test="${!empty loginInfo}">	
+			<script> location.href = 'board/boardList';  </script>
 		</c:if>
+		
+		
+		<!--로그인 폼 타이틀-->
+        <div class="card-title" style="margin-top:30px;">
+			<h2 class="card-title text-center" style="color:#113366;">Plan It!</h2>
+		</div>
+        
+        <!--로그인 폼 바디-->
 		<c:if test="${empty loginInfo}">
-		<form action="<c:url value='/login/login'/>" method="post" >
-			<input type="hidden" name="redirectUri" value="${header.referer}"
+		<div class="card-body">
+            <form action="<c:url value='/login/login'/>" method="post">
+                <input type="hidden" name="redirectUri" value="${header.referer}"
 				style="width: 50%;">
-
-			<table class="table">
-				<tr>
-					<td></td>
-					<td><input type="email" name="uid" value="${cookie.uid.value}"
-						placeholder="이메일을 입력하세요."></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="password" name="upw"
-						placeholder="비밀번호를 입력하세요."></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="checkbox" name="remember" value="r"
-						${cookie.uid != null ? 'checked' : '' }> 아이디 기억하기</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="로그인"></td>
-				</tr>
-
-				<tr>
-				<td></td>
-					<td><%-- <c:if test="${empty loginInfo}"> --%>
-							<a id="custom-login-btn" href="${kakao_url}"> <img
-								src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-								width="222" /></a></td> 
-
- 				</tr>
-
-
-
-			</table>
-			</form>
-			</c:if>
-	
-	
+                <h6 class="form-signin-heading">로그인 정보를 입력하세요</h6>
+       
+                <label for="inputEmail" class="sr-only">이메일을 입력하세요.</label>
+                <input type="email" id="uid" name = "uid" class="form-control" value="${cookie.uid.value}" placeholder="이메일을 입력하세요." required autofocus><BR>
+       
+                <label for="inputPassword" class="sr-only">비밀번호를 입력하세요.</label>
+                <input type="password" id="upw" name ="upw" class="form-control" placeholder="비밀번호를 입력하세요." required><br>
+       
+                <div class="checkbox">
+                <label>
+                <input type="checkbox" name = "remember" value="r" 
+                ${cookie.uid != null ? 'checked' : '' }> ID 기억하기
+                </label>
+                </div>
+    
+                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style ="height : 60.27px">로 그 인</button>
+                
+                <hr>
+                
+                <a id="custom-login-btn" href="${kakao_url}"> 
+                <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+								width="278"/></a>
+                </form>
+      
+		</div>
+		</c:if>
 	</div>
-<%-- 	<a id="custom-login-btn" href="${kakao_url}"> <img
-								src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-								width="222" /></a>
-	 --%>
 
-
-</body>
+	<div class="modal">
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+  </body>
 </html>
