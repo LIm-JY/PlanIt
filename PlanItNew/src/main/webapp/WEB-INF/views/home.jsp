@@ -1,141 +1,362 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
-    <title>로그인</title>
-    <style> 
-      
-    html {height: 100%;}  
-    
-    body {
-	    width:100%;
-	    height:100%;
-	    margin: 0;
-  		padding-top: 80px;
-  		padding-bottom: 40px;
-  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-  		background-repeat: no-repeat;
-  		/* 선형 그래디언트 + 두가지색상 이어줌 */
-  		/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
-	}
-    
-    #loginFormLogo{
-    	margin-top:18px; 
-	    font-family: 'Montserrat Alternates', sans-serif;
-	    color: #00CED1;
-    }
-    
-    
-    /*로그인 폼(카드) 위치*/
-    .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+		<!-- Website CSS style -->
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100;400&family=Work+Sans:ital,wght@0,200;0,300;0,400;1,200&display=swap" rel="stylesheet">
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+<title>Admin</title>
+<style> 
+
+body, html{
+    height: 100%;
+ 	background-repeat: no-repeat;
+ 	background-color: white;
+ 	font-family: 'Oxygen', sans-serif;
+}
+
+.main{
+ 	margin-top: 50px;
+}
+
+h3.title { 
+	font-size: 30px;
+	font-family: 'Jua'; 
+	font-weight: 400; 
+	color: #00CED1;
 	
-	.btn-primary {
-	    color: #fff;
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 5px;
+}
+
+.main-login{
+/*     border: 1px solid lightgrey;  */
+ 	background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.main-center{
+ 	margin-top: 15px;
+ 	margin: 0 auto;
+ 	max-width: 330px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
+/* 아이디 체크 시 글씨 색상 */
+.check_ok {
+	color: blue;
+}
+
+.check_not {
+	color: red;
+}
+
+#regSubmitBtn{
+		color: #fff;
 	    background-color: #00CED1; /* DarkTurquoise #00CED1 */
 	    border-color: #00CED1;
-	    }
-	    
-	#btn-Yes{
-		font-size: 14px;
+	    font-size: 14px;
 		font-weight: bolder;
-	}	
-	
-	.rememberChkBox{
-		size: 13px; 
-	 	color : grey;
-	}
-	
-	.regFormBtnDiv{
-		text-align : center; 
-	}
-	
-	.check_ok {color: blue;}
-	.check_not {color: red;}
- /* 	#idpwchk{display: none;} */
-	
-	
-    </style>
-    
-    
-    </head>
-    
-    
 
+}
 
- <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
- 
- 	<c:if test="${!empty loginInfo}">	
-	 	<script> location.href = "${pageContext.request.contextPath}/board/boardList"</script>
-	</c:if>
- 
- 
-    <!--로그인 폼 전체-->
-	<div class="card align-middle" style="width:20rem; border-radius:20px;">	
-		<!--로그인 폼 타이틀-->
-        <div class="card-title" style="margin-top:20px;">
-			<h2 id = "loginFormLogo" class="card-title text-center">Plan It!</h2>
+#idchk, #namechk{
+	display: none;
+}
+
+#input-file-button{
+  width: 278px;
+  padding: 6px 10px;
+  background-color: white;
+  border-radius: 4px;
+  color: lightgrey;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid lightgrey;
+}  
+    
+</style>
+</head>
+	<body>
+		<div class="container" id="registerForm">
+			<div class="row main"> 
+				<div class="main-login main-center" style="width:40em; border-radius:20px;">
+                    <div class="panel-heading">
+                        <div class="panel-title text-center" id = "panel-title">
+	               		<h3 class="title">회원가입</h3>
+	               		<hr>
+	               	   </div>
+                    </div> 
+					<form class="form-horizontal"  id="regForm" method="post" enctype="multipart/form-data">
+						
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
+								</div>
+							</div>
+                        <input type="checkbox" name="idchk" id="idchk">
+                        <span  id="checkmsg"></span>
+						</div>
+                        <div class="form-group">
+
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="upw" id="upw"  placeholder="패스워드를 입력하세요." required/>
+								</div>
+							</div>
+						</div>
+
+<!--						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="패스워드를 확인합니다."/>
+								</div>
+							</div>
+						</div>-->
+                        
+                        <div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uname" id="uname"  placeholder="닉네임을 입력하세요." required/>
+								</div>
+							</div>
+                         <input type="checkbox" name="namechk" id="namechk">
+			             <span  id="checkmsg02"></span>
+						</div>
+                        
+                        <div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uphonenum" id="uphonenum"  placeholder="연락처를 입력하세요."/>
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="form-group">
+                            <div class ="cols-sm-10" id = "inputFileContainer"> 
+                                <div class ="input-group" id = "inputFileContainer">
+                                    <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드</label>
+                                <input type="file" id="input-file" style= "display: none"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+
+						<div class="form-group ">
+							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button" style ="height : 41.7px; margin-bottom : 5px;">작성완료</button>
+						</div>
+						<div class="login-register">
+				            <a href="<c:url value="/home"/>" >뒤로 돌아가기</a>
+				         </div>
+					</form>
+				</div>
+			</div>
 		</div>
-        
-        <!--로그인 폼 바디-->
-		<c:if test="${empty loginInfo}">
-		<div class="card-body">
-            <form action="<c:url value='/login/login'/>" id = "loginForm" method="post">
-                <input type="hidden" name="redirectUri" value="${header.referer}"
-				style="width: 50%;">
-                <h6 class="form-signin-heading" style = "text-align : center; font-size: 12px; color: grey;">로그인 정보를 입력하세요</h6>
-                <hr>
-       
-                <label for="inputEmail" class="sr-only">이메일을 입력하세요.</label> 
-                <input type="email" id="uid" name ="uid" class="form-control" value="${cookie.uid.value}" placeholder="이메일을 입력하세요." required autofocus><BR>
-       
-                <label for="inputPassword" class="sr-only">비밀번호를 입력하세요.</label>
-                <input type="password" id="upw" name ="upw" class="form-control" placeholder="비밀번호를 입력하세요." required><br>
-       			
-       			<span  id="checkmsg"></span>
-       			
-                <div class="checkbox">
-                <label for="remember" class="rememberChkBox" >
-                <input type="checkbox" name = "remember" value="r" 
-                ${cookie.uid != null ? 'checked' : '' }> ID 기억하기
-                </label>
-                </div>
-    
-                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style ="height : 41.7px; margin-bottom : 5px;">로그인</button>
-                
-                <a id="custom-login-btn" href="${kakao_url}"> 
-                <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
-								width="278"/></a><hr>
-				
-				<div class = "regFormBtnDiv">
-                <a href = "<c:url value="/member/memberReg"/>" style ="color : #00CED1;">회원가입 </a>
-                </div>
-                </form>
-      
-		</div>
-		</c:if>
-	</div>
 
-	<div class="modal">
-	</div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-  </body>
+        <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+	</body>
+</html>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		$('#regForm').submit(function() {
+			if (!$('#idchk').prop('checked')) {
+				alert('아이디 중복 체크를 하세요.');
+				$('#uid').focus();
+				return false;
+			}
+		});
+		$('#uid').focusin(function() {
+			$(this).val('');
+			$('#idchk').prop('checked', false);
+			$('#checkmsg').text('');
+			$('#checkmsg').removeClass('check_not');
+			$('#checkmsg').removeClass('check_ok');
+		});
+
+		$('#uid').focusout(function() {
+			if ($(this).val().length < 1) {
+				$('#checkmsg').text("이메일을 입력해주세요.");
+				$('#checkmsg').addClass('check_not');
+				return false;
+			}
+
+			//ajax 비동기 통신
+
+			$.ajax({
+				url : 'idCheck',
+				data : {
+					uid : $(this).val()
+				},
+				success : function(data) {
+					if (data == 'Y') {
+						$('#checkmsg').text("사용가능한 이메일입니다.");
+						$('#checkmsg').addClass('check_ok');
+						$('#idchk').prop('checked', true);
+					} else {
+						$('#checkmsg').text("사용중인 이메일입니다.");
+						$('#checkmsg').addClass('check_not');
+						$('#idchk').prop('checked', false);
+					}
+				}
+			});
+		});
+
+		//닉네임 중복
+
+		$('#regForm').submit(function() {
+			if (!$('#namechk').prop('checked')) {
+				alert('닉네임 중복 체크를 해주세요');
+				$('#uname').focus();
+				return false;
+			}
+		});
+
+		$('#uname').focusin(function() {
+			$(this).val('');
+			$('#namechk').prop('checked', false);
+			$('#checkmsg02').text('');
+			$('#checkmsg02').removeClass('check_not');
+			$('#checkmsg02').removeClass('check_ok');
+		});
+
+		$('#uname').focusout(function() {
+			if ($(this).val().length < 1) {
+				$('#checkmsg02').text("닉네임을 입력해주세요.");
+				$('#checkmsg02').addClass('check_not');
+				return false;
+			}
+
+			//ajax 닉네임 중복
+
+			$.ajax({
+				url : 'nameCheck',
+				data : {
+					uname : $(this).val()
+				},
+				success : function(data) {
+					if (data == 'Y') {
+						$('#checkmsg02').text("사용가능한 닉네임입니다.");
+						$('#checkmsg02').addClass('check_ok');
+						$('#namechk').prop('checked', true);
+					} else {
+						$('#checkmsg02').text("사용중인 닉네임입니다.");
+						$('#checkmsg02').addClass('check_not');
+						$$('#namechk').prop('checked', false);
+					}
+				}
+			});
+		});
+
+	});
+</script>
+
+<!-- <script>
+
+	$(document).ready(function(){
+		
+		$('#regForm').submit(function(){
+			if(!$('#idchk').prop('checked')){
+				alert('아이디 중복 체크를 하세요.'); 
+				$('#uid').focus(); 
+				return false; 
+			}
+		}); 
+
+		$('#uid').focusin(function(){
+			$(this).val(''); 
+			$('#idchk').prop('checked', false); 
+			$('#checkmsg').text(''); 
+			$('#checkmsg').removeClass('check_not'); 
+			$('#checkmsg').removeClass('check_ok'); 
+		}); 
+		
+		$('#uid').focusout(function(){
+			if($(this).val().length<1){
+				$('#checkmsg').text("이메일을 입력해주세요."); 
+				$('#check,sg').addClass('check_not');
+				return false; 
+			}	
+			
+			//ajax 비동기 통신
+			
+			$.ajax({
+				url : 'idCheck', 
+				data : {uid : $(this).val()}, 
+				success : function(data){
+					if(data == 'Y'){
+						$('#checkmsg').text("사용가능한 이메일입니다.");
+						$('#checkmsg').addClass('check_ok');
+						$('#idchk').prop('checked', true); 
+					} else {
+						$('#checkmsg').text("사용중인 이메일입니다."); 
+						$('#checkmsg').addClass('check_not'); 
+						$$('#idchk').prop('checked', false); 
+					}	
+				}
+			}); 
+		});
+	}); 
+	
+
+</script> -->
