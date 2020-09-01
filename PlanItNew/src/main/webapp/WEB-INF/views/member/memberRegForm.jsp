@@ -15,12 +15,13 @@
 
 		<!-- Website Font style -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	    <script src="https://kit.fontawesome.com/yourcode.js"></script>
 		
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100;400&family=Work+Sans:ital,wght@0,200;0,300;0,400;1,200&display=swap" rel="stylesheet">
 		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 
-<title>Admin</title>
+<title>회원가입</title>
 <style> 
 
 body, html{
@@ -62,7 +63,7 @@ input::-webkit-input-placeholder {
 }
 
 .main-login{
-/*     border: 1px solid lightgrey;  */
+    border: 0.5px solid lightgrey; 
  	background-color: #fff;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
@@ -108,7 +109,7 @@ input::-webkit-input-placeholder {
 
 }
 
-#idchk, #namechk {
+#idchk, #namechk{
 	display: none;
 }
 
@@ -117,12 +118,19 @@ input::-webkit-input-placeholder {
   padding: 6px 10px;
   background-color: white;
   border-radius: 4px;
-  color: lightgrey;
+  color: #00CED1;
   cursor: pointer;
+  font-size: 13px;
   text-align: center;
-  border: 1px solid lightgrey;
-}  
-    
+  
+ /*  border: 1px solid lightgrey; */
+} 
+
+#goBackBtn{
+ color: lightGrey; 
+
+}
+
 </style>
 </head>
 	<body>
@@ -152,7 +160,7 @@ input::-webkit-input-placeholder {
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="패스워드를 입력하세요." required/>
+									<input type="password" class="form-control" name="upw" id="upw"  placeholder="패스워드를 입력하세요." required/>
 								</div>
 							</div>
 						</div>
@@ -169,8 +177,8 @@ input::-webkit-input-placeholder {
                         <div class="form-group">
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="닉네임을 입력하세요." required/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uname" id="uname"  placeholder="닉네임을 입력하세요." required/>
 								</div>
 							</div>
                          <input type="checkbox" name="namechk" id="namechk">
@@ -180,8 +188,8 @@ input::-webkit-input-placeholder {
                         <div class="form-group">
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="연락처를 입력하세요."/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-phone" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uphonenum" id="uphonenum"  placeholder="연락처를 입력하세요."/>
 								</div>
 							</div>
 						</div>
@@ -189,19 +197,20 @@ input::-webkit-input-placeholder {
                         <div class="form-group">
                             <div class ="cols-sm-10" id = "inputFileContainer"> 
                                 <div class ="input-group" id = "inputFileContainer">
-                                    <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드</label>
+                                    <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드
+                                    <i class="fa fa-search" aria-hidden="true"></i>　</label>
+                                    
                                 <input type="file" id="input-file" style= "display: none"/>
                                 </div>
                             </div>
                         </div>
-                        
-                        <hr>
 
 						<div class="form-group ">
 							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button" style ="height : 41.7px; margin-bottom : 5px;">작성완료</button>
 						</div>
 						<div class="login-register">
-				            <a href="<c:url value="/home"/>" >뒤로 돌아가기</a>
+				            <a href="<c:url value="/home"/>" >
+				            <span id = "goBackBtn">뒤로 돌아가기</span></a>
 				         </div>
 					</form>
 				</div>
