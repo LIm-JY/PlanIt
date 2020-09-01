@@ -12,6 +12,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
     <title>로그인</title>
     <style> 
       
@@ -25,8 +26,16 @@
   		padding-bottom: 40px;
   		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
   		background-repeat: no-repeat;
-  		background:linear-gradient(to bottom right);
+  		/* 선형 그래디언트 + 두가지색상 이어줌 */
+  		/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
 	}
+    
+    #loginFormLogo{
+    	margin-top:18px; 
+	    font-family: 'Montserrat Alternates', sans-serif;
+	    color: #00CED1;
+    }
+    
     
     /*로그인 폼(카드) 위치*/
     .card {
@@ -36,11 +45,30 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 	
-	
 	.btn-primary {
 	    color: #fff;
 	    background-color: #00CED1; /* DarkTurquoise #00CED1 */
 	    border-color: #00CED1;
+	    }
+	    
+	#btn-Yes{
+		font-size: 14px;
+		font-weight: bolder;
+	}	
+	
+	.rememberChkBox{
+		size: 13px; 
+	 	color : grey;
+	}
+	
+	.regFormBtnDiv{
+		text-align : center; 
+	}
+	
+	.check_ok {color: blue;}
+	.check_not {color: red;}
+ /* 	#idpwchk{display: none;} */
+	
 	
     </style>
     
@@ -52,47 +80,51 @@
 
  <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
  
+ 	<c:if test="${!empty loginInfo}">	
+	 	<script> location.href = "${pageContext.request.contextPath}/board/boardList"</script>
+	</c:if>
+ 
+ 
     <!--로그인 폼 전체-->
-	<div class="card align-middle" style="width:20rem; border-radius:20px;">
-	
-		<c:if test="${!empty loginInfo}">	
-			<script> location.href = 'board/boardList';  </script>
-		</c:if>
-		
-		
+	<div class="card align-middle" style="width:20rem; border-radius:20px;">	
 		<!--로그인 폼 타이틀-->
-        <div class="card-title" style="margin-top:30px;">
-			<h2 class="card-title text-center" style="color:#113366;">Plan It!</h2>
+        <div class="card-title" style="margin-top:20px;">
+			<h2 id = "loginFormLogo" class="card-title text-center">Plan It!</h2>
 		</div>
         
         <!--로그인 폼 바디-->
 		<c:if test="${empty loginInfo}">
 		<div class="card-body">
-            <form action="<c:url value='/login/login'/>" method="post">
+            <form action="<c:url value='/login/login'/>" id = "loginForm" method="post">
                 <input type="hidden" name="redirectUri" value="${header.referer}"
 				style="width: 50%;">
-                <h6 class="form-signin-heading">로그인 정보를 입력하세요</h6>
+                <h6 class="form-signin-heading" style = "text-align : center; font-size: 12px; color: grey;">로그인 정보를 입력하세요</h6>
+                <hr>
        
-                <label for="inputEmail" class="sr-only">이메일을 입력하세요.</label>
-                <input type="email" id="uid" name = "uid" class="form-control" value="${cookie.uid.value}" placeholder="이메일을 입력하세요." required autofocus><BR>
+                <label for="inputEmail" class="sr-only">이메일을 입력하세요.</label> 
+                <input type="email" id="uid" name ="uid" class="form-control" value="${cookie.uid.value}" placeholder="이메일을 입력하세요." required autofocus><BR>
        
                 <label for="inputPassword" class="sr-only">비밀번호를 입력하세요.</label>
                 <input type="password" id="upw" name ="upw" class="form-control" placeholder="비밀번호를 입력하세요." required><br>
-       
+       			
+       			<span  id="checkmsg"></span>
+       			
                 <div class="checkbox">
-                <label>
+                <label for="remember" class="rememberChkBox" >
                 <input type="checkbox" name = "remember" value="r" 
                 ${cookie.uid != null ? 'checked' : '' }> ID 기억하기
                 </label>
                 </div>
     
-                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style ="height : 60.27px">로 그 인</button>
-                
-                <hr>
+                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style ="height : 41.7px; margin-bottom : 5px;">로그인</button>
                 
                 <a id="custom-login-btn" href="${kakao_url}"> 
-                <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-								width="278"/></a>
+                <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
+								width="278"/></a><hr>
+				
+				<div class = "regFormBtnDiv">
+                <a href = "<c:url value="/member/memberReg"/>" style ="color : #00CED1;">회원가입 </a>
+                </div>
                 </form>
       
 		</div>
@@ -107,4 +139,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
   </body>
-</html>

@@ -1,39 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="ko">
 <meta charset="UTF-8">
-<title>Register Form</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/default.css" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html, body, h1, h2, h3, h4 {
-	font-family: "Lato", sans-serif
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+		<!-- Website CSS style -->
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100;400&family=Work+Sans:ital,wght@0,200;0,300;0,400;1,200&display=swap" rel="stylesheet">
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+<title>Admin</title>
+<style> 
+
+body, html{
+    height: 100%;
+ 	background-repeat: no-repeat;
+ 	background-color: white;
+ 	font-family: 'Oxygen', sans-serif;
 }
 
-.mySlides {
-	display: none
+.main{
+ 	margin-top: 50px;
 }
 
-.w3-tag, .fa {
-	cursor: pointer
+h3.title { 
+	font-size: 30px;
+	font-family: 'Jua'; 
+	font-weight: 400; 
+	color: #00CED1;
+	
 }
 
-.w3-tag {
-	height: 15px;
-	width: 15px;
-	padding: 0;
-	margin-top: 6px
+hr{
+	width: 10%;
+	color: #fff;
 }
 
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 5px;
+}
+
+.main-login{
+/*     border: 1px solid lightgrey;  */
+ 	background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.main-center{
+ 	margin-top: 15px;
+ 	margin: 0 auto;
+ 	max-width: 330px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
 /* 아이디 체크 시 글씨 색상 */
 .check_ok {
 	color: blue;
@@ -43,55 +99,123 @@ html, body, h1, h2, h3, h4 {
 	color: red;
 }
 
+#regSubmitBtn{
+		color: #fff;
+	    background-color: #00CED1; /* DarkTurquoise #00CED1 */
+	    border-color: #00CED1;
+	    font-size: 14px;
+		font-weight: bolder;
+
+}
+
 #idchk, #namechk {
 	display: none;
 }
+
+#input-file-button{
+  width: 278px;
+  padding: 6px 10px;
+  background-color: white;
+  border-radius: 4px;
+  color: lightgrey;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid lightgrey;
+}  
+    
 </style>
 </head>
+	<body>
+		<div class="container" id="registerForm">
+			<div class="row main"> 
+				<div class="main-login main-center" style="width:40em; border-radius:20px;">
+                    <div class="panel-heading">
+                        <div class="panel-title text-center" id = "panel-title">
+	               		<h3 class="title">회원가입</h3>
+	               		<hr>
+	               	   </div>
+                    </div> 
+					<form class="form-horizontal"  id="regForm" method="post" enctype="multipart/form-data">
+						
+						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
+								</div>
+							</div>
+                        <input type="checkbox" name="idchk" id="idchk">
+                        <span  id="checkmsg"></span>
+						</div>
+                        <div class="form-group">
 
-<body>
-	<%@ include file="/WEB-INF/views/include/header2.jsp"%>
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="패스워드를 입력하세요." required/>
+								</div>
+							</div>
+						</div>
 
-	<!-- Contact -->
-	<div class="w3-center w3-padding-64" id="registerForm">
-		<span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">회원가입</span>
-	</div>
+<!--						<div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="패스워드를 확인합니다."/>
+								</div>
+							</div>
+						</div>-->
+                        
+                        <div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="닉네임을 입력하세요." required/>
+								</div>
+							</div>
+                         <input type="checkbox" name="namechk" id="namechk">
+			             <span  id="checkmsg02"></span>
+						</div>
+                        
+                        <div class="form-group">
+							<div class="cols-sm-10">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="연락처를 입력하세요."/>
+								</div>
+							</div>
+						</div>
+                        
+                        <div class="form-group">
+                            <div class ="cols-sm-10" id = "inputFileContainer"> 
+                                <div class ="input-group" id = "inputFileContainer">
+                                    <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드</label>
+                                <input type="file" id="input-file" style= "display: none"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
 
-	<form class="w3-container" id="regForm" method="post" enctype="multipart/form-data">
-		<div class="w3-section">
-			<label>Name</label> 
-			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
-				type="text" name="uname" id ="uname" required>
-			<input type="checkbox" name="namechk" id="namechk">
+						<div class="form-group ">
+							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button" style ="height : 41.7px; margin-bottom : 5px;">작성완료</button>
+						</div>
+						<div class="login-register">
+				            <a href="<c:url value="/home"/>" >뒤로 돌아가기</a>
+				         </div>
+					</form>
+				</div>
+			</div>
 		</div>
-		<div class="w3-section">
-			<label>Email</label> 
-			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
-				type="email" name="uid" id = "uid" required>
-			<input type="checkbox" name="idchk" id="idchk">
-		</div>
-		<div class="w3-section">
-			<label>Password</label> 
-			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
-				type ="password" name="upw" required>	
-		</div>
-		<div class="w3-section">
-			<label>Phone Number</label> 
-			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
-				type = "text" name="uphonenum" required>
-		</div>
-		<div class="w3-section">
-			<label>Profile</label> 
-			<input class="w3-input w3-border w3-hover-border-black" style="width: 50%;"
-				type = "file" name = "photo">
-		</div>
-		<button type="submit" class="w3-button w3-block w3-black">가입하기</button>
 
-	</form>
-
-	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-</body>
+        <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+	</body>
 </html>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <script>
 	$(document).ready(function() {
 
@@ -132,7 +256,7 @@ html, body, h1, h2, h3, h4 {
 					} else {
 						$('#checkmsg').text("사용중인 이메일입니다.");
 						$('#checkmsg').addClass('check_not');
-						$$('#idchk').prop('checked', false);
+						$('#idchk').prop('checked', false);
 					}
 				}
 			});
