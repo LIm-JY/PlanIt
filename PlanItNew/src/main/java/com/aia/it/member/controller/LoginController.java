@@ -25,7 +25,7 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String loginForm() {
-		return "home";
+		return "login";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
