@@ -34,10 +34,24 @@
 	background-repeat: no-repeat;
 	background-position: 2px 3px;
 }
-;
+
+#tableProfileImg{ 
+	text-align: center;
+}
+
+#profileImg{ 
+	width: 3em;
+	height : 3em; 
+	border-radius: 100%;
+}
+
+
+
 
 </style>
 <body>
+	<!--img 경로 선언  -->
+	<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
 
 	<!-- Sidebar -->
 	<div class="w3-sidebar w3-bar-block w3-card w3-animate-left"
@@ -65,6 +79,13 @@
 					<th colspan="2" class="active">나의 계정 정보</th>
 
 				</tr>
+				<tr>
+					<th colspan="2" id = "tableProfileImg">
+					<img alt="사진 " id = "profileImg" src="${imagePath}/${myInfo.uphoto}" width="30px"
+										height="30px"></th>
+
+					
+				</tr>
 				<c:set var="ukakao" value="${myInfo.ukakao}" />
 				<c:if test="${ukakao eq N}">
 					<tr>
@@ -82,10 +103,6 @@
 					<td class="w3-right-align">${myInfo.uphonenum}</td>
 				</tr>
 
-				<tr>
-					<th>프로필 사진</th>
-					<td class="w3-right-align"><img alt="사진 " src="${imagePath}/${myInfo.uphoto}"></td>
-				</tr>
 				<tr>
 					<td colspan="2" id="editSubmitTd">
 					<a class="editBtn"

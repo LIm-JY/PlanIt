@@ -18,6 +18,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <style>
+
+input[type=text], input[type=password], input[type=email] {
+ 	width: 100%; 
+}
+
 .check_ok {
 	color: blue;
 }
@@ -44,67 +49,72 @@
 </div>
 
 <div id="main">
-	<div class="w3-container w3-green">
-		<h1>나의 정보 수정</h1>
-		<button id="openNav" class="w3-button w3-green w3-xlarge"
+	<div class="w3-container">
+		<h1>My Page</h1>
+		<button id="openNav" class="w3-button w3-xlarge"
 			onclick="w3_open()">&#9776;</button>
 	</div>
-	<div class="container">
+	<div class="container" >
 		<hr>
 
 
-		<form class="form-horizontal" id="editForm" method="post"
+		<form class="form-horizontal" id="editForm" method="post" style = "margin: auto; width: 400px;" 
 			enctype="multipart/form-data">
 
 			<input type="hidden" name="uidx" value="${member.uidx}" readonly>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="email">ID(이메일)</label>
-				<div class="col-sm-10">
+				<label class="control-label col-sm-4" for="email">ID(이메일)</label>
+				<div class="col-sm-8">
 					<input type="email" class="form-control" id="uid" name="uid"
 						value="${member.uid}" readonly>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="name">닉네임</label>
-				<div class="col-sm-10">
+				<label class="control-label col-sm-4" for="name">닉네임</label>
+				<div class="col-sm-8">
 					<input type="text" class="form-control" id="uname" name="uname"
 						value="${member.uname}" required>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd">비밀번호 </label>
-				<div class="col-sm-10">
+				<label class="control-label col-sm-4" for="pwd">비밀번호 </label>
+				<div class="col-sm-8">
 					<input type="password" class="form-control" id="upw"
 						placeholder="새로운 비밀번호를 입력하세요." name="upw" required>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="phonenumber">휴대폰
+				<label class="control-label col-sm-4" for="phonenumber">휴대폰
 					번호</label>
-				<div class="col-sm-10">
+				<div class="col-sm-8">
 					<input type="text" class="form-control" id="uphonenum"
 						name="uphonenum" value="${member.uphonenum}" required>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="photo">사진</label>
-				<div class="col-sm-10">
-					<input type="file" id="uphoto" name="photo"> <br> 현재
-					프로필 사진 : ${member.uphoto} <input type="hidden" name="oldFile"
-						value="${member.uphoto}">
+				<label class="control-label col-sm-4" for="photo">사진</label>
+				<div class="col-sm-8">
+					<input type="file" id="uphoto" name="photo"> <br> <%-- 현재
+					프로필 사진 : ${member.uphoto} --%> 
+					<input type="hidden" name="oldFile" value="${member.uphoto}">
 				</div>
-			</div>
+	
+				<label class="control-label col-sm-4" for="submit"></label>
+				<div class="col-sm-6">
+					<button type="submit" class="btn btn-default">수정하기</button>
+				</div>
+			</div> 
 
-			<div class="form-group">
+		<!-- 	<div class="form-group" style = "margin :auto;">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-default">수정하기</button>
 				</div>
-			</div>
+			</div> -->
 		</form>
 	</div>
 </div>

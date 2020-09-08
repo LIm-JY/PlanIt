@@ -149,7 +149,7 @@ input::-webkit-input-placeholder {
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
+									<input type="email" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
 								</div>
 							</div>
                         <input type="checkbox" name="idchk" id="idchk">
@@ -165,14 +165,15 @@ input::-webkit-input-placeholder {
 							</div>
 						</div>
 
-<!--						<div class="form-group">
+						<div class="form-group">
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="패스워드를 확인합니다."/>
+									<input type="password" class="form-control" name="chkUpw" id="chkUpw"  placeholder="패스워드를 한번 더 입력해주세요."/>
 								</div>
 							</div>
-						</div>-->
+			            	 <span  id="checkmsg03"></span>
+						</div>
                         
                         <div class="form-group">
 							<div class="cols-sm-10">
@@ -317,6 +318,25 @@ input::-webkit-input-placeholder {
 			});
 		});
 
+		/* 
+		$('#regForm').submit(function() {
+			if ($('#upw').val() != $('#chkUpw').val()) {
+				$('#checkmsg03').text("비밀번호가 다릅니다.");
+				$('#chkUpw').focus();
+				return false;
+			}
+		}); */
+		
+		/*비밀번호 중복체크 */
+		$('#chkUpw').focusout(function() {
+			if ($('#upw').val() != $('#chkUpw').val()) {
+				$('#checkmsg03').text("비밀번호가 다릅니다.");
+				$('#chkUpw').focus();
+				return false;
+			}
+		});
+		
+		
 	});
 </script>
 

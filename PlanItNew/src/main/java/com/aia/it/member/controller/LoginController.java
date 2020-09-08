@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aia.it.member.model.LoginRequest;
 import com.aia.it.member.service.LoginService;
-
 @Controller
 @RequestMapping("/login")
 public class LoginController {
