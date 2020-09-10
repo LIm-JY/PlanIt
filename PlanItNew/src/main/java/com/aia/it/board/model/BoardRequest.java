@@ -9,6 +9,15 @@ public class BoardRequest {
 	private MultipartFile bphoto1; //게시글 사진
 	private MultipartFile bphoto2; //게시글 사진
 	private int uidx;//회원 닉네임
+	private int pidx;
+	
+	
+	public int getPidx() {
+		return pidx;
+	}
+	public void setPidx(int pidx) {
+		this.pidx = pidx;
+	}
 	public String getBtitle() {
 		return btitle;
 	}
@@ -39,17 +48,18 @@ public class BoardRequest {
 	public void setUidx(int uidx) {
 		this.uidx = uidx;
 	}
+
+	
+	
+	
 	@Override
 	public String toString() {
 		return "BoardRequest [btitle=" + btitle + ", bmsg=" + bmsg + ", bphoto1=" + bphoto1 + ", bphoto2=" + bphoto2
-				+ ", uidx=" + uidx + "]";
+				+ ", uidx=" + uidx + ", pidx=" + pidx + "]";
 	}
-	
-	
 	public Board toBoard() {
 		
-		return new Board(btitle,bmsg,uidx);
+		return new Board(btitle,bmsg,pidx,uidx);
 	}
-	
 
 }

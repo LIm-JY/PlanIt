@@ -60,10 +60,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- deletePlannerByIdx -->
 	
 	
+	<!-- 게시판에서도 사용-->
 	<!-- 플래너의 리스트 출력 by Uidx -->
 	<select id="selectPlannerByIdx" resultMap="resultPlanner">
 	select * from planit.planner where uidx=#{uidx} order by pidx desc
 	</select>
+	
 	
 	
 	

@@ -25,6 +25,7 @@ public interface BoardDaoInterface {
 	//게시글 지우기
 	int boardDelete(Board board);
 	
-	
+	int selectByPidx(int pidx);
+
 
 }

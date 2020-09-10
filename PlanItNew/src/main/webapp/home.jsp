@@ -273,7 +273,7 @@
                 <div class = "mainNavDiv">
                	<ul class = "mainNav"> 
                		<li>
-               			<a href = "<c:url value="/member/memberList"/>"><i class="fa fa-home fa-2x" aria-hidden="true">
+               			<a href = "<c:url value="/"/>"><i class="fa fa-home fa-2x" aria-hidden="true">
                			<br><span id = "mainNavSpan">메인</span></i></a>
                		</li>
                		<li>

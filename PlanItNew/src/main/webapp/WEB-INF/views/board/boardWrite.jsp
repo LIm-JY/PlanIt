@@ -13,9 +13,9 @@
 
 	<script>
 	
-	alert(' 완료');
-	location.href='<c:url value="/board/boardList"/>';
-	
+	alert('게시글이 성공적으로 등록되었습니다.');
+	 location.href = '<c:url value="/board/boardList"/>';
+
 	</script>
 		
 	
@@ -25,10 +25,8 @@
 	<c:if test="${result lt 1}">
 	<script>
 	
-	alert(' 실패');
-	history.go(-1);
-
-	
+	alert('확인 후 다시 시도해주세요.');
+	location.href = '<c:url value="/board/boardList"/>';
 	</script>
 	
 	</c:if>

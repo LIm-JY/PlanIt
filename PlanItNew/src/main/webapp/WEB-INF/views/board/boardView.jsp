@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,105 +16,91 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<br><br>
+	<br>
+	<br>
 	<table class="table" border="1">
 		<tr>
 			<th>게시글 제목</th>
 			<th colspan="3">${viewBoard.btitle}</th>
 		</tr>
-		
+
 		<tr>
 			<th>작성자</th>
 			<th>${viewBoard.uidx}</th>
 			<th colspan="2">${viewBoard.bregdate}</</th>
 		</tr>
-		
+
 		<tr>
 			<th>내용</th>
 			<th colspan="3">${viewBoard.bmsg}</th>
 		</tr>
-<c:url value="${initParam['boardUploadPath']}" var="imagePath" />
-		<tr>	
-			<th>사진</th>
-			<th colspan="3"><img alt="사진 " src="${imagePath}/${viewBoard.bphoto1}"></th>
+
+		<tr>
+			<th>내일정공유</th>
+			<th colspan="3" id="boardplanner">${viewBoard.pidx}</th>
+
 		</tr>
-		
-		<tr>	
+		<c:url value="${initParam['boardUploadPath']}" var="imagePath" />
+		<tr>
 			<th>사진</th>
-			<th colspan="3"><img alt="사진 " src="${imagePath}/${viewBoard.bphoto2}"></th>
+			<th colspan="3"><img alt="사진 "
+				src="${imagePath}/${viewBoard.bphoto1}"></th>
+		</tr>
+
+		<tr>
+			<th>사진</th>
+			<th colspan="3"><img alt="사진 "
+				src="${imagePath}/${viewBoard.bphoto2}"></th>
 
 		</tr>
 	</table>
-	
 
-		<div>
-			<h1><a href="boardEdit?bidx=${viewBoard.bidx}">게시글 수정|</a>
-			<a href="javascript:boardDel(${viewBoard.bidx})">게시글 삭제</a></h1>
 
-		</div>
-		
-		<div>
+	<div>
+		<h1>
+			<a href="boardEdit?bidx=${viewBoard.bidx}">게시글 수정| <a
+				href="javascript:boardDel(${viewBoard.bidx})">게시글 삭제</a></a>
+			<h1>
+	</div>
+
+	<c:if test="${not empty commentistView}">
+		<table class="table" border="1">
+			<tr>
+				<th>작성자</th>
+				<th>댓글 내용</th>
+				<th>댓글 작성시간</th>
+
+			</tr>
+
+			<c:if test="${not empty commentistView.commentList }">
+				<c:forEach items="${commentistView.commentList}" var="comment">
+					<tr>
+
+						<th>${comment.uname}</th>
+						<th>${comment.cmsg}</th>
+						<th>${comment.cregdate}</th>
+						<th><a href="javascript:commentDel(${comment.cidx})">댓글삭제</a>|
+							<a href="../comment/commentEdit?cidx=${comment.cidx}">댓글수정</a></th>
+					</tr>
+				</c:forEach>
+			</c:if>
+
+			<c:if test="${empty commentistView}">
+				<tr>
+
+					<th colspan="3">첫번째 댓글을 남겨주세요~♡</th>
+
+				</tr>
+			</c:if>
+		</table>
+	</c:if>
+
+	<div>
 		<%@ include file="/WEB-INF/views/comment/commentForm.jsp"%>
-		</div>
-		
-		
-		
-	<%-- <div>
-		<h1 class="subtitle">댓글 작성</h1>
-		<form id="commentRegForm" onsubmit="return false;" >
-			<table class="table" border="1">
-				<tr>
-				<th>보드인덱스<br>히든으로 감춰야함</th>
-				<th>작성자 닉네임</th>
-				<th>내용입력</th>
-				</tr>
-			
-				<tr>
-					<th><input type="text" id="bidx" name="bidx" value ="${viewBoard.bidx}" readonly></th>
-					<th><input type="text" name="uname" id="uname" value="${loginInfo.uname}"></th>
-					<th><input type="text" name="cmsg" id="cmsg"	required placeholder="댓글을 입력해주세요"></th>
-				</tr>
-				<tr>
-					<th colspan="3"><input type="submit" value="댓글등록" onclick="regComment();"></th>
-				</tr>
-			</table>
-		</form>
-	</div> --%>
-	
-		
-<c:if test="${not empty commentistView}">
-	<table class="table" border="1">	
-		<tr>
-			<th>작성자</th>
-			<th>댓글 내용</th>
-			<th>댓글 작성시간</th>
-			
-		</tr>
-		
-		   <c:if test="${not empty commentistView.commentList }">
-               <c:forEach items="${commentistView.commentList}" var="comment">
-                  <tr>
-					
-                     <th>${comment.uname}</th>
-                     <th>${comment.cmsg}</th>
-                     <th>${comment.cregdate}</th>
-                     
-                     <th><a href="javascript:commentDel(${comment.cidx})">댓글삭제</a>|
-						 <a href="../comment/commentEdit?cidx=${comment.cidx}">댓글수정</a></th>
-                  </tr>
-               </c:forEach>
-            </c:if>
-           
-            <c:if test="${empty commentistView}">
-                  <tr>
-					
-                     <th colspan="3">첫번째 댓글을 남겨주세요~♡</th>
-                     
-                  </tr></c:if> 
-	</table>	
-</c:if>
 
-	
+	</div>
+
+
 
 
 
@@ -122,78 +110,72 @@
 <script>
 
 
- /* function regComment(){
-    
-    var regFormData = new FormData();
-    regFormData.append('bidx', $('#bidx').val());
-    regFormData.append('uname', $('#uname').val());
-    regFormData.append('cmsg', $('#cmsg').val());
-  
-    console.log(FormData);
-    $.ajax({
-       url : 'http://localhost:8080/it/board/{bidx}/',
-       type : 'post',
-     
-       data : regFormData,
-       
-       success : function(data){
-    	  console.log(data);
-          alert(data); 
-          
-          dailyList();
-          document.getElementById('commentRegForm').reset();
-          
-          
-
-       }
-    });
-    
- }
- */
-
-
-
-
-
-
-
-
-/* function commentDel(cidx){
-	   if(confirm('정말 삭제하시겠습니까?')){
-	      
-	      $.ajax({
-	         url : 'http://localhost:8080/it/comment/comment/' + cidx,
-	         type : 'DELETE',
-	         success : function(data){
-	            
-	            alert(data);
-				 commentList(); 
-	         }
-	      });
-	      
-	   }
-	} */
-	
-	
-	function commentDel(cidx) {
-		if (confirm('선택하신 댓글을 삭제하시겠습니까?')) {
-			location.href = '../comment/commentDelete?cidx=' + cidx;
-			
-		}
-	
-	}
-
-
-
 	function boardDel(bidx) {
 		if (confirm('선택하신 회원 정보를 삭제하시겠습니까?')) {
 			location.href = 'boardDelete?bidx=' + bidx;
 		}
 
 	}
-	
+	function commentDel(cidx) {
+		if (confirm('선택하신 댓글을 삭제하시겠습니까?')) {
+			location.href = '../comment/commentDelete?cidx=' + cidx;
+
+		}
+
+	}
 
 	function boardList() {
 		location.href = 'boardList';
+	}
+	
+	
+	
+$(document).ready(function(){
+	
+	
+	$.ajax({
+		url : 'checkPidx',
+		data : {pidx:('${viewBoard.pidx}')},
+		
+		success : function(data) {
+			if (data == 'Y') {
+				plannerJoinDailyList();
+			}
+		}
+	});//pidx를 체크하는 ajax시작의 마감
+	
+	});
+
+	function plannerJoinDailyList() {
+		var pidx=${viewBoard.pidx};
+		$.ajax({
+			url :  'http://localhost:8080/it/planner/dailyRest',
+			type :  'GET',
+			data : {uidx : '${loginInfo.uidx}',
+					pidx	},
+			success : function(data) {
+
+				var html = '';
+				html += '		<div>제목 : ' + data[0].ptitle + '</div>';
+				html += '		<div>기간 : ' + data[0].pstartdate + '~'+data[0].penddate+'</div>';
+			
+				for (var i = 0; i < data.length; i++) {
+					if(data[i].didx != 0){
+					html += '<div class="card">';
+					html += '		<div>장소 : ' + data[i].didx + '</div>';
+					html += '		<div>장소 : ' + data[i].dloc + '</div>';
+					html += '</div>';
+					
+			
+					$('#boardplanner').html(html);
+					}else{
+						
+
+						$('#boardplanner').html(html);
+					}
+			}//for 문 끝
+				
+			}//success끝
+		});
 	}
 </script>

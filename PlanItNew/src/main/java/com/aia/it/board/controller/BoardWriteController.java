@@ -22,19 +22,19 @@ public class BoardWriteController {
 
 	
 	@Autowired
-	private DailyListService listDailyService;
+	private DailyListService listService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getBoardForm(
-			HttpSession session,
-			Model model,
-			HttpServletRequest request
-			) {
+	public String getBoardList(
+				Model model, 
+				HttpSession session, 
+				HttpServletRequest request
+				) {
 		
-		model.addAttribute("listView", listDailyService.getDailyView(session, request));
-
+		model.addAttribute("dailyList", listService.getDailyView(session, request));
 		return "board/boardWriteForm";
 	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public String getBoard(
 			BoardRequest bRequest, 
