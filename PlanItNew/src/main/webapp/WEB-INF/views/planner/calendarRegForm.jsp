@@ -7,19 +7,27 @@
 <html>
 <head>
 
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+
+<style>
+
+
+#datechk{
+	display: none;
+}
+
+
+</style>
 
     <title>text Limit</title>
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
-
+<%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+ --%>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script>
-                  $(function() {
+       /*            $(function() {
                 
-            
                 //오늘 날짜를 출력
                 $("#today").text(new Date().toLocaleDateString());
                 //datepicker 한국어로 사용하기 위한 언어설정
@@ -57,7 +65,7 @@
                         $("#fromDate").datepicker( "option", "maxDate", selectedDate );
                     }                
                 });
-            });
+            }); */
 // if (Date.prototype.yyyymmdd === undefined) {
 //     Date.prototype.yyyymmdd = function() {
 //     var mm = this.getMonth() + 1; // getMonth() is zero-based
@@ -102,19 +110,62 @@ call( );
 
     
 <body>
-<form method="post">
+  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
+
+
+<form method="post" id="regForm">
 	<p>uidx <input type="text" name="uidx" value="${loginInfo.uidx}"></p><br>
 		제목<input type="text" name="ptitle">
 	
-    <p>StartDate : <input type="text" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
-    <p>EndDate : <input type="text" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
-    <div></div>
+    <p>StartDate : <input type="date" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
+    <p>EndDate : <input type="date" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
+    <div id="checkmsg"></div>
+    <input type="checkbox" name="datechk" id="datechk">
+    
     <input type="submit" value="완료">
     </form>
+    
+    
+    
 </body>
 </html>
 
-
+    <script>
+    
+    $(document).ready(function() {
+    	
+    	
+    	
+    $('#datepicker2').mouseout(function(){
+    	
+    	if($('#datepicker').val()>$('#datepicker2').val()){
+    		$('#datechk').prop('checked',false);
+    		$('#checkmsg').text("시작일 이후로 설정해주세요.");
+    	
+    		
+    	} else{
+    		$('#checkmsg').text("");
+    		$('#datechk').prop('checked',true);
+    		
+    	}
+    	
+    });
+    
+    $('#regForm').submit(function() {
+		if (!$('#datechk').prop('checked')) {
+			
+			$('#datepicker2').focus();
+			return false;
+		}
+	});
+    
+    
+    
+    
+    
+    
+    });
+    </script>
 
 
 

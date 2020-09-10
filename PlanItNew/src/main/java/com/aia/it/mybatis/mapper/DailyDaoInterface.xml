@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dloc" column="dloc" />
 		<result property="dloclon" column="dloclon" />
 		<result property="dloclat" column="dloclat" />
+		<result property="daddr" column="daddr" />
 		<result property="dmsg" column="dmsg" />
 		<result property="dphoto" column="dphoto" />
 		<result property="dtype" column="dtype" />
@@ -21,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pidx" column="pidx" />		
 	</resultMap>
 
-<resultMap id="editDaily"
+	<resultMap id="editDaily"
 		type="com.aia.it.daily.model.DailyOrderEditForm">
 
 		<id property="didx" column="didx" />
@@ -33,15 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
 	<!-- 데일리 등록 -->
 	<insert id="insertDaily"
 		parameterType="com.aia.it.daily.model.Daily" 
 		useGeneratedKeys="true"
 		keyProperty="didx">
 
-		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, dmsg, dphoto, dtype, ddate, ddidx, pidx)
-		VALUES (#{dloc},#{dloclon},#{dloclat},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
+		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, daddr, dmsg, dphoto, dtype, ddate, ddidx, pidx)
+		VALUES (#{dloc},#{dloclon},#{dloclat},#{daddr},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
 	</insert>
 	
 	<!-- 데일리 전체 개수 -->
@@ -51,33 +51,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on p.pidx=d.pidx where p.pidx=#{pidx}
 	</select>
 	
-	
+	<!-- 데일리 삭제 -->
+	<delete id="deleteDailyByIdx">
+	delete from planit.daily_plan where didx=#{didx};
+	</delete>
 
 	
-
-		
-	<!-- 데일리 순서 수정 -->
-	<update id="editMember"
-			parameterType="com.aia.it.daily.model.DailyOrderEditForm"
+	<!-- 하나의 데일리 가져오기 -->
+	<select id="selectByIdx" resultMap="resultDaily">
+	select * from planit.daily_plan where didx=#{didx};
+	</select>
+	
+	
+	
+	
+	
+	<!-- 데일리 수정 -->
+	<update id="editDaily"
+			parameterType="com.aia.it.daily.model.Daily"
 	>
-	
-	update planit.member set ddate=#{ddate} , ddidx=#{ddidx} where didx=#{didx}
-	
+		update planit.daily_plan set dloc=#{dloc}, dloclon=#{dloclon}, dloclat=#{dloclat}, daddr=#{daddr}, dmsg=#{dmsg}, dphoto=#{dphoto}, dtype=#{dtype}, ddate=#{ddate}, ddidx=#{ddidx} where didx=#{didx}
 	</update>
 	
 	
 	
 	
 	
+	
+	<!-- 데일리 순서 수정 -->
+	<update id="editDailyOrder"
+			parameterType="com.aia.it.daily.model.DailyOrderEditForm"
+	>
+	
+	update planit.daily_plan set ddate=#{ddate} , ddidx=#{ddidx} where didx=#{didx} 
+	
+	</update>
+
+	
 	<!-- 데일리 목록 출력 -->
 	<select id="selectTotalList"
 			resultMap="resultDaily">
 		select count(*) from planit.planner p left outer join planit.daily_plan d  
-		on p.pidx=d.pidx where p.pidx=#{pidx}
+		on p.pidx=d.pidx where p.uidx=#{param2} and p.pidx=#{param1}
 	</select>
 
 
-
+	<!-- 데일리 목록 출력 -->
+	<select id="selectTotalListQ"
+			resultMap="resultDaily">
+		select count(*) from planit.planner p left outer join planit.daily_plan d  
+		on p.pidx=d.pidx where p.pidx=#{pidx}
+	</select>
 
 
 

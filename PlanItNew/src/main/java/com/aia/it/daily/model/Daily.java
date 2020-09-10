@@ -7,13 +7,14 @@ public class Daily {
 	private String dloc;
 	private String dloclon;
 	private String dloclat;
+	private String daddr;
 	private String dmsg;
 	private String dphoto;
 	private String dtype;
 	private String ddate;
 	private int ddidx;
 	private int pidx;
-
+	
 	
 	
 	
@@ -21,17 +22,19 @@ public class Daily {
 
 	}
 
-	public Daily(String dloc, String dloclon, String dloclat, String dmsg, String dtype, String ddate, int ddidx, int pidx) {
-		this(0,dloc,dloclon,dloclat,dmsg,null,dtype, ddate, ddidx ,pidx);
+	public Daily(String dloc, String dloclon, String dloclat, String daddr, String dmsg, String dtype, String ddate, int ddidx, int pidx) {
+		this(0,dloc,dloclon,dloclat,daddr,dmsg,null,dtype,ddate,ddidx,pidx);
 	}
 
-	public Daily(int didx, String dloc, String dloclon, String dloclat, String dmsg, String dphoto, String dtype,
-			String ddate, int ddidx, int pidx) {
+	
+	public Daily(int didx, String dloc, String dloclon, String dloclat, String daddr, String dmsg, String dphoto,
+			String dtype, String ddate, int ddidx, int pidx) {
 		super();
 		this.didx = didx;
 		this.dloc = dloc;
 		this.dloclon = dloclon;
 		this.dloclat = dloclat;
+		this.daddr = daddr;
 		this.dmsg = dmsg;
 		this.dphoto = dphoto;
 		this.dtype = dtype;
@@ -120,14 +123,20 @@ public class Daily {
 		this.ddidx = ddidx;
 	}
 
+	public String getDaddr() {
+		return daddr;
+	}
+
+	public void setDaddr(String daddr) {
+		this.daddr = daddr;
+	}
 
 	@Override
 	public String toString() {
-		return "Daily [didx=" + didx + ", dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", dmsg="
-				+ dmsg + ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx=" + ddidx + ", pidx="
-				+ pidx + "]";
+		return "Daily [didx=" + didx + ", dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", daddr="
+				+ daddr + ", dmsg=" + dmsg + ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx="
+				+ ddidx + ", pidx=" + pidx + "]";
 	}
 
-	
 
 }

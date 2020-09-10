@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aia.it.planner.model.Planner;
+import com.aia.it.planner.service.CalendarService;
 import com.aia.it.planner.service.PlannerEditService;
 
 @Controller
@@ -18,6 +20,9 @@ public class PlannerEditController {
 	@Autowired
 	PlannerEditService editService;
 	
+	@Autowired
+	CalendarService calService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String getPlannerRegForm() {
 		return "planner/plannerEditForm";
@@ -25,10 +30,29 @@ public class PlannerEditController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String getPlannerReg (HttpServletRequest request,
 								Planner planner,
+								@RequestParam("pidx") String pidx,
+								@RequestParam("pstartdate") String pstartdate,
+								@RequestParam("penddate") String penddate,
+								@RequestParam("ptitle") String ptitle,
 								Model model) {
-		System.out.println(planner);
-		model.addAttribute("result", editService.plannerEdit(planner, request));
-		return "planner/plannerEdit";
+		
+		
+		
+		
+		/*
+		 * model.addAttribute("result", editService.plannerEdit(planner, request));
+		 */		
+		model.addAttribute("dateList", calService.getDateList(pstartdate, penddate));
+		model.addAttribute("pidx", pidx);
+		model.addAttribute("startdate",pstartdate);
+		model.addAttribute("enddate",penddate);
+		model.addAttribute("ptitle",ptitle);
+
+		
+		
+		
+		
+		return "planner/plannerRegForm";
 	}
 	
 }

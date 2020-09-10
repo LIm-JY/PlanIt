@@ -1,23 +1,32 @@
 package com.aia.it.daily.model;
 
-
 import org.springframework.web.multipart.MultipartFile;
 
-public class DailyRegRequest {
-	
+public class DailyEditRequest {
+
+	private int didx;
 	private String dloc;
 	private String dloclon;
 	private String dloclat;
 	private String daddr;
 	private String dmsg;
 	private MultipartFile dphoto;
+	private String oldFile;
 	private String dtype;
 	private String ddate;
 	private int ddidx;
 	private int pidx;
 	
 	public Daily toDaily() {
-		return new Daily(dloc,dloclon,dloclat,daddr,dmsg,dtype, ddate, ddidx, pidx);
+		return new Daily(didx,dloc,dloclon,dloclat,daddr,dmsg,oldFile.length()>0?oldFile:null, dtype, ddate, ddidx, pidx);
+	}
+
+	public int getDidx() {
+		return didx;
+	}
+
+	public void setDidx(int didx) {
+		this.didx = didx;
 	}
 
 	public String getDloc() {
@@ -44,6 +53,14 @@ public class DailyRegRequest {
 		this.dloclat = dloclat;
 	}
 
+	public String getDaddr() {
+		return daddr;
+	}
+
+	public void setDaddr(String daddr) {
+		this.daddr = daddr;
+	}
+
 	public String getDmsg() {
 		return dmsg;
 	}
@@ -60,21 +77,20 @@ public class DailyRegRequest {
 		this.dphoto = dphoto;
 	}
 
+	public String getOldFile() {
+		return oldFile;
+	}
+
+	public void setOldFile(String oldFile) {
+		this.oldFile = oldFile;
+	}
+
 	public String getDtype() {
 		return dtype;
 	}
 
 	public void setDtype(String dtype) {
 		this.dtype = dtype;
-	}
-
-	
-	public int getPidx() {
-		return pidx;
-	}
-
-	public void setPidx(int pidx) {
-		this.pidx = pidx;
 	}
 
 	public String getDdate() {
@@ -93,22 +109,21 @@ public class DailyRegRequest {
 		this.ddidx = ddidx;
 	}
 
-	public String getDaddr() {
-		return daddr;
+	public int getPidx() {
+		return pidx;
 	}
 
-	public void setDaddr(String daddr) {
-		this.daddr = daddr;
+	public void setPidx(int pidx) {
+		this.pidx = pidx;
 	}
 
 	@Override
 	public String toString() {
-		return "DailyRegRequest [dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", daddr=" + daddr
-				+ ", dmsg=" + dmsg + ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx=" + ddidx
-				+ ", pidx=" + pidx + "]";
+		return "DailyEditRequest [didx=" + didx + ", dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat
+				+ ", daddr=" + daddr + ", dmsg=" + dmsg + ", dphoto=" + dphoto + ", oldFile=" + oldFile + ", dtype="
+				+ dtype + ", ddate=" + ddate + ", ddidx=" + ddidx + ", pidx=" + pidx + "]";
 	}
-
 	
 	
 	
-	}
+}

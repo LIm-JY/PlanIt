@@ -1,7 +1,6 @@
 <%@ page import="com.aia.it.planner.model.PlannerJoinDaily"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
 
 <!DOCTYPE html>
@@ -9,47 +8,18 @@
 <head>
 <meta charset="UTF-8">
 
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
-	
-		<!-- 모달  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	
+<%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+ --%>	
 
-		 <!-- jquery  -->
- 	<!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
- 	 	<script src="http://code.jquery.com/jquery-1.7.js"></script>
- 	
- 	
-	<!-- <script>
- 	 var jq = jQuery.noConflict();
-	</script> -->
- 
-		<!-- SORTABLE  -->
-	<!-- <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script> -->
-	
+ 	<!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
 
-
-
-	<!-- SORTABLE  -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	
-<!-- 	<script>
- 	 var st = jQuery.noConflict();
-	</script> -->
-	
 
 <style>
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:350px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -94,59 +64,191 @@
 	
 }
 
+.sortableBox{
+
+	border: 0.5px solid black;
+
+
+}
+
+.handle{
+	border: 0.5px solid black;
+	text-align: center;
+	float : right;
+
+}
+
+.items{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+/* ul>li{
+	margin: 0;
+        padding: 0;
+        border: 0.5px,solid ,black;
+        
+        
+} */
+
+.didxImg{
+
+width: 30px;
+height: 30px;
+
+}
+
 </style>
 
 <title>플래너 작성</title>
 </head>
 
-
-
-
 <body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
-
-
-
-
-	<a type="submit" onclick="editDailyOrder();">에디트 저장</a>
+ <%@ include file="/WEB-INF/views/include/header.jsp" %>
+ 
+	<a type="submit" class="icon-remove" onclick="editDailyOrder();">에디트 저장</a>
 	
-  <div id="dailyModal" class="modal" >
+	 
+       <!-- RegDaily MODAL -->
   
-  	<h2>데일리 작성</h2>
-  
+       <div class="modal fade" id="regDailyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">데일리 작성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+
+
    <form id="dailyRegForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
+   
+   		ddate(날짜)	<input type="text" name="ddate" id="ddateModal" class="ddateModal" readonly>	<br>
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
-
-		dloc		<input type="text" name="dloc" >	<br>
-		dloclon		<input type="text" name="dloclon" id="dloclon"><br>
-		dloclat		<input type="text" name="dloclat" id="dloclat"><br>
-		dmsg		<input type="text" name="dmsg" id="dmsg"><br>
-		dphoto		<input type="file" name="dphoto" id="dphoto"><br>
+		dloc		<input type="text" name="dloc" id="dloc" >	<br>
+		dloclon		<input type="text" name="dloclon" id="dloclon">	<br>
+		dloclat		<input type="text" name="dloclat" id="dloclat">	<br>
+		daddr		<input type="text" name="daddr" id="daddr">	<br>
+		dmsg		<input type="text" name="dmsg" id="dmsg">	<br>
+		dphoto		<input type="file" name="dphoto" id="dphoto">	<br>
 		dtype		<select name="dtype" id="dtype">
+					<option value="white">하양</option>
 					<option value="red">빨강</option>
 					<option value="blue">파랑</option>
 					<option value="green">초록</option>
 					<option value="pink">분홍</option>
+					</select>	<br>
+					
+					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
+		
+		<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
+
+		<a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
+			
+	</form>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+       
+       
+       
+       
+       <!-- EditDaily MODAL -->
+  
+      
+      <div class="modal fade" id="editDailyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">데일리 에디트</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     
+
+
+   <form id="dailyEditForm" onsubmit="return false;" >
+   <%-- action="<c:url value='/planner/dailyList'/>" --%>    
+   		didx		<input type="text" name="didx" id="didx"  readonly><br>
+   		ddate		<input type="text" name="ddate" id="eddateModal" class="ddateModal" readonly><br>
+		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="epidx">	<br>
+		dloc		<input type="text" name="dloc" id="edloc" >	<br>
+		dloclon		<input type="text" name="dloclon" id="edloclon"><br>
+		dloclat		<input type="text" name="dloclat" id="edloclat"><br>
+		daddr		<input type="text" name="daddr" id="edaddr"><br>
+		dmsg		<input type="text" name="dmsg" id="edmsg"><br>
+		dphoto		<input type="file" name="dphoto" id="edphoto"><br>
+		현재 사진 		<input type="text" name="oldfile" id="oldfile"><br>
+		
+		dtype		<select name="dtype" id="edtype">
 					<option value="white">하양</option>
+					<option value="red">빨강</option>
+					<option value="blue">파랑</option>
+					<option value="green">초록</option>
+					<option value="pink">분홍</option>
+					
 					</select>
 					<br>
-		ddate(날짜)	<input type="text" name="ddate" id="ddate"><br>
-		ddidx(날짜순서)<input type="text" name="ddidx" id="ddidx"><br>
+					<input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
+		
+		<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
 		
 		
-			<input type="submit" value="제출" onclick="regDaily(); ">
-</form>
+		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
+			
+	</form>
 
-<div class="map_wrap" style="height:500px">
-    <!-- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> -->
-    <div id="map" style="height:500px;position:relative;overflow:hidden;"> 클릭1 </div>
 
-    <div id="menu_wrap" class="bg_white">클릭2
-        <div class="option">클릭3
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      
+      
+      <!-- 지도 MODAL -->
+      
+      <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">위치 검색</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+   
+   
+   <div class="map_wrap" style="height:500px">
+    <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
             <div>
-                <form onsubmit="searchPlaces(); return false;">클릭4
-                    키워드 : <input type="text" value="종각 맛집" id="keyword" size="15"> 
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="맛집" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -155,48 +257,48 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-            <input type="submit" onclick="showItemEl();" name="back" value="검색">
+            <input type="submit" onclick="showItemEl(); " name="back" value="검색">
     
-    <hr>
-    <span id="Lat"></span>
-	<span id="Lng"></span>
     
-</div>
-
-
-
-        <a href="#" rel="modal:close">닫기</a>
+	</div>
+   
+   
       </div>
-       
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
       
-
-	
-	
-		pidx <input type="text" name="pidx" value="${pidx}"><br>
+      
+      
+      <!-- 플래너 정보 -->
+	<div>
+	<input type="hidden" name="pidx" value="${pidx}">
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
-	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
+		 <input type="text" name="pstartdate" value="${startdate}">/
+		 <input type="text" name="penddate" value="${enddate}"><br>
 	제목<input type="text" name="ptitle" value="${ptitle}">
-		<div id="sortable">
+		</div>
+		<hr>
+		
+		<form id="serialize">
+				<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
+		
 			<c:forEach items="${dateList}" var="list">
-				<div class="sortable" name="dailytable">
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
-					<div class="sortable"></div>
-					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div>
-					<%-- <a href="<c:url value="/daily/dailyReg"/>"> --%>
-				</div>
+					
+					<ul class="sortable"></ul>
+					
+					<a data-toggle="modal" data-target="#regDailyModal" class="${list}" onclick="searchReset(); showItemEl(); searchPlaces(); writeddate(this);" >+데일리 등록</a>
+
 			</c:forEach>
-		</div>
-		
-		<span id="dailyList"></span>
-	
+		</form>
 
 
 
-
-	
-
-	
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
@@ -205,199 +307,231 @@
 
 
 <!-- 비동기 통신  -->
+<script >
 
-	<script type="text/javascript">
+	
 
-		 $(document).ready(function(){
-			
-			dailyList();
-			
+/* 페이지 시작시 리스트 출력 */
+$(document).ready(function(){
+	dailyList();
+
+
 		}); 
+
 		 
+	/* 데일리 리스트 출력 */
+	function dailyList() {
 		
-		 /* 데일리 리스트 출력 */
-		 	function dailyList() {
-			
-			$.ajax({
-				url: 'http://localhost:8080/it/planner/dailyRest',
-				type: 'GET',
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest',
+			type : 'GET',
+			data : {
+				uidx : '${loginInfo.uidx}',
+				pidx : '${pidx}'
+			},
+			success : function(data) {
+				var html = '';
+
 				
-				data: {
-					uidx : '${loginInfo.uidx}',
-					pidx : '${pidx}'
-				},
-				success: function(data){
-			var html = '';
-			
-		console.log(data);
-		console.log(data[1].ptitle);
+				console.log($(
+						document.getElementsByClassName("ddateList"))
+						.html());
 
-		
-/* 		var sortable = document.getElementsByClassName("sortable");
- */		
-		
-		
-		console.log($(document.getElementsByClassName("ddateList")).html());
-		
-/* 		var ddate = $(document.getElementsByClassName("ddateList"));
- */		
-		
+				 for (var j = 0; j < $('.dayOfPlan').length; j++) {
+					 
+					 $('.dayOfPlan').eq(j).parent('div').next().html('');
 
-
-		for(var i=0; i<data.length; i++){
+				 }
+				
+				
+				for (var i = 0; i < data.length; i++) {
 					
-				 	html += '<div class="sortableBox" class="sortable">';
-				 
-					html += '	<div class="sortable" >'; 
-					html += '		<input type="text" class="ddidx" value="'+data[i].ddidx+'">';
-					html += '		<input type="text" class="ddate" id="ddate" value="'+data[i].ddate+'">';
-					html += '		<input type="text" class="didx" value="'+data[i].didx+'">';
-					html += '		<input type="text" value="'+data[i].dloc+'">';
-					html += '		<input type="text" value="'+data[i].dloclon+'">';
-					html += '		<input type="text" value="'+data[i].dloclat+'">';
-					html += '		<input type="text" value="'+data[i].dphoto+'">';
-					html += '		<input type="text" value="'+data[i].dtype+'">';
 					
-					html += '		<input type="text" value="'+data[i].pidx+'">';
-					html += '	</div>';
-					html += '	<a href="https://map.kakao.com/?sName=%27+종각+%27&eName=%27+홍대입구역 2호선">경로찾기</a>';
+					html += '<li class="sortableBox" class="sortable">';
+					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
+					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly><br>';
+					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
+					html += '	dloc	<input type="text" value="'+data[i].dloc+'" readonly><br>';
+					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
+					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
+					html += '  daddr<input type="text" class="daddr" value="'+data[i].daddr+'" readonly><br>';
+					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
+/* 					html += '	img	<img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">';
+ */
+					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
+					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
+					html += '		<input type="hidden" value="'+data[i].pidx+'">';
+					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
+					html += '		<a data-toggle="modal" data-target="#editDailyModal" onclick="editForm('+data[i].didx+'); searchReset(); showItemEl(); searchPlaces(); "  >수정</a>';
+					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
-					
- 					html += '</div>'; 
-					/* console.log($('.dayOfPlan').eq(i).val()); */
-					/* console.log(data[i].ddate); */
-					
-					for(var j=0; j<$('.dayOfPlan').length;j++)
-						
-					if($('.dayOfPlan').eq(j).val() == data[i].ddate){
-						$('.dayOfPlan').eq(j).parent('div').next().append(html);
-					}
-					
-					
-					/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
-					/* $('#dailyList').append(html); */
-					html='';
+					/* html += '<span class="handle">↕</span>' */
+						html += '</li>';
+					//<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>
+				
+					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
 
-					}
-		reorder();
+						if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
+							
+							$('.dayOfPlan').eq(j).parent('div').next().append(html);
+
+							html = '';
+							break;
+						}
+					 }
+							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
+							/* $('#dailyList').append(html); */
+				
+			}
+				reorder();
+
+		}
+	});
+}
+
+	/* 데일리 등록 */
+	function regDaily() {
+
+		var regFormData = new FormData();
+		regFormData.append('pidx', $('#pidx').val());
+		regFormData.append('dloc', $('#dloc').val());
+		regFormData.append('dloclon', $('#dloclon').val());
+		regFormData.append('dloclat', $('#dloclat').val());
+		regFormData.append('daddr', $('#daddr').val());
+		regFormData.append('dmsg', $('#dmsg').val());
+		// 파일 첨부
+		if ($('#dphoto')[0].files[0] != null) {
+			regFormData.append('dphoto', $('#dphoto')[0].files[0]);
+		}
+		regFormData.append('dtype', $('#dtype').val());
+		regFormData.append('ddate', $('#ddateModal').val());
+		regFormData.append('ddidx', $('#ddidx').val());
+
+		console.log(regFormData);
+		console.log($('#ddate').val());
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest',
+			type : 'post',
+			processData : false, // File 전송시 필수
+			contentType : false, // multipart/form-data
+			data : regFormData,
+
+			success : function(data) {
+				dailyList();
+				editDailyOrder();
+
+				document.getElementById('dailyRegForm').reset();
+
+			}
+		
+		});
+
+	}
+
+	/* 데일리 순서 등록 */
+	function editDailyOrder() {
+
+		var params = $("#serialize").serialize();
+		var param = $("#serialize").serializeArray();
+
+		console.log(params);
+		console.log(param);
+		
+
+
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyOrderEdit',
+			type : 'post',
+			/* processData: false, 
+			contentType: false,  */
+			data : param,
+			//data: regFormData,
+			success : function(data) {
+				dailyList();
+			}
+		});
+	}
+
+	/* 데일리 삭제 */
+	function deleteDaily(didx) {
+
+		if(confirm('정말 삭제하시겠습니까?')){
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+			type : 'delete',
+			success : function(data) {
+				alert(data);
+				dailyList();
 				}
 			});
 		}
+	}
+	
+	
+	
+	/* 데일리 수정폼 */
+	
+	function editForm(didx){
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+			type : 'GET',
+			success : function(data){
+				
+				$('#didx').val(data.didx); 
+				$('#edloc').val(data.dloc);
+				$('#edloclon').val(data.dloclon);
+				$('#edloclat').val(data.dloclat);
+				$('#edaddr').val(data.daddr);
+				$('#edmsg').val(data.dmsg);
+				$('#oldfile').val(data.dphoto);
+				$('#edtype').val(data.dtype);
+				$('#eddateModal').val(data.ddate);
+				$('#eddidx').val(data.ddidx);
 		
-		 	/* 데일리 등록 */
-			function regDaily(){
-				
-				var regFormData = new FormData();
-				regFormData.append('pidx', $('#pidx').val());
-				regFormData.append('dloc', $('#dloc').val());
-				regFormData.append('dloclon', $('#dloclon').val());
-				regFormData.append('dloclat', $('#dloclat').val());
-				regFormData.append('dmsg', $('#dmsg').val());
-				/* regFormData.append('dphoto', $('#dphoto').val()); */
 
-				// 파일 첨부
-				 if($('#dphoto')[0].files[0] != null){
-					regFormData.append('dphoto',$('#dphoto')[0].files[0]);
-				} 
-				regFormData.append('dtype', $('#dtype').val());
-				regFormData.append('ddate', $('#ddate').val());
-				regFormData.append('ddidx', $('#ddidx').val());
-				
-				console.log(regFormData);
-				console.log($('#ddate').val());
-				$.ajax({
-					url : 'http://localhost:8080/it/planner/dailyRest',
-					type : 'post',
-					processData: false, // File 전송시 필수
-					contentType: false, // multipart/form-data
-					data : regFormData,
-					
-					success : function(data){
-						alert(data); 
-						dailyList();
-						document.getElementById('dailyRegForm').reset();
-						
-
-					}
-				});
-				
 			}
+		});
+	}
+	
+		/* 데일리 수정 */
+	
+		function editDaily(){
+
+			var regFormData = new FormData();
+			regFormData.append('dloc', $('#edloc').val());
+			regFormData.append('dloclon', $('#edloclon').val());
+			regFormData.append('dloclat', $('#edloclat').val());
+			regFormData.append('daddr', $('#edaddr').val());			
+			regFormData.append('dmsg', $('#edmsg').val());			
+			regFormData.append('oldFile', $('#oldfile').val());
+			// 파일 첨부
+			if($('#edphoto')[0].files[0] != null){
+				regFormData.append('dphoto',$('#edphoto')[0].files[0]);
+			}
+			regFormData.append('dtype', $('#edtype').val());
+			regFormData.append('ddate', $('#eddateModal').val());
+			regFormData.append('ddateModal', $('#eddateModal').val());			
+			regFormData.append('ddidx', $('#eddidx').val());			
+			
+			
+			$.ajax({
+				url : 'http://localhost:8080/it/planner/dailyRest/'+$('#didx').val(),
+				type : 'POST',
+				processData: false, // File 전송시 필수
+				contentType: false, // multipart/form-data
+				data : regFormData,
 		
-		 	/* 데일리 순서 등록 */
-/* 		function editDailyOrder(){
-				
-				var DailyOrderEdit = new FormData();
-				
-				
-				
-				 for(var i=0; i<=$('.didx').length-1;i++){
-					 
-					 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
-					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
-					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val());
-				
-				console.log($('.ddidx').eq(i).val());
-				} 
-				
-				 
-				 $.ajax({
-					url : 'http://localhost:8080/it/planner/dailyOrderEdit',
-					type : 'post',
-					datatype : 'json',
-					data : DailyOrderEdit,
-					
-					success : function(data){
-						alert(data); 
-						
-
-					}
-				}); 
-				
-			} */
-			
-			/* 데일리등록 낱개 연습  */
-		function editDailyOrder(){
-			
-				
-				/* regFormData.append('didx', $('.didx').val()); */
-			/* 	regFormData.append('ddate', $('.ddate').val());
-				regFormData.append('ddidx', $('.ddidx').val());
-				
-				console.log($('.ddate').val());
-				console.log($('.ddidx').val());			
-				regFormData.get(ddidx);
-				regFormData.get(ddate);	 */	
-				
-				
-				
-			
-			
-			 $.ajax({  
-				url : 'http://localhost:8080/it/planner/dailyOrderEdit/'+$('.didx').val(),
-				type : 'post',
-
-				data : {
-					didx : $('.didx').val() ,
-					ddate : $('.ddate').val() ,
-					ddidx : $('.ddidx').val()
-					
-				},
-				
 				success : function(data){
 					alert(data); 
-					
-
+					dailyList();
+					document.getElementById('dailyEditForm').reset();
 				}
-			}); 
+			});
 			
 		}
-			
-			
-			
-			
-			
-			
 
+		
+		
 </script>
 	
 	<!-- 지도API  -->
@@ -420,8 +554,8 @@ var geocoder = new daum.maps.services.Geocoder();
 
 function resizeMap() {
     var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '350px';
-    mapContainer.style.height = '450px'; 
+    mapContainer.style.width = '440px';
+    mapContainer.style.height = '500px'; 
 }
 
 
@@ -451,19 +585,8 @@ function panTo() {
 
 
 
-
 resizeMap();
 relayout();
-
-function zoomIn() {        
-    // 현재 지도의 레벨을 얻어옵니다
-    var level = map.getLevel();
-    
-    // 지도를 1레벨 내립니다 (지도가 확대됩니다)
-    map.setLevel(level - 9);
-    
-    
-}    
 
 
 
@@ -474,7 +597,7 @@ var ps = new kakao.maps.services.Places();
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
-searchPlaces();
+//searchPlaces();
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -514,20 +637,20 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 
+
+
+var listEl = document.getElementById('placesList'), 
+menuEl = document.getElementById('menu_wrap'),
+fragment = document.createDocumentFragment(), 
+bounds = new kakao.maps.LatLngBounds(), 
+listStr = '';
+
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
 
-    var listEl = document.getElementById('placesList'), 
-    menuEl = document.getElementById('menu_wrap'),
-    fragment = document.createDocumentFragment(), 
-    bounds = new kakao.maps.LatLngBounds(), 
-    listStr = '';
-    
-    // 검색 결과 목록에 추가된 항목들을 제거합니다
-    removeAllChildNods(listEl);
 
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
+    
+	searchReset();
     
     
     
@@ -545,11 +668,8 @@ function displayPlaces(places) {
                             ;
                             
                             
-                            
-                            
-                            
-                         
-                // 마커를 클릭한 위치에 표시합니다 
+
+                  // 마커를 클릭한 위치에 표시합니다 
                 marker.setPosition(mouseEvent.latLng);
                 
                 marker.setMap(map);
@@ -559,6 +679,7 @@ function displayPlaces(places) {
                 infowindow.open(map, marker); 
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
+                $('#daddr').val(result[0].address.address_name);
 
                 relayout();
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -595,7 +716,7 @@ function displayPlaces(places) {
                 
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
-                console.log('1번');
+                $('#daddr').val(title);                
                 relayout();
             	map.setLevel(4);    
   				var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -611,11 +732,8 @@ function displayPlaces(places) {
                 
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
-                
+                $('#daddr').val(title);                
                 $("#menu_wrap").css("display","none");
-                
-                console.log('2번');
-
                 relayout();
             	map.setLevel(4);    
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -769,7 +887,14 @@ function searchDetailAddrFromCoords(coords, callback) {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
  
+function searchReset(){
+	
+    // 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
 
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
+}
  
 
 </script>
@@ -782,14 +907,17 @@ function searchDetailAddrFromCoords(coords, callback) {
 	$(function() {
 		$(".sortable").sortable({
 			placeholder : "itemBoxHighlight",
-			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
+			connectWith : " .sortable.ui-sortable",
+			animation : 200,
+			axis:'y',
 			
+			/* handle: ".handle", */
 			start : function(event, ui) {
-				ui.item.data('start_pos', ui.item.index());
+				/* ui.item.data('start_pos', ui.item.index()); */
 			},
 			stop : function(event, ui) {
-				var spos = ui.item.data('start_pos');
-				var epos = ui.item.index();
+			/* 	var spos = ui.item.data('start_pos');
+				var epos = ui.item.index(); */
 				 	reorder();  //순서 조정
 				 
 				 	
@@ -798,41 +926,68 @@ function searchDetailAddrFromCoords(coords, callback) {
 
 			}
 			
-
 			
 			
 		});
-		$("#sortable").disableSelection();
+		$(".sortable").disableSelection();
 		
 	});
 
 	
 	/* 순서 조정 */
 	function reorder() {
+		//ddidx 재배치
 	   $(".sortableBox").each(function(i, box) {
 	        $(box).find(".ddidx").val(i + 1);
 
 	    });
-	/*  $(".sortableBox").each(function(i, box) {
-		console.log($(".dayOfPlan").eq(i).val());
-		 $(box).find(".ddate").val($(".dayOfPlan").eq(i).val()); 
-	
-	    }); */
 
-	
+
+		//ddate 재배치
 		for(var i=0; i<$(".dayOfPlan").length; i++){
 					
-		$(".dayOfPlan").eq(i).parent('div').next('div').find("input.ddate").val($(".dayOfPlan").eq(i).val());
+		$(".dayOfPlan").eq(i).parent('div').next().find("input.ddate").val($(".dayOfPlan").eq(i).val());
 		
 		}
 	    
+		//색상 재배치 sortableBox
+		for(var i=0; i<$(".sortableBox").length; i++){
+
+	    $(".sortableBox").eq(i).css("background-color",$(".dtype").eq(i).val());
+	    
+	    
+	}
+	
+	}
+	
+	/* 모달에ddate를 클래스명을 활용해서 옮기는 메서드 */
+	function writeddate(e){
+		console.log($(e).attr('class'));
+		console.log($(e).parent('div').prev('div'));
+
+		
+		$(".ddateModal").val($(e).attr('class'));
 		
 	}
 	
-</script>
 	
+	function resetEditForm(){
+		   $('#dailyEditForm')[0].reset();	 	
+
+	}
+
+	
+</script>
 	
 	
 </body>
 </html>
 
+
+	<!-- SORTABLE  -->
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+ 

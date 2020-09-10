@@ -38,15 +38,10 @@ public class DailyListService {
 		dao=sessionTemplate.getMapper(PlannerDaoInterface.class);
 		
 		
-	
-		/*
-		 * dailyList = dao.selectDailyList(uidx);
-		 * 
-		 * listView = new DailyList(dailyList);
-		 * System.out.println("나는 데일리의 리스트뷰!"+listView);
-		 */
+	System.out.println(dao.selectDailyList(uidx, pidx));
+
 		
-		return dao.selectDailyList(uidx);
+		return dao.selectDailyList(uidx, pidx);
 	}
 
 	
@@ -65,7 +60,7 @@ public class DailyListService {
 	  // 세션이 있으면 세션에 있는 loginInfo의 uidx를 데려온다. 
 		  loginInfo.getUidx(); 
 		  //데려온 uidx를이용하여 플래너의 리스트를 출력해준다. 
-		  dailyList = dao.selectDailyList(loginInfo.getUidx()); }
+		  dailyList = dao.selectDailyListQ(loginInfo.getUidx()); }
 	  
 	  
 	  //리스트에 uidx로 데려온 결과를 담아준다. listView = new DailyList(dailyList);

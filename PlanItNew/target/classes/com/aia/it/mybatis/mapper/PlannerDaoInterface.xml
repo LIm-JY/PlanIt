@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dloc" column="dloc" />
 		<result property="dloclon" column="dloclon" />
 		<result property="dloclat" column="dloclat" />
+		<result property="daddr" column="daddr" />		
 		<result property="dmsg" column="dmsg" />
 		<result property="dphoto" column="dphoto" />
 		<result property="dtype" column="dtype" />
@@ -88,13 +89,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 데일리 리스트 출력  -->
 	<select id="selectDailyList" resultMap="resultPlannerJoinDaily">
-		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{param1} and p.pidx=#{param2} order by ddate asc, ddidx asc
 
 	</select>
 
 
 	<!-- 데일리 리스트 출력  -->
-	<select id="selectDailyJoinList" resultMap="resultPlannerJoinDaily">
+	<select id="selectDailyListQ" resultMap="resultPlannerJoinDaily">
 		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
 
 	</select>
