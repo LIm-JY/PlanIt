@@ -92,12 +92,12 @@
 
 
 				<tr>
-					<td><label for="bphoto">사진</label></td>
+					<td><label for="bphoto1">사진</label></td>
 					<td><input type="file" name="bphoto1" id="bphoto1"></td>
 
 				</tr>
 				<tr>
-					<td><label for="bphoto">사진</label></td>
+					<td><label for="bphoto2">사진</label></td>
 					<td><input type="file" name="bphoto2" id="bphoto2"></td>
 				</tr>
 				<tr>

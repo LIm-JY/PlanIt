@@ -16,6 +16,8 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	
+	<c:url value="${initParam['boardUploadPath']}" var="imagePath"/>
 	<br>
 	<br>
 	<table class="table" border="1">
@@ -40,7 +42,6 @@
 			<th colspan="3" id="boardplanner">${viewBoard.pidx}</th>
 
 		</tr>
-		<c:url value="${initParam['boardUploadPath']}" var="imagePath" />
 		<tr>
 			<th>사진</th>
 			<th colspan="3"><img alt="사진 "
@@ -151,15 +152,22 @@ $(document).ready(function(){
 		$.ajax({
 			url :  'http://localhost:8080/it/planner/dailyRest',
 			type :  'GET',
-			data : {uidx : '${loginInfo.uidx}',
-					pidx	},
+			data : {uidx : '${viewBoard.uidx}',
+					pidx : '${viewBoard.pidx}'	},
 			success : function(data) {
 
 				var html = '';
 				html += '		<div>제목 : ' + data[0].ptitle + '</div>';
 				html += '		<div>기간 : ' + data[0].pstartdate + '~'+data[0].penddate+'</div>';
-			
-				for (var i = 0; i < data.length; i++) {
+				 for (var i = 0; i < data.length; i++) {
+						html += '<div class="card">';
+						html += '		<div>장소 : ' + data[i].didx + '</div>';
+						html += '		<div>장소 : ' + data[i].dloc + '</div>';
+						html += '</div>';
+						
+				
+						$('#boardplanner').html(html);
+				/* for (var i = 0; i < data.length; i++) {
 					if(data[i].didx != 0){
 					html += '<div class="card">';
 					html += '		<div>장소 : ' + data[i].didx + '</div>';
@@ -172,7 +180,7 @@ $(document).ready(function(){
 						
 
 						$('#boardplanner').html(html);
-					}
+					} */
 			}//for 문 끝
 				
 			}//success끝

@@ -201,7 +201,7 @@ input::-webkit-input-placeholder {
                                     <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드
                                     <i class="fa fa-search" aria-hidden="true"></i>　</label>
                                     
-                                <input type="file" id="input-file" style= "display: none"/>
+                                <input type="file" id="input-file" name="photo"style= "display: none"/>
                                 </div>
                             </div>
                         </div>

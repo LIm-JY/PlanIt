@@ -38,7 +38,7 @@ public class BoardEditService {
 		dao = sessionTemplate.getMapper(BoardDaoInterface.class);
 
 		int result = 0;
-		System.out.println("수정전%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%result!"+result);
+		System.out.println("수정전%%%%%%%%%%%%%%%result!"+result);
 
 		// MemberEditRequest -> Member : 이전 파일을 photo에 저장하고 시작
 		Board board = editRequest.toBoard();
@@ -47,6 +47,8 @@ public class BoardEditService {
 
 		MultipartFile file1 = editRequest.getBphoto1();
 		MultipartFile file2 = editRequest.getBphoto2();
+		
+		System.out.println("file1 ?????????????? : " + file1);
 		
 		try {
 
@@ -74,7 +76,7 @@ public class BoardEditService {
 				// 이전 페이지를 지운다.
 				// 이전 파일의 File 객체
 				File oldFile1 = new File(realPath, editRequest.getOldFile1());
-
+				System.out.println("oldFile1 : " + oldFile1);
 				// 파일이 존재하면
 				if (oldFile1.exists()) {
 					// 파일을 삭제
