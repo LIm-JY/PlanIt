@@ -74,7 +74,7 @@ public class LoginService {
 			loginResult += "</script>";
 			
 		} else{
-			loginResult = "<script>" + "alert('please enter a correct password.');" + "history.go(-1);" + "</script>";
+			loginResult = "<script>" + "alert('please enter 나는 한글t password.');" + "history.go(-1);" + "</script>";
 		}
 
 		return loginResult;

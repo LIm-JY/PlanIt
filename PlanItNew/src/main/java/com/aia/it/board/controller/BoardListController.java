@@ -1,5 +1,7 @@
 package com.aia.it.board.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +22,7 @@ public class BoardListController {
 	public String getBoardList(
 				Model model,
 				HttpServletRequest request,
-				HttpServletResponse response) {
+				HttpServletResponse response) throws SQLException {
 		
 		model.addAttribute("listView", listService.getView(request, response));
 		

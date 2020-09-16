@@ -60,7 +60,7 @@ public class MemberEditService {
 		
 			member.setUphoto(newFileName); 
 			
-			//이전 페이지 삭제 
+			//이전 파 삭제 
 			File oldFile = new File(realPath, editRequest.getOldFile());
 			
 			if(oldFile.exists()) {

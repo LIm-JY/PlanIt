@@ -1,6 +1,7 @@
 package com.aia.it.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.aia.it.board.model.Board;
 
@@ -9,9 +10,11 @@ public interface BoardDaoInterface {
 	//게시판 리스트 출력
 	List<Board> selectTotalList();
 
-	int totalCnt();
+	// 전체 게시물의 개수 : 검색 포함
+	int totalCnt(Map search);
 
-	List<Board> selectList(int startRow, int count);
+	// 전체 게시물의  List<Board> 로 반환
+	List<Board> selectList(Map search);
 
 	//게시판 글쓰기 입력
 	int insertBoard(Board board);

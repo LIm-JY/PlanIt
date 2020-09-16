@@ -1,6 +1,8 @@
 
 package com.aia.it.comment.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +29,7 @@ public class CommentController {
 	BoardListService bService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getCommentForm(HttpServletResponse response, HttpServletRequest request, Model model) {
+	public String getCommentForm(HttpServletResponse response, HttpServletRequest request, Model model) throws SQLException {
 
 		model.addAttribute("listView", bService.getView(request, response));
 

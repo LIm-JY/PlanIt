@@ -2,7 +2,14 @@ package com.aia.it.board.model;
 
 import java.sql.Date;
 
-public class Board {
+/*import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;*/
+
+
+/*@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name="", propOrder = {"bidx","btitle","bmsg","bphoto1","bphoto2","bregdate","pidx","uidx"})
+*/public class Board {
 	
 	private int bidx; //게시글 식별번호
 	private String btitle; //게시글 제목
