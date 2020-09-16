@@ -1,7 +1,5 @@
 package com.aia.it.member.service;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -76,6 +74,7 @@ public class LoginService {
 			loginResult += "</script>";
 			
 		} else{		
+
 
 			loginResult += "<script>" + "alert('이메일 혹은 비밀번호를 확인해주세요. ');" + "history.go(-1);" + "</script>";
 		

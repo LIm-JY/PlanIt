@@ -15,7 +15,7 @@
 <c:if test="${empty loginInfo}">
 	<script>
 		alert('로그인이 필요한 페이지 입니다.');		
-		location.href= "<c:url value="/login/login" />";
+		location.href= "<c:url value="/login" />";
 	</script>
 </c:if>
 

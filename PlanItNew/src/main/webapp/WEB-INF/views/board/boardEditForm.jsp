@@ -40,7 +40,7 @@
 					<td><input type="file" name="bphoto1">
 						<br>
 						현재 파일 : ${board.bphoto1}
-						<input type="hidden" name="oldFile" value="${board.bphoto1}" >
+						<input type="hidden" name="oldFile1" value="${board.bphoto1}" >
 					 </td>
 				</tr>
 				<tr>
@@ -48,7 +48,7 @@
 					 <td><input type="file" name="bphoto2">
 						<br>
 						현재 파일 : ${board.bphoto2}
-						<input type="hidden" name="oldFile" value="${board.bphoto2}" >
+						<input type="hidden" name="oldFile2" value="${board.bphoto2}" >
 					 </td>
 				</tr>
 				<tr>
@@ -68,7 +68,6 @@
 <script>
 	
 	$(document).ready(function(){
-		
 		
 		
 		
