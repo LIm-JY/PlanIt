@@ -92,8 +92,14 @@ input::-webkit-input-placeholder {
 	text-align: center;
 }
 /* 아이디 체크 시 글씨 색상 */
+#checkmsgDiv{ 
+	text-align: center;
+	font-size: 12px;
+}
+
 .check_ok {
 	color: blue;
+	
 }
 
 .check_not {
@@ -106,8 +112,22 @@ input::-webkit-input-placeholder {
 	    border-color: #00CED1;
 	    font-size: 14px;
 		font-weight: bolder;
+		height : 41.7px; 
+		margin-bottom : 5px;
 
 }
+
+#input-group-eVerify{
+	text-align: center;
+	color: grey;
+	background: white;
+}
+
+#eVerify{
+	font-size: 11px;
+	border: none; 
+	background-color: white;
+	}
 
 #idchk, #namechk{
 	display: none;
@@ -131,6 +151,7 @@ input::-webkit-input-placeholder {
 
 }
 
+
 </style>
 </head>
 	<body>
@@ -145,15 +166,20 @@ input::-webkit-input-placeholder {
                     </div> 
 					<form class="form-horizontal"  id="regForm" method="post" enctype="multipart/form-data">
 						
-						<div class="form-group">
+						<div class="form-group" id = "form-group-uid">
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input type="email" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
+									<span class="input-group-addon" id = "input-group-eVerify">
+										<button id ="eVerify"> 인증 </button>
+									</span>
 								</div>
+					
 							</div>
-                        <input type="checkbox" name="idchk" id="idchk">
-                        <span  id="checkmsg"></span>
+                        	<input type="checkbox" name="idchk" id="idchk">
+	                        <div id = checkmsgDiv>
+	                        <span  id="checkmsg"></span>
+							</div>
 						</div>
                         <div class="form-group">
 
@@ -183,7 +209,9 @@ input::-webkit-input-placeholder {
 								</div>
 							</div>
                          <input type="checkbox" name="namechk" id="namechk">
+                         <div id = checkmsgDiv>
 			             <span  id="checkmsg02"></span>
+			             </div>
 						</div>
                         
                         <div class="form-group">
@@ -201,13 +229,13 @@ input::-webkit-input-placeholder {
                                     <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드
                                     <i class="fa fa-search" aria-hidden="true"></i>　</label>
                                     
-                                <input type="file" id="input-file" style= "display: none"/>
+                                <input type="file" id="input-file" name = "photo" style= "display: none"/>
                                 </div>
                             </div>
                         </div>
 
 						<div class="form-group ">
-							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button" style ="height : 41.7px; margin-bottom : 5px;">작성완료</button>
+							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button">작성완료</button>
 						</div>
 						<div class="login-register">
 				            <a href="<c:url value="/home"/>" >

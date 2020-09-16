@@ -91,6 +91,7 @@
 		 color: #00CED1;
 		 font-size: 14px;
    		 font-weight: bolder;
+   		 
 	}
     </style>
     

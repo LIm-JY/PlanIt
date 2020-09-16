@@ -27,8 +27,9 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(produces = "text/html; charset=utf-8", method = RequestMethod.POST)
 	@ResponseBody
+
 	public String login(
 			LoginRequest loginRequest,
 			HttpSession session,
@@ -38,7 +39,10 @@ public class LoginController {
 //		model.addAttribute("result", loginService.login(loginRequest, session, response));
 		System.out.println("여기는 로긴 컨트롤러: " + loginService.login(loginRequest, session, response));
 		
-		return loginService.login(loginRequest, session, response);
+		String result = loginService.login(loginRequest, session, response);
+		
+		
+		return result;
 	}
 
 }

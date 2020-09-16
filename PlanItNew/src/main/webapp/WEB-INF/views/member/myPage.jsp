@@ -58,7 +58,7 @@
 		style="display: none" id="mySidebar">
 		<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close
 			&times;</button>
-		<a href="#" class="w3-bar-item w3-button">나의 플랜 </a> <a href="#"
+			<a href = "<c:url value="/board/boardList"/>" class="w3-bar-item w3-button">나의 플랜 보기 </a> <a href="#"
 			class="w3-bar-item w3-button">내가 쓴 게시글</a> <a href="#"
 			class="w3-bar-item w3-button">내가 좋아요 한 글</a>
 	</div>

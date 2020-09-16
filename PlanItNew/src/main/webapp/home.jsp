@@ -6,10 +6,12 @@
 <html lang="ko">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssMainFooter.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
     <title>메인페이지</title>
 <head>
 
@@ -21,7 +23,7 @@
     
     
     }  
-    
+ 
     body {
 	    width:100%;
 	    height:100%;
@@ -95,7 +97,7 @@
 
 	
 	#mainPlanList, #mainBoardList{
-/* 	border: 1px solid lightgrey;  */
+    /* 	border: 1px solid lightgrey;  */
 	
 	}
 	
@@ -111,34 +113,6 @@
 		
 	}
 	
-	.mainNav{
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-	
-	.mainNav li { 
-		display: inline; 
-		color: grey;
-		padding-left: 15px; 
-		padding-right: 15px; 
-		text-align: center;
-		 }
-	
-	
-    .mainNav li a:hover  {
-		color: #E9967A;
-	}
-
-	.mainPlanList a, .mainBoardList a{
-		color: #E9967A;
-	}
-    
-    #mainNavSpan{
-    	color: grey;
-    	font-size: 9px; 
-    }    
-   
     </style>
 
 
@@ -199,7 +173,7 @@
               		<tr> 
               			<td colspan = "4">
               			<div class = "planListBtn">
-              			<a href = "<c:url value="/member/memberReg"/>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+              			<a href = "<c:url value="/planner/plannerList"/>"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
               			</div>
               			</td>
               		</tr>
@@ -221,9 +195,12 @@
               		<tr> 
               			<td>1</td>
               			<td>
+             				<!-- 본인 프로필 사진으로 대체할 부분!  -->
               				<i class="fa fa-user" aria-hidden="true"></i>
               			</td>
+              			<!--글쓴이 이름으로 대체할 부분!  -->
               			<td>창일</td>
+              			<!--제목으로 대체할 부분!  -->
               			<td>안녕하세요~</td>
               			
               			<td>
@@ -268,31 +245,8 @@
                 
                 <hr> 
                 
-                
-                <!--메인화면 네비  -->
-                <div class = "mainNavDiv">
-               	<ul class = "mainNav"> 
-               		<li>
-               			<a href = "<c:url value="/"/>"><i class="fa fa-home fa-2x" aria-hidden="true">
-               			<br><span id = "mainNavSpan">메인</span></i></a>
-               		</li>
-               		<li>
-               			<a href="<c:url value="/planner/calendar"/>"><i class="fa fa-book fa-2x" aria-hidden="true">
-               			<br><span id = "mainNavSpan">플래너</span></i></a>
-               		</li>
-               		<li>
-               			<a href="<c:url value="/board/boardList"/>"><i class="fa fa-pencil fa-2x" aria-hidden="true">
-               			<br><span id = "mainNavSpan">커뮤니티</span></i></a>
-               		</li>
-               		<li>
-               			<a href = "<c:url value="/myPage/${loginInfo.uidx}"/>"><i class ="fa fa-user fa-2x" aria-hidden="true">
-               			<br><span id = "mainNavSpan">마이페이지</span></i></a>
-               		</li>
-               	</ul>
-                </div>
-                
-				
-				 
+                <!-- 메인화면 Footer  -->
+				<%@ include file="/WEB-INF/views/include/mainFooter.jsp" %> 
       		
 		</div>
 	</div>
