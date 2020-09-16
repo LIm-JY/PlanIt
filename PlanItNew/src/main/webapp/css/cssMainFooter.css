@@ -2,6 +2,7 @@
 
 
 /* footer nav 설장입니다.  */
+
 	.mainNav{
 		list-style-type: none;
 		margin: 0;
@@ -20,16 +21,18 @@
 		color: #E9967A;
 	}
 
-	.mainPlanList a, .mainBoardList a{
+/* 	.mainPlanList a, .mainBoardList a{
 		color: #E9967A;
-	}
+	} */
     
     #mainNavSpan{
     	color: grey;
     	font-size: 9px; 
     	position: relative; 
     	top : -15px;
-    }  
+    }
+    
+      
     
     
  

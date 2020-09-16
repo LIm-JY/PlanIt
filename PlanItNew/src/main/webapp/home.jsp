@@ -93,14 +93,7 @@
 	
 	.planListBtn, .boardListBtn{
 		text-align : center; 
-		}
-
-	
-	#mainPlanList, #mainBoardList{
-    /* 	border: 1px solid lightgrey;  */
-	
-	}
-	
+		}	
 	
 	.form-control {
 		

@@ -53,7 +53,7 @@ html, body, h1, h2, h3, h4 {
 		<!--로그인 되었는 상태 -->
 		<c:if test="${!empty loginInfo}">
 			<div class="w3-col s2">
-				<a href="<c:url value="/home"/>" class="w3-button w3-block"><i class="glyphicon glyphicon-home"></i></a>
+				<a href="<c:url value="/"/>" class="w3-button w3-block"><i class="glyphicon glyphicon-home"></i></a>
 			</div>
 			<div class="w3-col s2">
 				<a href="<c:url value="/planner/calendar"/>"

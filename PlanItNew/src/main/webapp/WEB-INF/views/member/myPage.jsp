@@ -81,8 +81,8 @@
 				</tr>
 				<tr>
 					<th colspan="2" id = "tableProfileImg">
-					<img alt="사진 " id = "profileImg" src="${imagePath}/${myInfo.uphoto}" width="30px"
-										height="30px"></th>
+					<img alt="사진 " id = "profileImg" src="${imagePath}/${myInfo.uphoto}" width="45px"
+										height="45px"></th>
 
 					
 				</tr>

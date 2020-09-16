@@ -38,7 +38,7 @@ html, body, h1, h2, h3, h4 {
 				<a href="${pageContext.request.contextPath}/member/memberReg" class="w3-button w3-block">회원가입</a>
 			</div>
 			<div class="w3-col s4">
-				<a href="<c:url value="/home"/>" class="w3-button w3-block"> 로그인 </a>
+				<a href="<c:url value="/"/>" class="w3-button w3-block"> 로그인 </a>
 			</div>
 			<div class="w3-col s4">
 				<a href="<c:url value="/board/boardList"/>" class="w3-button w3-block">커뮤니티</a>
@@ -48,7 +48,7 @@ html, body, h1, h2, h3, h4 {
 		<!--로그인 되었는 상태 -->
 		<c:if test="${!empty loginInfo}">
 			<div class="w3-col s2">
-				<a href="<c:url value="/home"/>" class="w3-button w3-block">Home</a>
+				<a href="<c:url value="/"/>" class="w3-button w3-block">Home</a>
 			</div>
 			<div class="w3-col s2">
 				<a href="<c:url value="/planner/calendar"/>" class="w3-button w3-block">Plans</a>

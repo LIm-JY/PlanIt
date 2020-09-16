@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>회원정보수정</title>
 
-<link rel="stylesheet" href="<c:url value="/css/default.css" />">
 
 <style>
 </style>

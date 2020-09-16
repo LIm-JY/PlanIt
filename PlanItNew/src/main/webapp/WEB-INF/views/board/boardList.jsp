@@ -8,19 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap"
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cssMainFooter.css">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
-
-
 html {
 	height: 100%;
 	scroll-behavior: smooth;
@@ -43,12 +38,15 @@ table {
 	border-collapse: collapse;
 }
 
-th, td {
-	border: 1px solid lightgrey;
+tr, td { 
+ border-bottom: 1px solid #eee;
+
 }
 
+
+
 hr {
-	width: 80%;
+	width: 85%;
 	border: 0;
 	border-top: 1px solid #eee;
 }
@@ -58,7 +56,7 @@ a {
 	color: #00CED1;
 }
 
-img{
+img {
 	border-radius: 70%;
 }
 
@@ -80,85 +78,76 @@ img{
 
 #card-title {
 	color: #00CED1;
-	margin-top: 10px;
-	margin-bottom: 5px;
+	margin-top: 5px;
+	margin-bottom: -10px;
 }
 
 #card-body {
-	padding-top: 5px;
+	padding-top: 2px;
 	height: 400px;
 }
 
-.btn-primary {
-	color: #fff;
-	background-color: #00CED1; /* DarkTurquoise #00CED1 */
-	border-color: #00CED1;
-}
-
-.planListBtn, .boardListBtn {
-	text-align: center;
-}
-
 #mainBoardList {
-	height : 350px;
-	
+	height: 350px;
+} 
+
+form>span>p {
+	font-size: 10px;
 }
 
-.form-control {
-	border-radius: 0;
-	font-size: 14px;
-	BORDER-BOTTOM: 1px solid lightgrey;
-	BORDER-LEFT: medium none;
-	BORDER-RIGHT: medium none;
-	BORDER-TOP: medium none;
+#boardlistTable>tbody>tr>td {
+	border: 0px;
 }
 
-.mainNav {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+/* 게시글 검색 버튼  */
+#boardListSearchBtn {
+	margin-top: 5px; border : 1px solid lightgrey;
+	border-radius: 20%;
+	background-color: white;
+	border: 1px solid lightgrey;
+	border-radius : 20%;  
+	background-color :white;
+	color: lightgrey;
 }
 
-.mainNav li {
-	display: inline;
-	color: grey;
-	padding-left: 13px;
-	padding-right: 15px;
-	text-align: center;
-	
-	
+/*게시글 검색 input  */
+#boardListSearchInput {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-color: lightgrey;
 }
 
-.mainNav span {
-	
-}
-
-form>span>inptu{
-	height: 
-}
-
-form>span>p{
-	font-size : 10px;
-}
-
-.mainNav li a:hover {
-	color: #E9967A;
-}
-
-.mainPlanList a, .mainBoardList a {
-	color: #E9967A;
-}
-
-#mainNavSpan {
+/*게시글 작성자 이름 */
+#boardListName {
 	color: grey;
 	font-size: 9px;
 }
 
-#boardlistTable>tbody>tr>td{ 
-	border: 0px;
+#boardListTitleTd{
+	text-align: left;
+}
+
+#boardListTitle{
+	font-size: 14px;
+	color: grey;
+}
+
+#searchResultMsgDiv{
+	margin-top : 80px;
+	margin-bottom : 150px;
+	font-weight: bolder;
+ }
+ 
+.boardListPagingDiv{
+	margin-top: 6px;
+	paddig-top: 5px;
+	margin-bottom: 6px; 
 	
 
 }
+
+
 
 
 
@@ -170,107 +159,98 @@ form>span>p{
 		style="width: 20rem; border-radius: 20px;">
 		<!--1번  시작-->
 
-
 		<div class="card-title" id="card-title">
 			<h2 id="loginFormLogo" class="card-title text-center">Plan It!</h2>
 			<hr>
 		</div>
 
 
-		<div class="card-body" id="card-body" style="text-align: center;"><!--2번  시작-->
+		<div class="card-body" id="card-body" style="text-align: center;">
+			<!--2번  시작-->
 
-				<c:if test="${not empty listView}">
-					<div class="searchBox">
-						<form>
-							<select name="searchType" style="display:none">
-								<option value="both">ID + NAME</option>
-							</select>
-							<span><p>여행</p>
-							<input type="text" name="keyword"> <input type="submit"
-								value="검색"> <i class="fa fa-user" aria-hidden="true"></i></span> 
-						</form>
-					</div>
-
-
-
-			<div class="mainBoardList" id="mainBoardList" style="text-align: center;"><!--3번  시작-->
-			
-					<br>
-					<table id = "boardlistTable">
+			<c:if test="${not empty listView}">
+				<div class="searchBox">
+					<form>
+						<select name="searchType" style="display: none">
+							<option value="both">ID + NAME</option>
+						</select> <input type="text" name="keyword" id="boardListSearchInput">
+						<button type="submit" value="검색" id="boardListSearchBtn">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+					</form>
+				</div>
 					
+					<br>
+					<table id="boardlistTable">
 						<c:if test="${not empty listView.boardList }">
-							<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
-							<c:forEach items="${listView.boardList}" var="board">
-								<tr class="board">
+						<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
+						<c:forEach items="${listView.boardList}" var="board">
+							
+							<tr class="board">
+								<td><img alt="프로필" src="${imagePath}/${board.uphoto}" width="30px" height="30px">
+								</td>
 								
-									<td><img alt="프사 " src="${imagePath}/${board.uphoto}"width="30px"
-										height="30px" > 
-										<br>
-										${board.uname}		
-									</td>
-									<td><a href="${board.bidx}">${board.btitle}</a></td>
-									
+								<td rowspan ="2" id = "boardListTitleTd" >
+									<a href="${board.bidx}">
+										<span id = "boardListTitle">　 ${board.btitle}</span></a>
+				
+								</td>
+							</tr>
 
-								</tr>
-							</c:forEach>
+							<tr class="board" id="boardListName">
+								<td>${board.uname}
+								
+							</tr>
 							
-					<script>
-					function reorder() {
-						//ddidx 재배치
-					   $(".board").each(function(i, box) {
-					        $(box).find(".number").html(i + 1);
-
-					    });
-					}
 						
-					reorder();
-					</script>
-							
-							
+	
+					</c:forEach>
+
+							<script>
+								function reorder() {
+									//ddidx 재배치
+									$(".board").each(function(i, box) {
+										$(box).find(".number").html(i + 1);
+
+									});
+								}
+
+								reorder();
+							</script>
+
 						</c:if>
+						</table>
 
 						<c:if test="${empty listView.boardList }">
-							<tr>
-								<th colspan="6">조회된 글이 없습니다.</th>
-							</tr>
+							<div id ="searchResultMsgDiv">
+								<span id = "searchResultMsg">조회된 글이 없습니다.</span>
+							</div>
 						</c:if>
 
-					</table>
-					
-					</c:if>
-			
-
-
-		<c:if test="${listView.pageTotalCount > 0}">
-
-			<div class=""boardListBtn"">
-				<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
-
-					<a
-						class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
-						href="boardList?page=${i}">${i}</a>
-				</c:forEach>
-			</div>
-
-		</c:if>
-</div><!--3번  끝-->
+				</c:if>
 
 
 
+			<c:if test="${listView.pageTotalCount > 0}">
 
+				<div class="boardListPagingDiv">
+					<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
+						<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
+							href="boardList?page=${i}">${i}</a>
+					</c:forEach>
+				</div>
 
+			</c:if>
+
+			<!-- 메인화면 Footer  -->
+
+			<%@ include file="/WEB-INF/views/include/mainFooter.jsp"%>
+		
 	</div>
 	<!--2번  끝-->
-	
- 	<!-- 메인화면 Footer  -->
-		<%@ include file="/WEB-INF/views/include/mainFooter.jsp" %> 
-	
+
 	</div>
 	<!--1번  끝-->
-
-
-
-		
 
 
 
@@ -279,10 +259,8 @@ form>span>p{
 </html>
 
 <script>
+	/* 순서 조정 */
 
-/* 순서 조정 */
-
-	
 	function boardDel(bidx) {
 		if (confirm('선택하신 회원 정보를 삭제하시겠습니까?')) {
 			location.href = 'boardDelete?bidx=' + bidx;
@@ -294,3 +272,5 @@ form>span>p{
 		location.href = 'boardList';
 	}
 </script>
+
+
