@@ -19,6 +19,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
+
+
 html {
 	height: 100%;
 	scroll-behavior: smooth;
@@ -84,7 +86,6 @@ img{
 
 #card-body {
 	padding-top: 5px;
-	border: 1px solid red;
 	height: 400px;
 }
 
@@ -99,8 +100,7 @@ img{
 }
 
 #mainBoardList {
-	height : 250px;
-	border: 1px solid blue;
+	height : 350px;
 	
 }
 
@@ -133,6 +133,14 @@ img{
 	
 }
 
+form>span>inptu{
+	height: 
+}
+
+form>span>p{
+	font-size : 10px;
+}
+
 .mainNav li a:hover {
 	color: #E9967A;
 }
@@ -145,6 +153,15 @@ img{
 	color: grey;
 	font-size: 9px;
 }
+
+#boardlistTable>tbody>tr>td{ 
+	border: 0px;
+	
+
+}
+
+
+
 </style>
 </head>
 <body>
@@ -161,34 +178,36 @@ img{
 
 
 		<div class="card-body" id="card-body" style="text-align: center;"><!--2번  시작-->
-			
-
-
-			<div class="mainBoardList" id="mainBoardList" style="text-align: center;"><!--3번  시작-->
-				<h6 style="text-align: left;">커뮤니티 차트</h6>
 
 				<c:if test="${not empty listView}">
 					<div class="searchBox">
 						<form>
 							<select name="searchType" style="display:none">
 								<option value="both">ID + NAME</option>
-							</select> <input type="text" name="keyword"> <input type="submit"
-								value="검색"> 
+							</select>
+							<span><p>여행</p>
+							<input type="text" name="keyword"> <input type="submit"
+								value="검색"> <i class="fa fa-user" aria-hidden="true"></i></span> 
 						</form>
 					</div>
 
+
+
+			<div class="mainBoardList" id="mainBoardList" style="text-align: center;"><!--3번  시작-->
+			
 					<br>
-					<table>
+					<table id = "boardlistTable">
 					
 						<c:if test="${not empty listView.boardList }">
 							<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
 							<c:forEach items="${listView.boardList}" var="board">
 								<tr class="board">
 								
-									<td class="number"></td>
 									<td><img alt="프사 " src="${imagePath}/${board.uphoto}"width="30px"
-										height="30px" > </td>
-									<td>${board.uname}</td>
+										height="30px" > 
+										<br>
+										${board.uname}		
+									</td>
 									<td><a href="${board.bidx}">${board.btitle}</a></td>
 									
 
@@ -219,7 +238,7 @@ img{
 					</table>
 					
 					</c:if>
-			</div><!--3번  끝-->
+			
 
 
 		<c:if test="${listView.pageTotalCount > 0}">
@@ -234,36 +253,24 @@ img{
 			</div>
 
 		</c:if>
+</div><!--3번  끝-->
 
 
 
 
-
-
-
-		<!--메인화면 네비  -->
-		<div class="mainNavDiv">
-			<ul class="mainNav">
-				<li><a href="<c:url value="/"/>"><i
-						class="fa fa-home fa-2x" aria-hidden="true"> <br> <span
-							id="mainNavSpan">메인</span></i></a></li>
-				<li><a href="<c:url value="/planner/calendar"/>"><i
-						class="fa fa-book fa-2x" aria-hidden="true"> <br> <span
-							id="mainNavSpan">플래너</span></i></a></li>
-				<li><a href="<c:url value="/board/boardList"/>"><i
-						class="fa fa-pencil fa-2x" aria-hidden="true"> <br> <span
-							id="mainNavSpan">커뮤니티</span></i></a></li>
-				<li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>"><i
-						class="fa fa-user fa-2x" aria-hidden="true"> <br> <span
-							id="mainNavSpan">마이페이지</span></i></a></li>
-			</ul>
-		</div>
 
 	</div>
 	<!--2번  끝-->
+	
+ 	<!-- 메인화면 Footer  -->
+		<%@ include file="/WEB-INF/views/include/mainFooter.jsp" %> 
+	
 	</div>
 	<!--1번  끝-->
 
+
+
+		
 
 
 

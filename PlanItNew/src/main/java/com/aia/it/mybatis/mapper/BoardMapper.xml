@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 전체게시글 개수 -->
 	<select id="totalCnt" parameterType="map" resultType="int">
-		select count(*) from planit.board
+		select count(*) from planit.board b join planit.member m on b.uidx = m.uidx
 		
 		<include refid="listSearch"/>
 	</select>
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<sql id="whereID">
-		or uidx like concat('%',#{keyword},'%')
+		or uname like concat('%',#{keyword},'%')
 
 
 	</sql>

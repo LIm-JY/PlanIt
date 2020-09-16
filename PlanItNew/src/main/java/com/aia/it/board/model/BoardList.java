@@ -7,7 +7,7 @@ public class BoardList {
 	
 	private int boardTotalCount;
 	private int currentPageNumber;
-	private List<Board> BoardList;
+	private List<BoardJoinMember> BoardList;
 	private int pageTotalCount;
 	private int boardCountPerpage;
 	private int startRow;
@@ -17,7 +17,7 @@ public class BoardList {
 	}
 	
 	
-	public BoardList(int boardTotalCount, int currentPageNumber, List<Board> boardList,
+	public BoardList(int boardTotalCount, int currentPageNumber, List<BoardJoinMember> boardList,
 			int boardCountPerpage, int startRow) {
 		this.boardTotalCount = boardTotalCount;
 		this.currentPageNumber = currentPageNumber;
@@ -66,12 +66,12 @@ private void calTotalCount() {
 	}
 
 
-	public List<Board> getBoardList() {
+	public List<BoardJoinMember> getBoardList() {
 		return BoardList;
 	}
 
 
-	public void setBoardList(List<Board> boardList) {
+	public void setBoardList(List<BoardJoinMember> boardList) {
 		BoardList = boardList;
 	}
 

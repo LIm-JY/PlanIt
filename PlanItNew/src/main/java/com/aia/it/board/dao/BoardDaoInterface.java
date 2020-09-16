@@ -3,6 +3,7 @@ package com.aia.it.board.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.aia.it.board.model.BoardJoinMember;
 import com.aia.it.board.model.Board;
 
 public interface BoardDaoInterface {
@@ -14,7 +15,7 @@ public interface BoardDaoInterface {
 	int totalCnt(Map search);
 
 	// 전체 게시물의  List<Board> 로 반환
-	List<Board> selectList(Map search);
+	List<BoardJoinMember> selectList(Map search);
 
 	//게시판 글쓰기 입력
 	int insertBoard(Board board);

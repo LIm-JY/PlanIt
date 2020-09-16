@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aia.it.board.dao.BoardDaoInterface;
-import com.aia.it.board.model.Board;
+import com.aia.it.board.model.BoardJoinMember;
 import com.aia.it.board.model.BoardList;
 
 @Service
@@ -55,7 +55,7 @@ public class BoardListService {
 		int totalCnt = dao.totalCnt(search);
 		
 		//한 페이지 당 노출할 게시물의 개수
-		final int BOARD_CNT_PER_PAGE = 7;
+		final int BOARD_CNT_PER_PAGE = 5;
 		
 		//현재 페이지현재 번호 
 		int currentPageNumber = 1;
@@ -75,7 +75,7 @@ public class BoardListService {
 		int startRow = 0;
 		
 		//한페이지에 누출할 리스트
-		List<Board> boardList = null;
+		List<BoardJoinMember> boardList = null;
 		System.out.println("totalCnt"+totalCnt);
 		System.out.println("BOARD_CNT_PER_PAGE"+BOARD_CNT_PER_PAGE);
 		if(totalCnt>0) {
