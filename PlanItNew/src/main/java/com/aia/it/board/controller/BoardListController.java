@@ -22,7 +22,7 @@ public class BoardListController {
 	public String getBoardList(
 				Model model,
 				HttpServletRequest request,
-				HttpServletResponse response) throws SQLException {
+				HttpServletResponse response) throws SQLException{
 		
 		model.addAttribute("listView", listService.getView(request, response));
 		

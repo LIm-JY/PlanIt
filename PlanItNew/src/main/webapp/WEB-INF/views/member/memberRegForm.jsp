@@ -7,255 +7,283 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-
-		<!-- Website CSS style -->
-		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-
-		<!-- Website Font style -->
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-	    <script src="https://kit.fontawesome.com/yourcode.js"></script>
-		
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@100;400&family=Work+Sans:ital,wght@0,200;0,300;0,400;1,200&display=swap" rel="stylesheet">
-		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-
-<title>회원가입</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
+	<title>회원가입</title>
 <style> 
-
-body, html{
-    height: 100%;
- 	background-repeat: no-repeat;
- 	background-color: white;
- 	font-family: 'Oxygen', sans-serif;
-}
-
-.main{
- 	margin-top: 50px;
-}
-
-h3.title { 
-	font-size: 30px;
-	font-family: 'Jua'; 
-	font-weight: 400; 
-	color: #00CED1;
+	html{
+	 height: 100%;
+	}
 	
-}
-
-hr{
-	width: 10%;
-	color: #fff;
-}
-
-.form-group{
-	margin-bottom: 15px;
-}
-
-label{
-	margin-bottom: 15px;
-}
-
-input,
-input::-webkit-input-placeholder {
-    font-size: 11px;
-    padding-top: 5px;
-}
-
-.main-login{
-    border: 0.5px solid lightgrey; 
- 	background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-
-}
-
-.main-center{
- 	margin-top: 15px;
- 	margin: 0 auto;
- 	max-width: 330px;
-    padding: 40px 40px;
-
-}
-
-.login-button{
-	margin-top: 5px;
-}
-
-.login-register{
-	font-size: 11px;
-	text-align: center;
-}
-/* 아이디 체크 시 글씨 색상 */
-#checkmsgDiv{ 
-	text-align: center;
-	font-size: 12px;
-}
-
-.check_ok {
-	color: blue;
+	 body {
+	    width:100%;
+	    height:100%;
+	    margin: 0;
+  		padding-top: 90px;
+  		padding-bottom: 40px;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+  		/* 선형 그래디언트 + 두가지색상 이어줌 */
+  		/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
+	}
 	
-}
+	hr {
+		width: 85%;
+	    border: 0;
+	    border-top: 1px solid #eee;
+	}
+	
+	#loginFormLogo{
+    	margin-top:-10px;
+	    font-family: 'Montserrat Alternates', sans-serif;
+	    color: #1abc9c;
+    }
+      
+	#loginFormLogoKr{
+    	text-align : center; 
+    	font-size: 13px; 
+    	color: grey;
+    }
+    
+    /* 쉽고 간편 문구*/
+    #loginFormLogoSimple{
+     	font-weight: bolder;
+    	color: #1abc9c;
+    }
+    
+    /*로그인 폼(카드) 위치*/
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.form-group{
+		margin-bottom: 15px;
+	}
+	
+	/* 아이디 체크 시 글씨 색상 */
+	#checkmsgDiv{ 
+		text-align: right;
+		font-size: 12px;
+		height: 18px;		
+	}
+	
+	.check_ok {
+		color: blue;
+		
+	}
+	
+	.check_not {
+		color: red;
+	}
 
-.check_not {
-	color: red;
-}
-
-#regSubmitBtn{
+	#regSubmitBtn{
 		color: #fff;
-	    background-color: #00CED1; /* DarkTurquoise #00CED1 */
-	    border-color: #00CED1;
+	    background-color: #1abc9c; /* DarkTurquoise #1abc9c */
+	    border-color: #1abc9c;
 	    font-size: 14px;
 		font-weight: bolder;
 		height : 41.7px; 
 		margin-bottom : 5px;
 
-}
-
-#input-group-eVerify{
-	text-align: center;
-	color: grey;
-	background: white;
-}
-
-#eVerify{
-	font-size: 11px;
-	border: none; 
-	background-color: white;
+	}
+	
+	/* 회원가입 input을 감싸는 div */
+	#regForm{
+		
 	}
 
-#idchk, #namechk{
-	display: none;
-}
+	#btn-Yes{
+			font-size: 14px;
+			font-weight: bolder;
+	}	
+	
+	/* 아직 안만들었다 */
+	#input-group-eVerify{
+		text-align: center;
+		color: grey;
+		background: white;
+	}
+	
+	/* 아직 안만들었다 */
+	#eVerify{
+		font-size: 11px;
+		border: none; 
+		background-color: white;
+		}
 
-#input-file-button{
-  width: 278px;
-  padding: 6px 10px;
-  background-color: white;
-  border-radius: 4px;
-  color: #00CED1;
-  cursor: pointer;
-  font-size: 13px;
-  text-align: center;
-  
- /*  border: 1px solid lightgrey; */
-} 
+	#idchk, #namechk{
+	 	display : none; 	
+	}
+	
+	#input-file-button{
+	  width: 278px;
+	  padding: 6px 10px;
+	  background-color: white;
+	  color: #1abc9c;
+	  cursor: pointer;
+	  font-size: 13px;
+	  text-align: center;
+	  font-weight: bold;
+	 /*  border: 1px solid lightgrey; */
+	} 
 
-#goBackBtn{
- color: lightGrey; 
+	.form-control {
+		width: 278px;
+		border-radius: 0;
+		font-size : 12px;
+		border-bottom: 1px solid lightgrey;
+		border-left: medium none;
+		border-right: medium none;
+		border-top: medium none;
+		
+	}
 
-}
+	.btn-primary {
+	    color: #fff;
+	    background-color: #1abc9c; /* DarkTurquoise #1abc9c */
+	    border-color: #1abc9c;
+	    }
+	    
+	.login-register{
+	 	text-align: center;
+	
+	} 
+	#goBackBtn{
+		font-size: 9px;
+	 	color: lightGrey; 
+	
+	}
 
+	#checkMsgPwRule{
+		color: lightgrey;
+		font-size:9px;
+	
+	}
+	
+	.align-middle{
+		height: 510px;
+	}
+	
+	/* 상단 회원가입 문구  */
+	.form-reg-heading{
+		text-align : center; 
+		font-size: 14px; 
+		color: grey; 
+		margin-bottom: 1px;
+	
+	}
+	
+	/* 회원가입 form 전용 타이틀 */
+	.card-title{
+		padding-top: 0.25rem;
+		margin-bottom : 0.25rem;
+	}
 
 </style>
 </head>
-	<body>
-		<div class="container" id="registerForm">
-			<div class="row main"> 
-				<div class="main-login main-center" style="width:40em; border-radius:20px;">
-                    <div class="panel-heading">
-                        <div class="panel-title text-center" id = "panel-title">
-	               		<h3 class="title">회원가입</h3>
-	               		<hr>
-	               	   </div>
-                    </div> 
-					<form class="form-horizontal"  id="regForm" method="post" enctype="multipart/form-data">
-						
-						<div class="form-group" id = "form-group-uid">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<input type="email" class="form-control" name="uid" id="uid"  placeholder="이메일을 입력하세요." required/>
-									<span class="input-group-addon" id = "input-group-eVerify">
-										<button id ="eVerify"> 인증 </button>
-									</span>
-								</div>
-					
-							</div>
-                        	<input type="checkbox" name="idchk" id="idchk">
-	                        <div id = checkmsgDiv>
-	                        <span  id="checkmsg"></span>
-							</div>
-						</div>
-                        <div class="form-group">
-
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="upw" id="upw"  placeholder="패스워드를 입력하세요." required/>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="chkUpw" id="chkUpw"  placeholder="패스워드를 한번 더 입력해주세요."/>
-								</div>
-							</div>
-			            	 <span  id="checkmsg03"></span>
-						</div>
-                        
-                        <div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="uname" id="uname"  placeholder="닉네임을 입력하세요." required/>
-								</div>
-							</div>
-                         <input type="checkbox" name="namechk" id="namechk">
-                         <div id = checkmsgDiv>
-			             <span  id="checkmsg02"></span>
-			             </div>
-						</div>
-                        
-                        <div class="form-group">
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-phone" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="uphonenum" id="uphonenum"  placeholder="연락처를 입력하세요."/>
-								</div>
-							</div>
-						</div>
-                        
-                        <div class="form-group">
-                            <div class ="cols-sm-10" id = "inputFileContainer"> 
-                                <div class ="input-group" id = "inputFileContainer">
-                                    <label className = "input-file-button" for="input-file" id ="input-file-button">프로필 사진 업로드
-                                    <i class="fa fa-search" aria-hidden="true"></i>　</label>
-                                    
-                                <input type="file" id="input-file" name="photo"style= "display: none"/>
-
-                                </div>
-                            </div>
-                        </div>
-
-						<div class="form-group ">
-							<button id="regSubmitBtn" type="submit" class="btn btn-primary btn-lg btn-block login-button">작성완료</button>
-						</div>
-						<div class="login-register">
-				            <a href="<c:url value="/home"/>" >
-				            <span id = "goBackBtn">뒤로 돌아가기</span></a>
-				         </div>
-					</form>
-				</div>
-			</div>
+	<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+	
+	<!--회원가입 폼 전체 div -->
+	<div class="card align-middle" id = "registerForm" style="width:20rem; border-radius:10px;">	
+		<!--회원가입 폼 타이틀 div-->
+        <div class="card-title" style="margin-top:20px;">
+        
+        	<h6 id="loginFormLogoKr">여행을 <span id = "loginFormLogoSimple">쉽고 간편</span>하게</h6>
+			<h1 id = "loginFormLogo" class="card-title text-center">Plan It!</h1>			
+			<h6 class="form-reg-heading">회원가입</h6>
+			
 		</div>
+        
+        <!--회원가입 폼 바디-->
+		<div class="card-body">
+            <form id = "regForm" method="post" enctype = "multipart/form-data">
+                           
+       
+                <label for="uid" class="sr-only">이메일을 입력하세요.</label> 
+                <input type="email" id="uid" name ="uid" class="form-control" placeholder="이메일을 입력하세요." required autofocus>
+       				<input type="checkbox" name="idchk" id="idchk">
+	                <div id = "checkmsgDiv">
+	                <span  id="checkmsg"></span>
+					</div>
+       			
+       			
+                <label for="upw" class="sr-only">비밀번호를 입력하세요.</label>
+                <input type="password" maxlength ="12"
+					id="upw" name ="upw" class="form-control" placeholder="비밀번호 입력" minlength="6" required>
+                <div id = "checkmsgDiv" style ="text-align: left;">
+                	<span id = "checkMsgPwRule"> **최소 6자 이상, 최대  12자</span>
+                </div>
+                
+                <label for="upw" class="sr-only">비밀번호를 한번 더 입력해주세요.</label>
+                <input type="password" maxlength ="12"
+                	id="chkUpw" name ="chkUpw" class="form-control" placeholder="비밀번호 재입력" required>
+	       			<div id = "checkmsgDiv">
+	       			<span  id="checkmsg03"></span>
+	       			</div>
+       			
+       			<label for="uname" class="sr-only">닉네임을 입력하세요.(*최대5자)</label>
+                <input type="text" maxlength ="5" 
+                	id="uname" name ="uname" class="form-control" placeholder="닉네임을 입력하세요." required>
+                	<input type="checkbox" name="namechk" id="namechk">
+                    <div id = "checkmsgDiv" style = "text-align: left;" >
+						<span id ="checkMsgPwRule"> ** 최대 5자　　　　　　　</span>	 <!--공백지우지 마셈 제발   -->
+						<span id="checkmsg02"> </span>
+					</div>
+				
+				
+                <label for="uname" class="sr-only">연락처를 입력하세요.</label>
+                <input type="text" maxlength ="11" 
+                	id="uphonenum" name ="uphonenum" class="form-control" placeholder="연락처를 입력하세요." 
+                	minlength = "9" required>
+	                <div id = "checkmsgDiv" style ="text-align: left;">
+	                	<span id = "checkMsgPwRule"> ** 공백없이 숫자만 입력해 주세요.</span>
+	                </div>
+    
+    			<div class ="input-group" id = "inputFileContainer">
+                     <label class = "input-file-button" for="input-file" id ="input-file-button">+ 프로필 사진 등록하기
+                     <i class="fa fa-search" aria-hidden="true"></i>　</label>
+                     <input type="file" id="input-file" name="photo"style= "display: none"/>
+                </div>
+    			
+    
+    
+                <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style ="height : 41.7px; margin-bottom : 5px;">작성완료</button>
+    			
+	    			<div class="login-register">
+					    <a href="<c:url value="/"/>" >
+						<span id = "goBackBtn">뒤로 돌아가기</span></a>
+					</div>            
+         
+                </form>
+      
+		</div>
+	</div>
 
-        <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-	</body>
+</body>
 </html>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <script>
+	
+	/*이메일 규칙 */
+	function email_check( email ) {
+	    
+	    var regex=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	    return (email != '' && email != 'undefined' && regex.test(email));
+	
+	}
+
+
+
+
 	$(document).ready(function() {
 
 		$('#regForm').submit(function() {
@@ -288,12 +316,12 @@ input::-webkit-input-placeholder {
 					uid : $(this).val()
 				},
 				success : function(data) {
-					if (data == 'Y') {
+					if (data == 'Y' && email_check($('#uid').val()) ) {
 						$('#checkmsg').text("사용가능한 이메일입니다.");
 						$('#checkmsg').addClass('check_ok');
 						$('#idchk').prop('checked', true);
 					} else {
-						$('#checkmsg').text("사용중인 이메일입니다.");
+						$('#checkmsg').text("사용할수 없는 이메일입니다.");
 						$('#checkmsg').addClass('check_not');
 						$('#idchk').prop('checked', false);
 					}
@@ -321,7 +349,7 @@ input::-webkit-input-placeholder {
 
 		$('#uname').focusout(function() {
 			if ($(this).val().length < 1) {
-				$('#checkmsg02').text("닉네임을 입력해주세요.");
+				$('#checkmsg02').text("　 　닉네임을 입력해주세요.");
 				$('#checkmsg02').addClass('check_not');
 				return false;
 			}
@@ -335,11 +363,11 @@ input::-webkit-input-placeholder {
 				},
 				success : function(data) {
 					if (data == 'Y') {
-						$('#checkmsg02').text("사용가능한 닉네임입니다.");
+						$('#checkmsg02').text("　 사용가능한 닉네임입니다.");
 						$('#checkmsg02').addClass('check_ok');
 						$('#namechk').prop('checked', true);
 					} else {
-						$('#checkmsg02').text("사용중인 닉네임입니다.");
+						$('#checkmsg02').text("　　 사용중인 닉네임입니다.");
 						$('#checkmsg02').addClass('check_not');
 						$$('#namechk').prop('checked', false);
 					}
@@ -359,10 +387,18 @@ input::-webkit-input-placeholder {
 		/*비밀번호 중복체크 */
 		$('#chkUpw').focusout(function() {
 			if ($('#upw').val() != $('#chkUpw').val()) {
+				$('#checkmsg03').css("color","red");
 				$('#checkmsg03').text("비밀번호가 다릅니다.");
-				$('#chkUpw').focus();
+ 			/* 	$('#upw').focus();  */
 				return false;
+			} else{
+				$('#checkmsg03').text("");
 			}
+			
+			
+			
+			
+					
 		});
 		
 		

@@ -11,7 +11,7 @@ background-color : green;}
 
 
 </style>
-    
+<header> 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -68,6 +68,7 @@ background-color : green;}
     </div>
   </div>
 </nav>
+</header>   
 	
 	
 	

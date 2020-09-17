@@ -1,8 +1,17 @@
 @charset "UTF-8";
 
 
+
 /* footer nav 설장입니다.  */
 
+
+	footer{
+	/*하단에 위치고정 */
+	position : absolute;
+	bottom:  0;
+	}
+	
+	
 	.mainNav{
 		list-style-type: none;
 		margin: 0;

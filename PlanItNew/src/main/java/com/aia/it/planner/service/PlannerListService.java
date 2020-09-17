@@ -16,21 +16,21 @@ import com.aia.it.planner.model.Planner;
 public class PlannerListService {
 
 
-private PlannerDaoInterface dao;
-	
-	@Autowired
-	private SqlSessionTemplate sessionTemplate;
-	
-	List<Planner> plannerList = null;
-	
-public List<Planner> plannerList(int uidx) {
+	private PlannerDaoInterface dao;
 		
-		dao = sessionTemplate.getMapper(PlannerDaoInterface.class);
+		@Autowired
+		private SqlSessionTemplate sessionTemplate;
 		
-	
-		return dao.selectPlannerByIdx(uidx);
-	}
-	
+		List<Planner> plannerList = null;
+		
+	public List<Planner> plannerList(int uidx) {
+			
+			dao = sessionTemplate.getMapper(PlannerDaoInterface.class);
+			
+		
+			return dao.selectPlannerByIdx(uidx);
+		}
+		
 	
 	
 	

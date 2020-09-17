@@ -41,7 +41,7 @@ html, body, h1, h2, h3, h4 {
 					class="w3-button w3-block">회원가입</a>
 			</div>
 			<div class="w3-col s3">
-				<a href="<c:url value="/home"/>" class="w3-button w3-block"> 로그인
+				<a href="<c:url value="/"/>" class="w3-button w3-block"> 로그인
 				</a>
 			</div>
 			<div class="w3-col s3">

@@ -38,7 +38,7 @@ public class BoardEditController {
 			Model model
 			) throws IllegalStateException, IOException, SQLException {
 		
-		System.out.println("수정! controller: "+editRequest);
+		System.out.println("controller: "+editRequest);
 		
 		model.addAttribute("result", editService.boardEdit(editRequest,request));
 				return "board/boardEdit";

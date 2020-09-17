@@ -38,12 +38,15 @@ table {
 	border-collapse: collapse;
 }
 
-tr, td { 
- border-bottom: 1px solid #eee;
-
+tr{
+	border-bottom: 1px solid #eee;
 }
 
 
+/* #boardListProfileTd{
+ border-bottom: 0px;
+}
+ */
 
 hr {
 	width: 85%;
@@ -53,7 +56,7 @@ hr {
 
 a {
 	text-decoration: none;
-	color: #00CED1;
+	color: #1ABC9C;
 }
 
 img {
@@ -64,7 +67,7 @@ img {
 	margin-top: 10px;
 	margin-bottom: 0;
 	font-family: 'Montserrat Alternates', sans-serif; `
-	color: #00CED1;
+	color: #1ABC9C;
 }
 
 /*로그인 폼(카드) 위치*/
@@ -77,7 +80,7 @@ img {
 }
 
 #card-title {
-	color: #00CED1;
+	color: #1ABC9C;
 	margin-top: 5px;
 	margin-bottom: -10px;
 }
@@ -104,18 +107,19 @@ form>span>p {
 	margin-top: 5px; border : 1px solid lightgrey;
 	border-radius: 20%;
 	background-color: white;
-	border: 1px solid lightgrey;
+	border: none;
 	border-radius : 20%;  
 	background-color :white;
-	color: lightgrey;
+	color: grey;
 }
 
 /*게시글 검색 input  */
 #boardListSearchInput {
+	width: 80%;
 	border-top: none;
 	border-left: none;
 	border-right: none;
-	border-color: lightgrey;
+	border-bottom: 1px solid lightgrey;
 }
 
 /*게시글 작성자 이름 */
@@ -143,7 +147,6 @@ form>span>p {
 	margin-top: 6px;
 	paddig-top: 5px;
 	margin-bottom: 6px; 
-	
 
 }
 
@@ -159,17 +162,10 @@ form>span>p {
 		style="width: 20rem; border-radius: 20px;">
 		<!--1번  시작-->
 
-		<div class="card-title" id="card-title">
+		<div class="card-title" id="card-title" style = "text-align: center;">
 			<h2 id="loginFormLogo" class="card-title text-center">Plan It!</h2>
-			<hr>
-		</div>
-
-
-		<div class="card-body" id="card-body" style="text-align: center;">
-			<!--2번  시작-->
-
-			<c:if test="${not empty listView}">
-				<div class="searchBox">
+			<span style = "color : grey;">Community</span>
+			<div class="searchBox">
 					<form>
 						<select name="searchType" style="display: none">
 							<option value="both">ID + NAME</option>
@@ -179,6 +175,23 @@ form>span>p {
 						</button>
 					</form>
 				</div>
+		</div>
+
+
+		<div class="card-body" id="card-body" style="text-align: center;">
+			<!--2번  시작-->
+
+			<c:if test="${not empty listView}">
+				<!-- <div class="searchBox">
+					<form>
+						<select name="searchType" style="display: none">
+							<option value="both">ID + NAME</option>
+						</select> <input type="text" name="keyword" id="boardListSearchInput">
+						<button type="submit" value="검색" id="boardListSearchBtn">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</button>
+					</form>
+				</div> -->
 					
 					<br>
 					<table id="boardlistTable">
@@ -187,7 +200,8 @@ form>span>p {
 						<c:forEach items="${listView.boardList}" var="board">
 							
 							<tr class="board">
-								<td><img alt="프로필" src="${imagePath}/${board.uphoto}" width="30px" height="30px">
+								<td id ="boardListProfileTd">
+								<img alt="프로필" src="${imagePath}/${board.uphoto}" width="30px" height="30px">
 								</td>
 								
 								<td rowspan ="2" id = "boardListTitleTd" >
@@ -233,15 +247,20 @@ form>span>p {
 
 			<c:if test="${listView.pageTotalCount > 0}">
 
-				<div class="boardListPagingDiv">
-					<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
-						<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
-							href="boardList?page=${i}">${i}</a>
-					</c:forEach>
-				</div>
+					<div class="w3-center">
+					<div class="w3-bar">
+						<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
+							<a class="w3-button" ${i == listView.currentPageNumber ? 'now_page' : ''}"
+								href="boardList?page=${i}">${i}</a>
+						
+					<%-- 		<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
+								href="boardList?page=${i}">${i}</a> --%>
+						</c:forEach>
+						</div>
+					</div>
 
 			</c:if>
-
+			
 			<!-- 메인화면 Footer  -->
 
 			<%@ include file="/WEB-INF/views/include/mainFooter.jsp"%>

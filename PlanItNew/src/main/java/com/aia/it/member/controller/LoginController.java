@@ -29,7 +29,6 @@ public class LoginController {
 	
 	@RequestMapping(produces = "text/html; charset=utf-8", method = RequestMethod.POST)
 	@ResponseBody
-
 	public String login(
 			LoginRequest loginRequest,
 			HttpSession session,
