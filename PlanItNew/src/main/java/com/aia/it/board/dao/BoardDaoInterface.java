@@ -24,12 +24,16 @@ public interface BoardDaoInterface {
 	int editBoard(Board board);
 
 	//게시글 한개보여주기
+	BoardJoinMember selectByBidxJoin(int bidx);
+	
 	Board selectByBidx(int bidx);
 	
 	//게시글 지우기
 	int boardDelete(Board board);
 	
 	int selectByPidx(int pidx);
+
+	int insertBoardNull(Board board);
 
 
 }

@@ -5,10 +5,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style> 
-.navbar-heade{
-background-color : green;}
+.navbar-header{
+background-color : #1ABC9C;
+color: red;}
 
-
+.navbar-brand{
+	color: red;
+}
 
 </style>
 <header> 
@@ -20,7 +23,7 @@ background-color : green;}
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">plan it!</a>
+      <a class="navbar-brand" href="#" style="color: white;">plan it</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">

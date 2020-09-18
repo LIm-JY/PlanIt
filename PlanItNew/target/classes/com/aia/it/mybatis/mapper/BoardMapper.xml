@@ -39,6 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2,pidx)
 		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2},#{pidx})
 	</insert>
+	
+	
+		<insert id="insertBoardNull"
+		parameterType="com.aia.it.board.model.Board" useGeneratedKeys="true"
+		keyProperty="bidx">
+		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2)
+		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2})
+	</insert>
 
 	<!-- 게시판 리스트 출력 -->
 	<select id="selectTotalList" resultMap="resultBoard">
@@ -103,6 +111,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<!-- 게시글 bidx로 조회 -->
+	<select id="selectByBidxJoin"
+		resultType="com.aia.it.board.model.BoardJoinMember">
+		select * from planit.board b join planit.member m on b.uidx = m.uidx where b.bidx=#{bidx}
+	</select>
+	
+		<!-- 게시글 bidx로 조회 -->
 	<select id="selectByBidx"
 		resultType="com.aia.it.board.model.Board">
 		select * from planit.board where bidx=#{bidx}
