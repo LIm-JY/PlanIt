@@ -32,15 +32,15 @@ public class CalendarController {
 	public String getDate(	
 			Planner planner,
 			HttpServletRequest request,
+			@RequestParam("uidx") String uidx,
 			@RequestParam("pstartdate") String pstartdate,
 			@RequestParam("penddate") String penddate,
 			@RequestParam("ptitle") String ptitle,
 			Model model) {
 		
 		model.addAttribute("result", regService.plannerReg(planner, request));
-		
 		model.addAttribute("dateList", calService.getDateList(pstartdate, penddate));
-		
+		model.addAttribute("uidx", uidx);
 		model.addAttribute("startdate",pstartdate);
 		model.addAttribute("enddate",penddate);
 		model.addAttribute("ptitle",ptitle);

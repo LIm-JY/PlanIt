@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>플래너 리스트</title>
+<title>ADMIN PLANNER LIST</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 <style>
@@ -26,7 +26,7 @@
 
 
 
-	<h1>플래너 리스트</h1>
+	<h1>ADMIN PLANNER LIST</h1>
 	<hr>
 	<div id="plannerList"></div>
 
@@ -55,9 +55,8 @@ function deletePlanner(pidx){
 
 
 function plannerList() {
-		console.log('${loginInfo.uidx}');
 	$.ajax({
-		url: 'http://localhost:8080/it/planner/plannerRest/'+${loginInfo.uidx},
+		url: 'http://localhost:8080/it/planner/plannerRest',
 		type: 'get',
 	
 		success: function(data){

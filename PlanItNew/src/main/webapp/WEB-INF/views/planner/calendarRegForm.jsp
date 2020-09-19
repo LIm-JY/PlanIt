@@ -1,81 +1,156 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/sessionCheck.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
-
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css"> 
+ --%><!-- <link rel="stylesheet" media="screen and (max-width: 768px)" href="mystyle.css" />
+ -->
 
 <style>
+#datechk {
+	 display: none; 
+}
+
+#checkmsg {
+	color: red;
+	padding-left: 15px;
+}
+
+body, html {
+	height: 100%;
+	background-repeat: no-repeat;
+	background-color: white;
+	overflow: hidden;
+	min-width: 360px;
+	width: 100%;
+}
+
+#main-center {
+	height: 100%;
+	margin: auto;
+	margin-top:0px;	
+	border-radius: 5px 5px 5px 5px;
+	min-width: 360px;
+	width: 360px;
+}
+
+#title {
+	font-size: 20px;
+	border: white;
+	min-width: 360px;
+	width: 100%;
+	height: 40px;
+	font-style: Arial;
+	top:0;
+	padding-left: 10px;
+}
+
+#datepicker, #datepicker2 {
+	height: 40px;
+	width: 150px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#startMark, #endMark {
+	height: 40px;
+	width: 150px;
+	background-color: #21CAA9;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 40px;
+	color: white;
+}
+
+table {
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 
-#datechk{
-	display: none;
+table>tbody>tr>td {
+	padding: 10px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+#submit {
+	min-width: 358px;
+	width: 100%;
+	height: 40px;
+	color: white;
+	font-size: 12px;
+	background-color: #BEBEBE;
+	border-radius: 5px 5px 5px 5px;
+	position: fixed; 
+	bottom: 0;
 }
 
 
 </style>
 
-    <title>text Limit</title>
-<%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
- --%>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<title>플래너 등록</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script>
-       /*            $(function() {
-                
-                //오늘 날짜를 출력
-                $("#today").text(new Date().toLocaleDateString());
-                //datepicker 한국어로 사용하기 위한 언어설정
-                $.datepicker.setDefaults($.datepicker.regional['ko']); 
-                
-                // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
-                // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
-                //시작일.
-                $('#datepicker').datepicker({
-                    showOn: "both",                     // 달력을 표시할 타이밍 (both: focus or button)
-                    buttonImage: "images/calendar.gif", // 버튼 이미지
-                    buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-                    buttonText: "날짜선택",             // 버튼의 대체 텍스트
-                    dateFormat: "yy-mm-dd",             // 날짜의 형식
-                    changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-                    //minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-                    onClose: function( selectedDate ) {    
-                        // 시작일(fromDate) datepicker가 닫힐때
-                        // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                        $("#toDate").datepicker( "option", "minDate", selectedDate );
-                    }                
-                });
-                //종료일
-                $('#datepicker2').datepicker({
-                    showOn: "both", 
-                    buttonImage: "images/calendar.gif", 
-                    buttonImageOnly : true,
-                    buttonText: "날짜선택",
-                    dateFormat: "yy-mm-dd",
-                    changeMonth: true,
-                    //minDate: 0, // 오늘 이전 날짜 선택 불가
-                    onClose: function( selectedDate ) {
-                        // 종료일(toDate) datepicker가 닫힐때
-                        // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-                        $("#fromDate").datepicker( "option", "maxDate", selectedDate );
-                    }                
-                });
-            }); */
-// if (Date.prototype.yyyymmdd === undefined) {
-//     Date.prototype.yyyymmdd = function() {
-//     var mm = this.getMonth() + 1; // getMonth() is zero-based
-//     var dd = this.getDate();
-//     return [this.getFullYear(),
-//             (mm>9 ? '' : '0') + mm,
-//             (dd>9 ? '' : '0') + dd
-//             ].join('');
-//     };
-// }
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+</head>
+
+
+
+<body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
+		<form method="post" id="regForm" >
+		<input type="text" name="ptitle" placeholder="제목을 입력해주세요."
+				id="title" autocomplete="off">
+		<div id="main-center">
+			<input type="hidden" name="uidx" value="${loginInfo.uidx}">
+			  <br> <br>
+			<table>
+				<tr style="text-align: center;">
+					<td><div id="startMark">출발일</div></td>
+					<td><div id="endMark">도착일</div></td>
+
+				</tr>
+
+				<tr>
+					<td style="background-color: white;"><input type="date"
+						id="datepicker" name="pstartdate" onchange="call()"
+						placeholder="날짜를 선택하세요"></td>
+					<td style="background-color: white;"><input type="date"
+						id="datepicker2" name="penddate" onchange="call()"
+						autocomplete="off" placeholder="날짜를 선택하세요"></td>
+				</tr>
+
+			</table>
+
+			<div id="checkmsg"></div>
+			
+			
+			</div>
+			
+			<input type="checkbox" name="datechk" id="datechk"> 
+			<input type="submit" id="submit" value="선택완료">
+		</form>
+
+
+</body>
+</html>
+
+<script>
+    
+    /* 날짜의 형식 정리  */
 function call(){
     var sdd = document.getElementById("datepicker").value;
     var edd = document.getElementById("datepicker2").value;
@@ -102,81 +177,66 @@ function call(){
     console.log(curr.getFullYear()+'-'+curr.getMonth()+'-'+curr.getDate());
    	plan += '<div>'+curr.getFullYear()+'-'+curr.getMonth()+'-'+curr.getDate()+'</div>';
 	}   
-    $('body').append(plan);
+    /* $('body').append(plan); */
 }
-call( );
-</script>
-</head>
-
+	call( );
     
-<body>
-  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
-
-
-<form method="post" id="regForm">
-	<p>uidx <input type="text" name="uidx" value="${loginInfo.uidx}"></p><br>
-		제목<input type="text" name="ptitle">
 	
-    <p>StartDate : <input type="date" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
-    <p>EndDate : <input type="date" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
-    <div id="checkmsg"></div>
-    <input type="checkbox" name="datechk" id="datechk">
-    
-    <input type="submit" value="완료">
-    </form>
-    
-    
-    
-</body>
-</html>
-
-    <script>
+	/* 동작 ui */
     
     $(document).ready(function() {
     	
-    	
-    	
-    $('#datepicker2').mouseout(function(){
-    	
+    $('#datepicker2, #datepicker').mouseout(function(){
+    	if($('#datepicker2').val()!=""&&$('#datepicker').val()!=""){
+    		
     	if($('#datepicker').val()>$('#datepicker2').val()){
     		$('#datechk').prop('checked',false);
     		$('#checkmsg').text("시작일 이후로 설정해주세요.");
-    	
-    		
+    		$('#submit').css('background-color','#BEBEBE');
+
     	} else{
     		$('#checkmsg').text("");
+    		$('#submit').css('background-color','#21CAA9');
     		$('#datechk').prop('checked',true);
-    		
+    		}
     	}
-    	
     });
     
+    
     $('#regForm').submit(function() {
+    	
+    	if($('#title').val()==""){
+    		
+    		$('#title').focus();
+    		
+ 			return false;
+
+    	}
+    	
+    	 if($('#datepicker2').val()==""||$('#datepicker').val()==""){
+ 			
+     		$('#checkmsg').text("날짜를 선택해주세요.");
+
+ 			return false;
+
+ 			 }
+    	 
+    
+ 		
 		if (!$('#datechk').prop('checked')) {
-			
 			$('#datepicker2').focus();
 			return false;
 		}
+		
+			
+		
+		
 	});
-    
-    
-    
     
     
     
     });
     </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -30,6 +30,7 @@ public class PlannerEditController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String getPlannerReg (HttpServletRequest request,
 								Planner planner,
+								@RequestParam("uidx") String uidx,
 								@RequestParam("pidx") String pidx,
 								@RequestParam("pstartdate") String pstartdate,
 								@RequestParam("penddate") String penddate,
@@ -44,6 +45,7 @@ public class PlannerEditController {
 		 */		
 		model.addAttribute("dateList", calService.getDateList(pstartdate, penddate));
 		model.addAttribute("pidx", pidx);
+		model.addAttribute("uidx", uidx);
 		model.addAttribute("startdate",pstartdate);
 		model.addAttribute("enddate",penddate);
 		model.addAttribute("ptitle",ptitle);
