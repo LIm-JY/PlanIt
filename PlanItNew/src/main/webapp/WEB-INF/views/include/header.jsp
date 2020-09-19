@@ -4,54 +4,82 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style> 
-.navbar-header{
-background-color : #1ABC9C;
-color: red;}
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@600&display=swap" rel="stylesheet">
 
-.navbar-brand{
-	color: red;
+<style> 
+
+
+nav{
+	z-index: 99999;
+	}
+/* navbar 로고 */
+#navbar-brand{
+		color: #1ABC9C; 
+		font-size: 3.5rem;
+      	font-family: 'Montserrat Alternates', sans-serif;
 }
 
+#myNavbar{
+	background-color: white;
+	color: grey;
+	font-weight : 100; 
+
+}
+
+#myNavbar a:hover{
+	background-color: #1ABC9C;
+	font-weight: 700; 
+	color: white; 
+}
+
+#navIconbar{
+	background-color: #1ABC9C; 
+		
+}
 </style>
 <header> 
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
+  <div class="container-fluid" style ="background-color: white;" >
+    <div class="navbar-header" style = "background-color: white;">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar" id="navIconbar"></span>
+        <span class="icon-bar" id="navIconbar"></span>
+        <span class="icon-bar" id="navIconbar"></span>                        
       </button>
-      <a class="navbar-brand" href="#" style="color: white;">plan it</a>
+      
+      
+      <a class="navbar-brand" id ="navbar-brand" href ="/it">
+      
+      	plan it</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="<c:url value="/home"/>">Home</a></li>
+        <li><a href="/it">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plans <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<c:url value="/planner/calendar"/>">새로운 플랜</a></li>
-            <li><a href="<c:url value="/planner/calendar"/>">내가 짠 플랜</a></li>
-            <li><a href="<c:url value="/planner/calendar"/>">집가고 싶다.</a></li>
+            <li><a href="<c:url value="/planner/calendar"/>">새로운 플랜 작성</a></li>
+            <li><a href="<c:url value="/planner/calendar"/>">나의 플랜 리스트</a></li>
           </ul>
         </li>
           
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Board <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Community <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<c:url value="/board/boardList"/>">게시글 리스트</a></li>
-            <li><a href="<c:url value="/board/boardWrite"/>">게시글 작성</a></li>
+            <li><a href="<c:url value="/board/boardList"/>">커뮤니티 게시글 보기</a></li>
+            <li><a href="<c:url value="/board/boardWrite"/>">커뮤니티 게시글 작성</a></li>
+            <li><a href="<c:url value="/board/boardWrite"/>">내가 쓴 게시글 보기</a></li>
         </ul>
         </li>
           
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Page <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">나의 정보</a></li>
-            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">내가 작성한 플랜</a></li>
-            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">내가 작성한 글 </a></li>
-            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">내가 좋아요 한 글</a></li>
+            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">나의 정보 보기/수정 </a></li>
+            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">나의 플래너</a></li>
+            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>">나의 커뮤니티 게시글 </a></li>
+            <li><a href="<c:url value="/myPage/${loginInfo.uidx}"/>"></a></li>
           </ul>
         </li>
       </ul>

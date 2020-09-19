@@ -6,10 +6,6 @@
 <html lang="ko">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssMainFooter.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cssMain.css">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -21,23 +17,9 @@
        
      html {
   		 height: 100%;
-    	scroll-behavior: smooth;
-    
     
     }  
- 
-    body {
-    
-   	    width:100%;
-	    height:100%;
-	    margin: 0;
-  		padding-top: 80px;
-  		padding-bottom: 40px;
-  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-  		background-repeat: no-repeat;
-  		/* 선형 그래디언트 + 두가지색상 이어줌 */
-  		/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
-	}
+
 	
 	table{
 		width: 100%;
@@ -86,13 +68,7 @@
 	 height: 400px;
 	
 	}
-	
-/* 	.btn-primary {
-	    color: #fff;
-	    background-color: #1abc9c; /* DarkTurquoise #1abc9c */
-/* 	    border-color: #1abc9c;
-	    }
-	     */
+
 	
 	.planListBtn, .boardListBtn{
 		text-align : center; 
@@ -120,26 +96,42 @@
 
 </head>
 <body>
-${plannerListView};
 
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+
+<%-- ${plannerListView}; --%>
+<hr>
+<hr><p>여기서 시작</p>
+<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
+
+<c:forEach items="${boardListView.boardList}" var="board">
+
+							<tr class="board">
+								<td id="boardListProfileTd"><img alt="프로필"
+									src="${imagePath}/${board.uphoto}" width="30px" height="30px">
+								</td>
+
+								<td rowspan="2" id="boardListTitleTd"><a
+									href="${board.bidx}"> <span id="boardListTitle">
+											${board.btitle}</span></a></td>
+							</tr>
+
+							<tr class="board" id="boardListName">
+								<td>${board.uname}
+							</tr>
+</c:forEach>
 <hr>
 
 
-${boardListView};
+
+<%-- ${boardListView} --%>
 
 
 <c:if test="${!empty loginInfo}">	
-	<div class="card align-middle" style="width:20rem; border-radius:10px;">	
-        <div class="card-title" id  ="card-title" style = "text-align: center">
-			<h2 id = "loginFormLogo" class="card-title text-center">Plan It!</h2>
-			<span style = "color : grey;">Home</span>
-			<hr>
-		</div>
-       
 
-		<div class="card-body" id = "card-body" style = "text-align : center;">
-                <input type="hidden" name="redirectUri" value="${header.referer}"
-				style="width: 50%;">                
+	<!-- 헤더를 제외한 전체를 감싸는 div -->
+	<div class = "card">
+           
                 
                 <div class="mainPlanList" id ="mainPlanList"> <!-- style = "text-align : center;" -->
               
@@ -149,7 +141,7 @@ ${boardListView};
 	              				 				<table>             	
 	               		<tr> 
 	              			<td>1</td>
-	              			<td>0824 제주 여행</td>
+	              			<td>이거는 </td>
 	              			<td>
 	              				<i class="fa fa-plus-circle" aria-hidden="true"></i>
 	              			</td>
@@ -263,17 +255,13 @@ ${boardListView};
               	</table>
    			
                 </div>
-                
-                <hr> 
-                
-                <!-- 메인화면 Footer  -->
-				<%@ include file="/WEB-INF/views/include/mainFooter.jsp" %> 
+               
       		
 		</div>
 	</div>
-	 	
+ 	
 </c:if>
-
+	
 
 <c:if test="${empty loginInfo}">
 	<script>
