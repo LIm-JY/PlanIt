@@ -132,5 +132,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="int">
 		select count(*) from planit.board where pidx=#{pidx}
 	</select>
+	
+
  
 </mapper>
+
+

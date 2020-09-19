@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aia.it.board.dao.LikeDaoInterface">
+
+
+	<resultMap id="resultLike"
+		type="com.aia.it.board.model.Like">
+
+		<id property="lidx" column="lidx" />
+		<result property="bidx" column="bidx" />
+		<result property="uidx" column="uidx" />
+	</resultMap>
+
+	
+	<insert id="insertLike" 
+	parameterType="com.aia.it.board.model.Like" useGeneratedKeys="true"
+		keyProperty="lidx">
+		insert into planit.like(bidx, uidx)
+		values(#{bidx}, #{uidx})
+	</insert>
+
+	<!-- <select id="selectLike" resultType="like">
+		select count(uidx)
+		from planit.like
+		where bidx = #{bidx} and uidx = #{uidx}
+	</select>
+	
+	<delete id="deleteLike">
+		delete from planit.like
+		where bidx = #{bidx} and uidx = #{uidx}
+	</delete>
+ -->
+</mapper>

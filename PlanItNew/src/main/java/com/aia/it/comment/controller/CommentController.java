@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.aia.it.board.service.BoardListService;
 import com.aia.it.comment.model.Comment;
-import com.aia.it.comment.model.CommentRequest;
 import com.aia.it.comment.service.CommentService;
 
 @Controller

@@ -13,34 +13,77 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/cssMainFooter.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
-html {
-	height: 100%;
-	scroll-behavior: smooth;
+
+/* input[type="checkbox"] {
+       display:none;
 }
 
-body {
-	width: 100%;
+label {
+     color:blue;
+     text-decoration:underline;
+     margin-top:10px;
+     cursor:pointer;
+     display:inline-block;
+}
+
+label:after {
+     content:"more";  
+}
+
+input:checked ~ label:after {
+     content:"less";  
+}
+
+.inner {
+     max-height:100px;
+     overflow:hidden;
+     transition:all .3s ease;
+     width:100%;
+}
+
+input:checked + .inner {
+     max-height:500px;
+}
+ */
+
+
+
+
+
+
+
+
+
+
+html {
 	height: 100%;
-	margin: 0;
-	padding-top: 80px;
-	padding-bottom: 40px;
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-	background-repeat: no-repeat;
-	/* 선형 그래디언트 + 두가지색상 이어줌 */
-	/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
+}
+
+/*로그인 폼(카드) 위치*/
+.boardListcontainer {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+	width: 500px !important;
+	height: 600px;
+	background-color: #F6F6F6;
+	
+
 }
 
 table {
 	width: 100%;
 	border-collapse: collapse;
+}
+
+#boardlistTable{
+	
 }
 
 tr {
@@ -64,6 +107,8 @@ a {
 
 img {
 	border-radius: 70%;
+	width : 30px; 
+height : 30px;
 }
 
 #loginFormLogo {
@@ -71,16 +116,10 @@ img {
 	margin-bottom: 0;
 	font-family: 'Montserrat Alternates', sans-serif; `
 	color: #1ABC9C;
+	font-size: 20px;
 }
 
-/*로그인 폼(카드) 위치*/
-.card {
-	margin: 0 auto; /* Added */
-	float: none; /* Added */
-	margin-bottom: 10px; /* Added */
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
-}
+
 
 #card-title {
 	color: #1ABC9C;
@@ -134,11 +173,21 @@ form>span>p {
 
 #boardListTitleTd {
 	text-align: left;
+	height: 70px;
+
+}
+
+.boardListDate{
+font-size: 9px;
 }
 
 #boardListTitle {
 	font-size: 14px;
 	color: grey;
+	height: 70px;
+			
+	
+	
 }
 
 #searchResultMsgDiv {
@@ -153,29 +202,27 @@ form>span>p {
 	margin-bottom: 6px;
 }
 
-.plus{
+#boardListProfileTd, .number{
+	width : 50px;
+}
 
-}
-.ele2 {
-	position: absolute;
-	bottom : 50px;
-	right: 0;
-	width: 50px;
-	height: 50px;
-	border-radius : 70%;
-	border: 3px solid #73AD21;
-}
+
+
+
 </style>
 </head>
+
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
 <body>
 
-	<div class="card align-middle"
+
+	<div class="boardListcontainer"
 		style="width: 20rem; border-radius: 20px;">
 		<!--1번  시작-->
 
 		<div class="card-title" id="card-title" style="text-align: center;">
-			<h2 id="loginFormLogo" class="card-title text-center">Plan It!</h2>
-			<span style="color: grey;">Community</span>
+			<h2 id="loginFormLogo" class="card-title text-center">플랜차트</h2>
 			<div class="searchBox">
 				<form>
 					<select name="searchType" style="display: none">
@@ -195,33 +242,55 @@ form>span>p {
 			<c:if test="${not empty listView}">
 
 				<br>
+				
+											<div class="outer">
+						<input type="checkbox" id="readmore" />
+						<div class="inner">
 				<table id="boardlistTable">
 					<c:if test="${not empty listView.boardList }">
 						<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
+						
+						
+
+					
+				
+						
+						
 						<c:forEach items="${listView.boardList}" var="board">
 
-							<tr class="board">
-								<td id="boardListProfileTd"><img alt="프로필"
-									src="${imagePath}/${board.uphoto}" width="30px" height="30px">
+							<tr class="boardUser">
+								<td id="boardListProfileTd"><img
+									src="${imagePath}/${board.uphoto}" >
 								</td>
+								
+								<td rowspan="2" class="number"></td>
 
 								<td rowspan="2" id="boardListTitleTd"><a
 									href="${board.bidx}"> <span id="boardListTitle">
 											${board.btitle}</span></a></td>
+											
+								<td rowspan="2" class="boardListDate">
+									${board.bregdate}
+								</td>
 							</tr>
 
-							<tr class="board" id="boardListName">
+							<tr id="boardListName" >
 								<td>${board.uname}
 							</tr>
 
-
-
 						</c:forEach>
-
+						
+						
+						
+						
+						 
+						
+					
+				
 						<script>
 							function reorder() {
 								//ddidx 재배치
-								$(".board").each(function(i, box) {
+								$(".boardUser").each(function(i, box) {
 									$(box).find(".number").html(i + 1);
 
 								});
@@ -233,6 +302,12 @@ form>span>p {
 					</c:if>
 				</table>
 
+
+						</div>
+<label for="readmore">Read </label>
+	</div>
+
+
 				<c:if test="${empty listView.boardList }">
 					<div id="searchResultMsgDiv">
 						<span id="searchResultMsg">조회된 글이 없습니다.</span>
@@ -243,29 +318,7 @@ form>span>p {
 
 
 
-			<c:if test="${listView.pageTotalCount > 0}">
-
-				<div class="w3-center">
-					<div class="w3-bar">
-						<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
-							<a class="w3-button"
-								${i == listView.currentPageNumber ? 'now_page' : ''}"
-								href="boardList?page=${i}">${i}</a>
-
-							<%-- 		<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
-								href="boardList?page=${i}">${i}</a> --%>
-						</c:forEach>
-					</div>
-				</div>
-
-			</c:if>
-
-			<!-- 메인화면 Footer  -->
-			<div class="plus">
-				<a class="ele2" href="<c:url value="/board/boardWrite"/>">+</a>
-			</div>
-
-			<%@ include file="/WEB-INF/views/include/mainFooter.jsp"%>
+			
 
 		</div>
 		<!--2번  끝-->
@@ -292,6 +345,21 @@ form>span>p {
 	function boardList() {
 		location.href = 'boardList';
 	}
+	
+	
+	$(window).on("scroll", function() {
+		var scrollHeight = $(document).height();
+		var scrollPosition = $(window).height() + $(window).scrollTop();		
+
+		$("#scrollHeight").text(scrollHeight);
+		$("#scrollPosition").text(scrollPosition);
+		$("#bottom").text(scrollHeight - scrollPosition);
+
+		if (scrollPosition > scrollHeight - 500) {			
+			//todo
+			$("body").append('<div id="content"></div>');
+		}
+	});
 </script>
 
 
