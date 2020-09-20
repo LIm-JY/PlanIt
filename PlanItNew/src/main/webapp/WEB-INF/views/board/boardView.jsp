@@ -94,11 +94,21 @@
 		</div>
 		
 		<div>
-			<form id="like_form">
+			<form id="like_form" method="post" enctype = "multipart/form-data" onsubmit="return false;">
 				<table id="list">
 				<%@ include file="/WEB-INF/views/include/sessionCheck.jsp"%>
-					<tr><button id="btnLike">좋아요</button> </tr>
-					<tr><div id="like_result">좋아요갯수넣을자리</div> </tr>
+				
+				
+				<tr>
+				<td><input type="hidden" name="bidx" value="${viewBoard.bidx}" readonly>
+				<input type="hidden" name="uidx" value="${loginInfo.uidx}" readonly>
+<!-- 				style="display:none;"
+ -->				<label for="btnLike" onclick="checkLike();">
+				<img id="like_img"alt="식당" class="dtypeIcon" src="/it/resources/images/unlike.png" width="30px" height="30px"></label>
+				<input type="checkbox" id="btnLike" >
+					<div id="like_result" style="display:inline-block;">좋아요갯수넣을자리</div> </td>
+					
+				</tr>
 				</table>
 			</form>
 
@@ -177,44 +187,112 @@
 
 </body>
 </html>
+
 <script>
 
-/* $('#btnLike').click(function ()  {
-    
-    $.ajax({
-        url:"CommuBbsController",
-        data: {command: 'like', seq: ${comdto.seq }, userid: ${current_user.seq }},
-        type:"post",
-        success : function (data) {
-            
-            var result = JSON.parse(data);
-            
-            if(result.status == 404){
-                $('img#like_img').attr('src', './img/empty_heart.png');
-            } else {
-                $('img#like_img').attr('src', './img/heart.png');
-            }
-            
-            $('span#like_count').html(result.like_count);
-        }
-    })
-}); */
-$('#btnLike').click(function (){
+function likeAllSelect() {
 	$.ajax({
-	url: "LikeInsertController",
+		
+		url: 'http://localhost:8080/it/board/boardView/'+${viewBoard.bidx},
+		type: "get",
+		/* data: {uidx:'${loginInfo.uidx}', 
+			   bidx: '${viewBoard.bidx}'}, */
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+
+			
+			$("#like_result").text(data);
+			
+		}
+		});
+		
+
+}
+
+
+
+
+function likeSelect() {
+	$.ajax({
+		url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${viewBoard.bidx},
+		type: "get",
+		/* data: {uidx:'${loginInfo.uidx}', 
+			   bidx: '${viewBoard.bidx}'}, */
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			console.log(data);
+			if(data == 1){
+				 $('img#like_img').attr('src', '/it/resources/images/like.png');
+					$('#btnLike').prop('checked', true);
+
+			}else if(data == 0){
+				 $('img#like_img').attr('src', '/it/resources/images/unlike.png');		
+					$('#btnLike').prop('checked', false);
+
+			}
+		// data중 put한 것의 이름 like
+		}
+		});
+
+}
+
+
+
+
+
+
+
+function checkLike(){
+
+if(!$('#btnLike').prop('checked')){
+	
+	$.ajax({
+	url: 'http://localhost:8080/it/board/boardView',
 	type: "POST",
 	data: {uidx:'${loginInfo.uidx}', 
 		   bidx: '${viewBoard.bidx}'},
 	success:
+		
 	function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
-	alert("'좋아요'가 반영되었습니다!") ; // data중 put한 것의 이름 like
-	},
+		likeAllSelect();
+		likeSelect();
+	}
+		   ,
 	error:
 	function (request, status, error){
 	alert("ajax실패")
 	}
 	});
-});
+	
+	}else if($('#btnLike').prop('checked')){
+		
+		console.log("delete");
+		$.ajax({
+			url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${viewBoard.bidx},
+			type: "delete",
+			/* data: {uidx:'${loginInfo.uidx}', 
+				   bidx: '${viewBoard.bidx}'}, */
+			success:
+			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			// $('img#like_img').attr('src', '/it/resources/images/unlike.png');// data중 put한 것의 이름 like
+				likeAllSelect();
+				likeSelect();
+			}
+				   ,
+			error:
+			function (request, status, error){
+			alert("ajax실패")
+			}
+			});
+	}	
+		
+	
+	
+}
+	
+
+ 
+ 
 
 
 	function boardDel(bidx) {
@@ -236,14 +314,21 @@ $('#btnLike').click(function (){
 	}
 	
 	
+	
+	
+	
 	/* 게시글을 볼 때 내가쓴글이면 수정삭제가보임. 내가쓴글이 아니면 안보임.
 	      플래너가 있으면 플래너 리스트를 보여줌. 플래너 리스트가 없으면 안보여줌.*/
 $(document).ready(function(){
 	
+	likeAllSelect();
+	likeSelect();
+	
 	var uidx = ${viewBoard.uidx};
 		var loginuidx = ${loginInfo.uidx};
-		console.log(uidx);  
-		console.log(loginuidx);
+	
+		var likebidx=${viewBoard.bidx};
+
 		
 		if(uidx == loginuidx){
 			
@@ -268,6 +353,11 @@ $(document).ready(function(){
 			}
 		}
 	});//pidx를 체크하는 ajax시작의 마감
+	
+
+
+
+	
 	
 	});
 

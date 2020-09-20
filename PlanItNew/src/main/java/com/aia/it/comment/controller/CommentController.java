@@ -28,7 +28,9 @@ public class CommentController {
 	BoardListService bService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getCommentForm(HttpServletResponse response, HttpServletRequest request, Model model) throws SQLException {
+	public String getCommentForm(HttpServletResponse response, 
+			HttpServletRequest request, 
+			Model model) throws SQLException {
 
 		model.addAttribute("listView", bService.getView(request, response));
 

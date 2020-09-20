@@ -20,38 +20,94 @@
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
 
-/* input[type="checkbox"] {
-       display:none;
-}
-
-label {
-     color:blue;
-     text-decoration:underline;
-     margin-top:10px;
-     cursor:pointer;
-     display:inline-block;
-}
-
-label:after {
-     content:"more";  
-}
-
-input:checked ~ label:after {
-     content:"less";  
-}
-
-.inner {
-     max-height:100px;
-     overflow:hidden;
-     transition:all .3s ease;
-     width:100%;
-}
-
-input:checked + .inner {
-     max-height:500px;
-}
- */
-
+/*버튼 디자인 */
+ .button-wrapper {
+        display: inline-block;
+        margin: 20px 5px;
+        padding: 40px;
+    }
+    .dark-button,
+    .dark-button-2 {
+        background: #333;
+    }
+    .button {
+        background: #fff;
+        border: none;
+        padding: 2px;
+        cursor: pointer;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        transition: all .35s ease-in-out .35s;
+        margin: 0 auto;
+        width: 70px;
+        text-align: center;
+    }
+    .dark-button .button,
+    .dark-button .button span {
+        background: #36B4C7;
+        color: #fff;
+    }
+    .dark-button .button:after,
+    .dark-button .button:before,
+    .dark-button .button:hover span {
+        background: #fff;
+        color: #444;
+    } 
+    .dark-button-2 .button,
+    .dark-button-2 .button span {
+        background: #333;
+        color: #fff;
+    }
+    .dark-button-2 .button:after,
+    .dark-button-2 .button:before,
+    .dark-button-2 .button:hover span {
+        background: #fff;
+        color: #444;
+    } 
+    .span {
+        display: block;
+        padding: 5px 10px;
+        background: #fff;
+        z-index: 100;
+        position: relative;
+        transition: all .35s ease-in-out .35s;
+    }
+    .button:hover span {
+        background: #36B4C7;
+        color: #fff;
+        transition: all .35s ease-in-out .35s;
+    }
+    .button:after {
+        bottom: -100%;
+        right: -100%;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: #36B4C7;
+        transition: all .35s ease-in-out .5s;
+    }
+    .button:hover:after {
+        right: 0;
+        bottom: 0;
+        transition: all ease-in-out .35s;
+    }
+    .button:before {
+        top: -100%;
+        left: -100%;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: #36B4C7;
+        transition: all .35s ease-in-out .5s;
+    }
+    .button:hover:before {
+        left: 0;
+        top: 0;
+        transition: all ease-in-out .35s;
+    }
 
 
 
@@ -71,7 +127,7 @@ html {
 	float: none; /* Added */
 	margin-bottom: 10px; /* Added */
 	width: 500px !important;
-	height: 600px;
+	height: 700px;
 	background-color: #F6F6F6;
 	
 
@@ -116,10 +172,12 @@ height : 30px;
 	margin-bottom: 0;
 	font-family: 'Montserrat Alternates', sans-serif; `
 	color: #1ABC9C;
-	font-size: 20px;
+	float: left;
 }
 
-
+#ptext{
+	float: left;
+}
 
 #card-title {
 	color: #1ABC9C;
@@ -222,7 +280,9 @@ font-size: 9px;
 		<!--1번  시작-->
 
 		<div class="card-title" id="card-title" style="text-align: center;">
-			<h2 id="loginFormLogo" class="card-title text-center">플랜차트</h2>
+			<h3 id="loginFormLogo" class="card-title text-center">community</h3><br><br>
+			<p id="ptext" align="left">다양한 여행 정보를 확인해 보세요.</p>
+			
 			<div class="searchBox">
 				<form>
 					<select name="searchType" style="display: none">
@@ -243,14 +303,15 @@ font-size: 9px;
 
 				<br>
 				
-											<div class="outer">
-						<input type="checkbox" id="readmore" />
-						<div class="inner">
 				<table id="boardlistTable">
 					<c:if test="${not empty listView.boardList }">
 						<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
 						
-						
+						<tr>
+							<td colspan="3">제목</td>
+							<td>작성일</td>
+							<td>좋아요</td>
+						</tr>
 
 					
 				
@@ -272,11 +333,17 @@ font-size: 9px;
 								<td rowspan="2" class="boardListDate">
 									${board.bregdate}
 								</td>
+								
+								<td id="joinlike">
+								
+								</td>
+								
 							</tr>
 
 							<tr id="boardListName" >
 								<td>${board.uname}
 							</tr>
+							
 
 						</c:forEach>
 						
@@ -303,16 +370,33 @@ font-size: 9px;
 				</table>
 
 
-						</div>
-<label for="readmore">Read </label>
-	</div>
-
 
 				<c:if test="${empty listView.boardList }">
 					<div id="searchResultMsgDiv">
 						<span id="searchResultMsg">조회된 글이 없습니다.</span>
 					</div>
 				</c:if>
+				
+				<c:if test="${listView.pageTotalCount > 0}">
+
+            <div class="paging">
+               <c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
+
+                  <a
+                     class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
+                     href="boardList?page=${i}">${i}</a>
+               </c:forEach>
+               
+               <div class="light-button button-wrapper">
+    <div class="button">
+        <span class="span" font-size="15px">
+            글쓰기
+        </span>
+    </div>  
+</div>
+            </div>
+
+         </c:if>
 
 			</c:if>
 
@@ -333,6 +417,130 @@ font-size: 9px;
 </html>
 
 <script>
+function likeAllSelect() {
+	$.ajax({
+		
+		url: 'http://localhost:8080/it/board/boardList',
+		type: "get",
+	
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			var html = '';
+			for(var i; i<data.length; i++){
+				
+				html += '<input type="text" name="bidx" id ="test"value="${board.bidx}" readonly>';
+				html += '<input type="text" name="uidx" value="${loginInfo.uidx}" readonly>';
+				html += '<label for="btnLike" onclick="checkLike();">';
+				html += '<img id="like_img"alt="식당" class="dtypeIcon" src="/it/resources/images/unlike.png" width="30px" height="30px"></label>';
+				html += '<input type="checkbox" id="btnLike" >';
+				html += '<div id="like_result" style="display:inline-block;">${like.uidx }</div>';
+				
+				$("#joinlike").html(html);
+			}
+			
+			
+		}
+		});
+		
+
+}
+
+
+
+
+function likeSelect() {
+	$.ajax({
+		url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${listView.boardList[i].bidx},
+		type: "get",
+
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			console.log(data);
+			if(data == 1){
+				 $('img#like_img').attr('src', '/it/resources/images/like.png');
+					$('#btnLike').prop('checked', true);
+
+			}else if(data == 0){
+				 $('img#like_img').attr('src', '/it/resources/images/unlike.png');		
+					$('#btnLike').prop('checked', false);
+
+			}
+		// data중 put한 것의 이름 like
+		}
+		});
+
+}
+
+
+
+
+
+
+
+function checkLike(){
+
+
+if(!$('#btnLike').prop('checked')){
+	
+	$.ajax({
+	url: 'http://localhost:8080/it/board/boardView',
+	type: "POST",
+	data: {uidx:i,'${loginInfo.uidx}', 
+		   bidx: '${listView.boardList[i].bidx}'},
+	success:
+		
+	function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+		likeAllSelect();
+		likeSelect();
+	}
+		   ,
+	error:
+	function (request, status, error){
+	alert("ajax실패")
+	}
+	});
+	
+	}else if($('#btnLike').prop('checked')){
+		
+		console.log("delete");
+		$.ajax({
+			url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${listView.boardList[i].bidx},
+			type: "delete",
+			/* data: {uidx:'${loginInfo.uidx}', 
+				   bidx: '${viewBoard.bidx}'}, */
+			success:
+			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			// $('img#like_img').attr('src', '/it/resources/images/unlike.png');// data중 put한 것의 이름 like
+				likeAllSelect();
+				likeSelect();
+			}
+				   ,
+			error:
+			function (request, status, error){
+			alert("ajax실패")
+			}
+			});
+	}	
+		
+	
+	
+}
+	
+$(document).ready(function(){
+	
+	likeAllSelect();
+	likeSelect();
+	
+});
+ 
+
+
+
+
+
+
+
+
 	/* 순서 조정 */
 
 	function boardDel(bidx) {
@@ -360,6 +568,10 @@ font-size: 9px;
 			$("body").append('<div id="content"></div>');
 		}
 	});
+	
+	
+	
+	
 </script>
 
 

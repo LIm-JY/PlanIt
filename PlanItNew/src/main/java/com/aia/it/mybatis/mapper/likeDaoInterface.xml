@@ -13,24 +13,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="bidx" column="bidx" />
 		<result property="uidx" column="uidx" />
 	</resultMap>
+	
+
 
 	
-	<insert id="insertLike" 
+	<insert id="likeInsert1" 
 	parameterType="com.aia.it.board.model.Like" useGeneratedKeys="true"
 		keyProperty="lidx">
-		insert into planit.like(bidx, uidx)
-		values(#{bidx}, #{uidx})
+		insert into planit.like(uidx, bidx)
+		values(#{uidx}, #{bidx})
 	</insert>
-
-	<!-- <select id="selectLike" resultType="like">
-		select count(uidx)
-		from planit.like
-		where bidx = #{bidx} and uidx = #{uidx}
-	</select>
 	
 	<delete id="deleteLike">
 		delete from planit.like
-		where bidx = #{bidx} and uidx = #{uidx}
+		where uidx = #{param1} and  bidx= #{param2}
 	</delete>
- -->
+
+	<select id="selectLike" resultType="int">
+		select count(*)
+		from planit.like
+		where uidx = #{param1} and bidx = #{param2}
+	</select>
+	
+		<select id="selectAllLike" resultType="int">
+		select count(uidx)
+		from planit.like
+		where bidx = #{bidx}
+	</select>
+	
+	
+	<select id="bAndMSelect" resultType="com.aia.it.board.model.LikeJoinMB">
+	select count(*) from planit.like l join planit.member m on l.uidx=m.uidx
+		where l.bidx = #{bidx}
+	</select>
+
+
 </mapper>

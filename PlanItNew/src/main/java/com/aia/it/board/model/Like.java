@@ -2,18 +2,16 @@ package com.aia.it.board.model;
 
 public class Like {
 	
-	private int lidx;
+	/* private int lidx; */
 	private int uidx;
 	private int bidx;
 	
 	
 	
-	public int getLidx() {
-		return lidx;
-	}
-	public void setLidx(int lidx) {
-		this.lidx = lidx;
-	}
+	/*
+	 * public int getLidx() { return lidx; } public void setLidx(int lidx) {
+	 * this.lidx = lidx; }
+	 */
 	public int getUidx() {
 		return uidx;
 	}
@@ -32,8 +30,8 @@ public class Like {
 	}
 	
 	
-	public Like(int lidx, int uidx, int bidx) {
-		this.lidx = lidx;
+	public Like( int uidx, int bidx) {
+		
 		this.uidx = uidx;
 		this.bidx = bidx;
 	}
@@ -41,7 +39,7 @@ public class Like {
 	
 	@Override
 	public String toString() {
-		return "Like [lidx=" + lidx + ", uidx=" + uidx + ", bidx=" + bidx + "]";
+		return "Like [ uidx=" + uidx + ", bidx=" + bidx + "]";
 	}
 	
 	

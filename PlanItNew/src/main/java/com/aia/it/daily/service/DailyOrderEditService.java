@@ -1,11 +1,5 @@
 package com.aia.it.daily.service;
 
-
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
