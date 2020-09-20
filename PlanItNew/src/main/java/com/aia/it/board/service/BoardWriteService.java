@@ -74,12 +74,7 @@ public class BoardWriteService {
 				board.setBphoto1(newFileName);
 				//board.setBphoto2(newFileName);
 
-			} else {
-				board.setBphoto1("defalult.png");
-				//board.setBphoto2("defalult.png");
-
-				
-			}
+			} 
 			
 			// 사진이 있다면 사진 파일을 물리적으로 저장하고, 없다면 기본 이미지 파일의 경로를 저장한다.
 			if (file2 != null && !file2.isEmpty() && file2.getSize() > 0) {
@@ -102,12 +97,8 @@ public class BoardWriteService {
 			//board.setBphoto1(newFileName);
 			board.setBphoto2(newFileName);
 
-		} else {
-			//board.setBphoto1("defalult.png");
-			board.setBphoto2("defalult.png");
-
-							
-		}
+		} 				
+		
 	
 			
 			result = dao.insertBoard(board);

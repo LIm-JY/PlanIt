@@ -60,34 +60,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- deletePlannerByIdx -->
 	
 	
-	<!-- 게시판에서도 사용-->
 	<!-- 플래너의 리스트 출력 by Uidx -->
 	<select id="selectPlannerByIdx" resultMap="resultPlanner">
 	select * from planit.planner where uidx=#{uidx} order by pidx desc
 	</select>
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	<!-- 플래너 삭제 -->
 	<delete id="deletePlannerByIdx">
-	
 	delete from planit.planner where pidx=#{pidx};
-	
 	</delete>
-	
-	
-	
-	
+
+
 	
 	<!-- 플래너의 전체 리스트 출력 -->
 	<select id="selectTotalList" resultMap="resultPlanner">
-	select * from planit.planner where order by pidx desc
+	select * from planit.planner order by pidx desc
 	</select>
+	
+	
+	
 	
 	<!-- 데일리 리스트 출력  -->
 	<select id="selectDailyList" resultMap="resultPlannerJoinDaily">

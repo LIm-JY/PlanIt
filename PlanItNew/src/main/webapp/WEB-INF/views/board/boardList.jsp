@@ -13,34 +13,133 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/cssMainFooter.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
+
+/*버튼 디자인 */
+ .button-wrapper {
+        display: inline-block;
+        margin: 20px 5px;
+        padding: 40px;
+    }
+    .dark-button,
+    .dark-button-2 {
+        background: #333;
+    }
+    .button {
+        background: #fff;
+        border: none;
+        padding: 2px;
+        cursor: pointer;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        transition: all .35s ease-in-out .35s;
+        margin: 0 auto;
+        width: 70px;
+        text-align: center;
+    }
+    .dark-button .button,
+    .dark-button .button span {
+        background: #36B4C7;
+        color: #fff;
+    }
+    .dark-button .button:after,
+    .dark-button .button:before,
+    .dark-button .button:hover span {
+        background: #fff;
+        color: #444;
+    } 
+    .dark-button-2 .button,
+    .dark-button-2 .button span {
+        background: #333;
+        color: #fff;
+    }
+    .dark-button-2 .button:after,
+    .dark-button-2 .button:before,
+    .dark-button-2 .button:hover span {
+        background: #fff;
+        color: #444;
+    } 
+    .span {
+        display: block;
+        padding: 5px 10px;
+        background: #fff;
+        z-index: 100;
+        position: relative;
+        transition: all .35s ease-in-out .35s;
+    }
+    .button:hover span {
+        background: #36B4C7;
+        color: #fff;
+        transition: all .35s ease-in-out .35s;
+    }
+    .button:after {
+        bottom: -100%;
+        right: -100%;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: #36B4C7;
+        transition: all .35s ease-in-out .5s;
+    }
+    .button:hover:after {
+        right: 0;
+        bottom: 0;
+        transition: all ease-in-out .35s;
+    }
+    .button:before {
+        top: -100%;
+        left: -100%;
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: #36B4C7;
+        transition: all .35s ease-in-out .5s;
+    }
+    .button:hover:before {
+        left: 0;
+        top: 0;
+        transition: all ease-in-out .35s;
+    }
+
+
+
+
+
+
+
+
+
 html {
 	height: 100%;
-	scroll-behavior: smooth;
 }
 
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding-top: 80px;
-	padding-bottom: 40px;
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-	background-repeat: no-repeat;
-	/* 선형 그래디언트 + 두가지색상 이어줌 */
-	/* background:linear-gradient(to bottom right, #F5F5F5, #DCDCDC); */
+/*로그인 폼(카드) 위치*/
+.boardListcontainer {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+	width: 500px !important;
+	height: 700px;
+	background-color: #F6F6F6;
+	
+
 }
 
 table {
 	width: 100%;
 	border-collapse: collapse;
+}
+
+#boardlistTable{
+	
 }
 
 tr {
@@ -64,6 +163,8 @@ a {
 
 img {
 	border-radius: 70%;
+	width : 30px; 
+height : 30px;
 }
 
 #loginFormLogo {
@@ -71,15 +172,11 @@ img {
 	margin-bottom: 0;
 	font-family: 'Montserrat Alternates', sans-serif; `
 	color: #1ABC9C;
+	float: left;
 }
 
-/*로그인 폼(카드) 위치*/
-.card {
-	margin: 0 auto; /* Added */
-	float: none; /* Added */
-	margin-bottom: 10px; /* Added */
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
+#ptext{
+	float: left;
 }
 
 #card-title {
@@ -134,11 +231,21 @@ form>span>p {
 
 #boardListTitleTd {
 	text-align: left;
+	height: 70px;
+
+}
+
+.boardListDate{
+font-size: 9px;
 }
 
 #boardListTitle {
 	font-size: 14px;
 	color: grey;
+	height: 70px;
+			
+	
+	
 }
 
 #searchResultMsgDiv {
@@ -153,29 +260,29 @@ form>span>p {
 	margin-bottom: 6px;
 }
 
-.plus{
+#boardListProfileTd, .number{
+	width : 50px;
+}
 
-}
-.ele2 {
-	position: absolute;
-	bottom : 50px;
-	right: 0;
-	width: 50px;
-	height: 50px;
-	border-radius : 70%;
-	border: 3px solid #73AD21;
-}
+
+
+
 </style>
 </head>
+
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
 <body>
 
-	<div class="card align-middle"
+
+	<div class="boardListcontainer"
 		style="width: 20rem; border-radius: 20px;">
 		<!--1번  시작-->
 
 		<div class="card-title" id="card-title" style="text-align: center;">
-			<h2 id="loginFormLogo" class="card-title text-center">Plan It!</h2>
-			<span style="color: grey;">Community</span>
+			<h3 id="loginFormLogo" class="card-title text-center">community</h3><br><br>
+			<p id="ptext" align="left">다양한 여행 정보를 확인해 보세요.</p>
+			
 			<div class="searchBox">
 				<form>
 					<select name="searchType" style="display: none">
@@ -195,33 +302,62 @@ form>span>p {
 			<c:if test="${not empty listView}">
 
 				<br>
+				
 				<table id="boardlistTable">
 					<c:if test="${not empty listView.boardList }">
 						<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
+						
+						<tr>
+							<td colspan="3">제목</td>
+							<td>작성일</td>
+							<td>좋아요</td>
+						</tr>
+
+					
+				
+						
+						
 						<c:forEach items="${listView.boardList}" var="board">
 
-							<tr class="board">
-								<td id="boardListProfileTd"><img alt="프로필"
-									src="${imagePath}/${board.uphoto}" width="30px" height="30px">
+							<tr class="boardUser">
+								<td id="boardListProfileTd"><img
+									src="${imagePath}/${board.uphoto}" >
 								</td>
+								
+								<td rowspan="2" class="number"></td>
 
 								<td rowspan="2" id="boardListTitleTd"><a
 									href="${board.bidx}"> <span id="boardListTitle">
 											${board.btitle}</span></a></td>
+											
+								<td rowspan="2" class="boardListDate">
+									${board.bregdate}
+								</td>
+								
+								<td id="joinlike">
+								
+								</td>
+								
 							</tr>
 
-							<tr class="board" id="boardListName">
+							<tr id="boardListName" >
 								<td>${board.uname}
 							</tr>
-
-
+							
 
 						</c:forEach>
-
+						
+						
+						
+						
+						 
+						
+					
+				
 						<script>
 							function reorder() {
 								//ddidx 재배치
-								$(".board").each(function(i, box) {
+								$(".boardUser").each(function(i, box) {
 									$(box).find(".number").html(i + 1);
 
 								});
@@ -233,39 +369,40 @@ form>span>p {
 					</c:if>
 				</table>
 
+
+
 				<c:if test="${empty listView.boardList }">
 					<div id="searchResultMsgDiv">
 						<span id="searchResultMsg">조회된 글이 없습니다.</span>
 					</div>
 				</c:if>
+				
+				<c:if test="${listView.pageTotalCount > 0}">
+
+            <div class="paging">
+               <c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
+
+                  <a
+                     class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
+                     href="boardList?page=${i}">${i}</a>
+               </c:forEach>
+               
+               <div class="light-button button-wrapper">
+    <div class="button">
+        <span class="span" font-size="15px">
+            글쓰기
+        </span>
+    </div>  
+</div>
+            </div>
+
+         </c:if>
 
 			</c:if>
 
 
 
-			<c:if test="${listView.pageTotalCount > 0}">
-
-				<div class="w3-center">
-					<div class="w3-bar">
-						<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
-							<a class="w3-button"
-								${i == listView.currentPageNumber ? 'now_page' : ''}"
-								href="boardList?page=${i}">${i}</a>
-
-							<%-- 		<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}"
-								href="boardList?page=${i}">${i}</a> --%>
-						</c:forEach>
-					</div>
-				</div>
-
-			</c:if>
-
-			<!-- 메인화면 Footer  -->
-			<div class="plus">
-				<a class="ele2" href="<c:url value="/board/boardWrite"/>">+</a>
-			</div>
-
-			<%@ include file="/WEB-INF/views/include/mainFooter.jsp"%>
+			
 
 		</div>
 		<!--2번  끝-->
@@ -280,6 +417,130 @@ form>span>p {
 </html>
 
 <script>
+function likeAllSelect() {
+	$.ajax({
+		
+		url: 'http://localhost:8080/it/board/boardList',
+		type: "get",
+	
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			var html = '';
+			for(var i; i<data.length; i++){
+				
+				html += '<input type="text" name="bidx" id ="test"value="${board.bidx}" readonly>';
+				html += '<input type="text" name="uidx" value="${loginInfo.uidx}" readonly>';
+				html += '<label for="btnLike" onclick="checkLike();">';
+				html += '<img id="like_img"alt="식당" class="dtypeIcon" src="/it/resources/images/unlike.png" width="30px" height="30px"></label>';
+				html += '<input type="checkbox" id="btnLike" >';
+				html += '<div id="like_result" style="display:inline-block;">${like.uidx }</div>';
+				
+				$("#joinlike").html(html);
+			}
+			
+			
+		}
+		});
+		
+
+}
+
+
+
+
+function likeSelect() {
+	$.ajax({
+		url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${listView.boardList[i].bidx},
+		type: "get",
+
+		success:
+		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			console.log(data);
+			if(data == 1){
+				 $('img#like_img').attr('src', '/it/resources/images/like.png');
+					$('#btnLike').prop('checked', true);
+
+			}else if(data == 0){
+				 $('img#like_img').attr('src', '/it/resources/images/unlike.png');		
+					$('#btnLike').prop('checked', false);
+
+			}
+		// data중 put한 것의 이름 like
+		}
+		});
+
+}
+
+
+
+
+
+
+
+function checkLike(){
+
+
+if(!$('#btnLike').prop('checked')){
+	
+	$.ajax({
+	url: 'http://localhost:8080/it/board/boardView',
+	type: "POST",
+	data: {uidx:i,'${loginInfo.uidx}', 
+		   bidx: '${listView.boardList[i].bidx}'},
+	success:
+		
+	function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+		likeAllSelect();
+		likeSelect();
+	}
+		   ,
+	error:
+	function (request, status, error){
+	alert("ajax실패")
+	}
+	});
+	
+	}else if($('#btnLike').prop('checked')){
+		
+		console.log("delete");
+		$.ajax({
+			url: 'http://localhost:8080/it/board/boardView/'+${loginInfo.uidx}+'/'+${listView.boardList[i].bidx},
+			type: "delete",
+			/* data: {uidx:'${loginInfo.uidx}', 
+				   bidx: '${viewBoard.bidx}'}, */
+			success:
+			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
+			// $('img#like_img').attr('src', '/it/resources/images/unlike.png');// data중 put한 것의 이름 like
+				likeAllSelect();
+				likeSelect();
+			}
+				   ,
+			error:
+			function (request, status, error){
+			alert("ajax실패")
+			}
+			});
+	}	
+		
+	
+	
+}
+	
+$(document).ready(function(){
+	
+	likeAllSelect();
+	likeSelect();
+	
+});
+ 
+
+
+
+
+
+
+
+
 	/* 순서 조정 */
 
 	function boardDel(bidx) {
@@ -292,6 +553,25 @@ form>span>p {
 	function boardList() {
 		location.href = 'boardList';
 	}
+	
+	
+	$(window).on("scroll", function() {
+		var scrollHeight = $(document).height();
+		var scrollPosition = $(window).height() + $(window).scrollTop();		
+
+		$("#scrollHeight").text(scrollHeight);
+		$("#scrollPosition").text(scrollPosition);
+		$("#bottom").text(scrollHeight - scrollPosition);
+
+		if (scrollPosition > scrollHeight - 500) {			
+			//todo
+			$("body").append('<div id="content"></div>');
+		}
+	});
+	
+	
+	
+	
 </script>
 
 

@@ -55,7 +55,7 @@ public class BoardListService {
 		int totalCnt = dao.totalCnt(search);
 		
 		//한 페이지 당 노출할 게시물의 개수
-		final int BOARD_CNT_PER_PAGE = 5;
+		final int BOARD_CNT_PER_PAGE = 6;
 		
 		//현재 페이지현재 번호 
 		int currentPageNumber = 1;

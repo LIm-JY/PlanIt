@@ -25,17 +25,6 @@ public class DailyOrderEditController {
 	
 	@PostMapping
 	public int editDailyOrder(DailyOrderEdit daily){
-		
-		System.out.println("ccccc"+daily);
-
-		
-	System.out.println("컨트롤러까지 들어옴");
-
-
-	
-	/*
-	 * daily.getDailyOrderEdit().set(0, daily.getDailyOrderEdit().get(0));
-	 */
 	
 	
 		

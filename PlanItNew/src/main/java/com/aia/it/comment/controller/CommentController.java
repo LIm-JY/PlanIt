@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.aia.it.board.service.BoardListService;
 import com.aia.it.comment.model.Comment;
-import com.aia.it.comment.model.CommentRequest;
 import com.aia.it.comment.service.CommentService;
 
 @Controller
@@ -29,7 +28,9 @@ public class CommentController {
 	BoardListService bService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getCommentForm(HttpServletResponse response, HttpServletRequest request, Model model) throws SQLException {
+	public String getCommentForm(HttpServletResponse response, 
+			HttpServletRequest request, 
+			Model model) throws SQLException {
 
 		model.addAttribute("listView", bService.getView(request, response));
 

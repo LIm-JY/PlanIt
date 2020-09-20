@@ -20,6 +20,8 @@ public interface PlannerDaoInterface {
 	//플래너의 리스트 목록
 	List<Planner> selectTotalList();
 	
+	
+	
 	List<PlannerJoinDaily> selectDailyList(int uidx, int pidx);
 
 	List<PlannerJoinDaily> selectDailyListQ(int pidx);
@@ -33,7 +35,6 @@ public interface PlannerDaoInterface {
 
 	public int editPlanner(Planner planner);
 
-	//public int selectList();
 
 	
 
