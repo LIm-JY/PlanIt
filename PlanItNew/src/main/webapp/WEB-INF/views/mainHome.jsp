@@ -87,8 +87,6 @@ a {
 }
 </style>
 
-
-
 </head>
 <body>
 
@@ -118,6 +116,8 @@ a {
 
             <h6 style="text-align: left; font-size: 12px;">플랜 차트</h6>
             <table>
+            <c:set var="i" value="0"/>
+            <c:set var="j" value="1"/>            
                <c:forEach items="${plannerListView.plannerList}" var="planner">
 
                   <tr>
@@ -127,15 +127,38 @@ a {
                      <!--글쓴이 이름으로 대체할 부분!  -->
                      <td>${planner.ptitle}</td>
                      <!--제목으로 대체할 부분!  -->
-                     <td><a href="<c:url value="/planner/plannerList"/>">${planner.ptitle}~</a></td>
+
+                     <td>
+          		<form action="http://localhost:8080/it/planner/plannerEdit" method="post">
+					<div class="planner">
+					<img src="${imagePath}/${loginInfo.photo}" width="30px" height="30px">
+					<div class="num"style="width:20px; margin-left:6px; margin-right:6px; display: Inline-block; font-size:18px;"></div>				
+					<input type="text" name="ptitle" value="${planner.ptitle}" style="width:200px; border:0; font-size:20px;" readonly>
+					
+					<input type="text" class="dayText"value="" style="width:115px; border:0; font-size:20px;" readonly>박
+					<input type="text" class="dayText2"value="" style="width:115px; border:0; font-size:20px;" readonly>일
+					
+					<input type="hidden" name="pidx" value="${planner.pidx}" readonly>
+					<input type="hidden" name="pstartdate" value="${planner.pstartdate}" readonly>
+					<input type="hidden" name="penddate" value="${planner.penddate}" readonly>
+					<input type="hidden" name="uidx" value="${planner.uidx}" readonly>
+					<label for="editPlanner" class="listButton" ><a>${planner.ptitle}</a></label> '; 			
+					<input type="submit" id="editPlanner" value="수정" style="display:none;"> 
+	                </div>
+				</form> 
+                     
+                     
+                     
+                     </td>
 
                      <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
                   </tr>
+                  <c:set var="i" value="${i+j}"/> 
                </c:forEach>
                                    <tr> 
                        <td colspan = "5">
                        <div class = "boardListBtn">
-                       <a href = "<c:url value="/board/boardList"/>" style ="color: #F5DEB3"> + 더보기 </a>
+                       <a href = "<c:url value="/planner/plannerList"/>" style ="color: #F5DEB3"> + 더보기 </a>
                        </div>
                        </td>
                     </tr>
@@ -198,3 +221,35 @@ a {
       </script>
    </c:if>
 </body>
+
+</html>
+<script>
+
+
+$(document).ready(function(){
+	dateText();
+})
+
+function dateText(){
+	
+	for(var i=0;i<$('input[name=pstartdate]').length;i++){
+	
+	
+	
+var sdd=$('input[name=pstartdate]').eq(i).val();
+var edd=$('input[name=penddate]').eq(i).val();
+var ar1 = sdd.split('-');
+var ar2 = edd.split('-');
+var curr = new Date(ar1[0], ar1[1], ar1[2]);
+var end = new Date(ar2[0], ar2[1], ar2[2]);
+var betweenDay =( (end.getTime() - curr.getTime()) / 1000 / 60 / 60 / 24);
+var betweenDay2 = betweenDay+1;
+
+console.log(betweenDay);
+$('.dayText').eq(i).val(betweenDay);
+	$('.dayText2').eq(i).val(betweenDay2);
+	}
+}
+
+
+</script>
