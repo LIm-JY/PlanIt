@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aia.it.board.service.BoardListService;
 import com.aia.it.planner.service.PlannerListService;
+import com.aia.it.planner.service.PlannerListService2;
 
 
 @Controller
@@ -23,7 +24,7 @@ public class HomeController {
 	private BoardListService boardListService;
 	
 	@Autowired
-	private PlannerListService plannerListService;
+	private PlannerListService2 plannerListService2;
 	
 	@RequestMapping("/mainHome")
 	public String home(
@@ -32,7 +33,7 @@ public class HomeController {
 			HttpServletResponse response) throws SQLException {
 		
 		System.out.println("여기 거쳤다");
-		model.addAttribute("plannerListView",plannerListService.plannerList(uidx));
+		model.addAttribute("plannerListView",plannerListService2.getPlannerList(uidx, request, response));
 		model.addAttribute("boardListView", boardListService.getView(request, response));
 
 		

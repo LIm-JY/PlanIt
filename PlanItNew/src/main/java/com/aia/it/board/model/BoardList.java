@@ -22,7 +22,6 @@ public class BoardList {
 		this.boardTotalCount = boardTotalCount;
 		this.currentPageNumber = currentPageNumber;
 		BoardList = boardList;
-		this.pageTotalCount = pageTotalCount;
 		this.boardCountPerpage = boardCountPerpage;
 		this.startRow = startRow;
 		calTotalCount();

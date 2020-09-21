@@ -1,6 +1,7 @@
 package com.aia.it.planner.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.aia.it.planner.model.Planner;
 import com.aia.it.planner.model.PlannerJoinDaily;
@@ -34,6 +35,25 @@ public interface PlannerDaoInterface {
 	public int deletePlannerByIdx(int pidx);
 
 	public int editPlanner(Planner planner);
+
+	
+	
+	
+	//////////////////////////////////////////////
+	
+	//////////////////////////////////////////////
+	
+	////////여기서부터 리스트에 필요한것들//////////////////
+	
+	///////////////////////////////////////////////
+	
+	////////////////////////////////////////////
+	
+	//전체 게시물의 개수 : 검색포함
+	int totalCnt2(Map<String, Object> search);
+
+	// 전체 게시물의  List<Planner> 로 반환
+	List<Planner> selectList2(Map<String, Object> search);
 
 
 	

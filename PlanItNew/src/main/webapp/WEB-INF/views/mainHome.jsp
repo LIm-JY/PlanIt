@@ -111,57 +111,48 @@ a {
 
    <c:if test="${!empty loginInfo}">
 
-      <!-- 헤더를 제외한 전체를 감싸는 div -->
-      <div class="card">
 
+         
+                  <div class="mainBoardList" id="mainBoardList"
+            style="text-align: center;">
 
-         <div class="mainPlanList" id="mainPlanList">
-            <!-- style = "text-align : center;" -->
+            <h6 style="text-align: left; font-size: 12px;">플랜 차트</h6>
+            <table>
+               <c:forEach items="${plannerListView.plannerList}" var="planner">
 
-            <c:if test="${not empty plannerListView}">
-               <h6 style="text-align: center;">나의 플랜</h6>
-               <div>
-                  <table>
-                     <tr>
-                        <td>1</td>
-                        <td>이거는</td>
-                        <td><i class="fa fa-plus-circle" aria-hidden="true"></i></td>
-                        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+                  <tr>
+                     <td>1</td>
+                     <td><img src="${imagePath}/${loginInfo.photo}" width="30px"
+                        height="30px"></td>
+                     <!--글쓴이 이름으로 대체할 부분!  -->
+                     <td>${planner.ptitle}</td>
+                     <!--제목으로 대체할 부분!  -->
+                     <td><a href="<c:url value="/planner/plannerList"/>">${planner.ptitle}~</a></td>
 
-                     </tr>
-                     <tr>
-                        <td>2</td>
-                        <td>제주도 2박3일</td>
-                        <td><i class="fa fa-plus-circle" aria-hidden="true"></i></td>
-                        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
-                     </tr>
-                     <tr>
-                        <td>3</td>
-                        <td>다음주 여행</td>
-                        <td><i class="fa fa-plus-circle" aria-hidden="true"></i></td>
-                        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
-                     </tr>
-                     <tr>
-                        <td colspan="4">
-                           <div class="planListBtn">
-                              <a href="<c:url value="/planner/plannerList"/>"> <i
-                                 class="fa fa-plus-circle" aria-hidden="true"
-                                 style="color: #F5DEB3;"></i></a>
-                           </div>
-                        </td>
-                     </tr>
-                  </table>
-               </div>
-            </c:if>
-
-            <c:if test="${empty plannerListView }">
-               <div>플랜 없음 플랜잇을 통해 당신의 여행 첫 플랜을 만들어서 공유해 보세요!</div>
-            </c:if>
-
-
-
+                     <td><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                  </tr>
+               </c:forEach>
+                                   <tr> 
+                       <td colspan = "5">
+                       <div class = "boardListBtn">
+                       <a href = "<c:url value="/board/boardList"/>" style ="color: #F5DEB3"> + 더보기 </a>
+                       </div>
+                       </td>
+                    </tr>
+            </table>
 
          </div>
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
 
          <hr>
 
