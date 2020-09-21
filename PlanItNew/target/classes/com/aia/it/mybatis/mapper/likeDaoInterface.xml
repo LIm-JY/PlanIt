@@ -47,5 +47,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where l.bidx = #{bidx}
 	</select>
 
+		<!-- 보드의 좋아요 카운트 -->
+	<select id="boardLikeCount" resultType="int">
+		select count(*) from planit.like where bidx=#{bidx}
 
+	</select>
+	
+	<!-- 보드의 좋아요 확인 -->
+	<select id="boardLikeCheck" resultType="int">
+		select count(uidx) from planit.like where bidx = #{param1} and uidx = #{param2}
+
+	</select>
+	
+	
 </mapper>

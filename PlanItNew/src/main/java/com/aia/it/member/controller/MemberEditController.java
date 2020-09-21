@@ -14,7 +14,7 @@ import com.aia.it.member.service.MemberEditService;
 import com.aia.it.member.service.MyPageViewService;
 
 @Controller
-@RequestMapping("/member/myPage")
+@RequestMapping("/member/memberEdit")
 public class MemberEditController {
 	
 	@Autowired
@@ -26,9 +26,9 @@ public class MemberEditController {
 			Model model
 			) {
 		
-		model.addAttribute("myInfo", editService.getMember(uidx));
+		model.addAttribute("member", editService.getMember(uidx));
 		
-		return "member/myPage";
+		return "member/memberEditForm";
 		
 	}
 	

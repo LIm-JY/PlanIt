@@ -9,7 +9,12 @@
 <meta charset="UTF-8">
 <title>플래너 리스트</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+	<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css"> --%>
+	<link
+   href="https://fonts.googleapis.com/css2?family=Jua&family=Montserrat+Alternates:wght@600&display=swap"
+   rel="stylesheet">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 <style>
 
 	#plannerListWrap{
@@ -50,10 +55,31 @@
 
 <c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
 	
-	<div id="plannerListWrap">
-	<h4 style="font-weight:bold;">내 플랜</h4>
-	<ul id="plannerList"></ul>
-	</div>
+	
+
+
+     <div class="card-title" id="card-title" style="text-align: center;">
+         <!--2번시작 : 검색과 제목창시작  -->
+         
+         <div id="boardListHeadTitle">
+            <h3 id="loginFormLogo" class="card-title text-center">community</h3>
+            <br> <br>
+            <p id="ptext" align="left">다양한 여행 정보를 확인해 보세요.</p>
+         </div>
+         <br> <br>
+         </div>
+         <div id="plannerListWrap">
+         <div class="searchBox">
+            <form>
+               <select name="searchType" style="display: none">
+                  <option value="both">ID + NAME</option>
+               </select> <input type="text" name="keyword" id="boardListSearchInput">
+               <button type="submit" value="검색" id="boardListSearchBtn">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+               </button>
+            </form>
+         </div>
+      </div>
 
 
 <script>
@@ -104,7 +130,7 @@ function plannerList() {
 				html += '	<li class="planlist">';
 				html += '		<form action="http://localhost:8080/it/planner/plannerEdit" method="post">'
 				html += '		<div class="planner">';
-				html += '       <img src="${imagePath}/${loginInfo.uphoto}" width="30px" height="30px">'; 
+				html += '       <img src="${imagePath}/${loginInfo.photo}" width="30px" height="30px">'; 
 				html += '		<div class="num"style="width:20px; margin-left:6px; margin-right:6px; display: Inline-block; font-size:18px;"></div>'
 				html += '       <input type="text" name="ptitle" value="'+data[i].ptitle+'" style="width:200px; border:0; font-size:20px;" readonly>';
 				html += '		<input type="text" value="'+betweenDay+'박'+betweenDay2+'일" style="width:115px; border:0; font-size:20px;" readonly>';

@@ -692,10 +692,6 @@ $('#mapModal').on('shown.bs.modal', function () {
 	resizeMap();
 	
 });
-	/* edit창 닫으면서 reg창의 주소정보 초기화 */
-/* $('#editDailyModal').on('hidden.bs.modal', function(){
-	$('#daddr').val('');
-}); */
 
 
 	/* 데일리 리스트 출력 */
@@ -1426,31 +1422,7 @@ function searchReset(){
 		
 		}
 	}
-		/* 	 var radioValReg = $('input[name=dtype]:checked').val();
-	 var radioValEdit = $('input[name=edtype]:checked').val();
-	 console.log(radioValReg);
-	 console.log(radioValEdit);			 
-	if($('input:radio[name=dtype]:radio[value='+radioValReg+']').is(':checked')==true){
-		$(this).css("opacity",1);
-	}
-	
-		if($('input:radio[name=edtype]:radio[value='+radioValEdit+']').is(':checked')==true){
-			
-			$(this).css("opacity",1); 
-		}
-	
-		 */
-		 
-		/* 중복검사 */	
-	 /*  $('label').click(function(){ });  */
-		 
-		/*   var radioValEdit = $('input[name=edtype]:checked').val();
-		 if($('input:radio[name=edtype]:radio[value='+radioValEdit+']').is(':checked')==true){
-			 $(":input:radio[name='edtype']").prop("checked",false);
-		 } */
-		 
-		 
-	
+
 		 
 </script>
 	

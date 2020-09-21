@@ -2,6 +2,8 @@ package com.aia.it.board.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +32,20 @@ public class LikeInsertController {
 	LikeSelectService likeSelectService;
 
 	 
+		
+	/*
+	 * @PostMapping public List<LikeCountList> getLikeList (LikeInsert list){
+	 * 
+	 * System.out.println("LIKEINFORMATION_CONTROLLER"+list.getLikeInsert());
+	 * 
+	 * return likeSelectService.boardLikeList(list); }
+	 */
+	
+		
+		
+		
+		
+		
 		@GetMapping("/{uidx}/{bidx}")
 		public int getLikeSelect(
 				@PathVariable("uidx") int uidx,

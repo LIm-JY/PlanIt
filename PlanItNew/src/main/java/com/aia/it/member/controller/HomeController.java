@@ -31,7 +31,7 @@ public class HomeController {
 			HttpServletRequest request,
 			HttpServletResponse response) throws SQLException {
 		
-		System.out.println("HomeController 입니다");
+		System.out.println("여기 거쳤다");
 		model.addAttribute("plannerListView",plannerListService.plannerList(uidx));
 		model.addAttribute("boardListView", boardListService.getView(request, response));
 

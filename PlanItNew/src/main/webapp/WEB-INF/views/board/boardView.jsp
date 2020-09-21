@@ -111,7 +111,6 @@
 				</tr>
 				</table>
 			</form>
-
 		</div>
 		
 		<hr>
@@ -199,7 +198,6 @@ function likeAllSelect() {
 			   bidx: '${viewBoard.bidx}'}, */
 		success:
 		function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
-
 			
 			$("#like_result").text(data);
 			
@@ -244,7 +242,7 @@ function likeSelect() {
 
 function checkLike(){
 
-if(!$('#btnLike').prop('checked')){
+	if(!$('#btnLike').prop('checked')){
 	
 	$.ajax({
 	url: 'http://localhost:8080/it/board/boardView',

@@ -3,6 +3,7 @@ package com.aia.it.board.dao;
 import java.util.List;
 
 import com.aia.it.board.model.Like;
+import com.aia.it.board.model.LikeCountList;
 import com.aia.it.board.model.LikeList;
 
 public interface LikeDaoInterface {
@@ -18,5 +19,9 @@ public interface LikeDaoInterface {
 	int selectAllLike(int bidx);
 
 	List<LikeList> bAndMSelect(int bidx);
+
+	int boardLikeCount(int bidx);
 	
+	int boardLikeCheck(int bidx, int uidx);
+
 }

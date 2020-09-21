@@ -22,7 +22,12 @@ public class LikeInsert {
 		return likeInsert;
 	}
 
+	public void setLikeInsert(List<Like> likeInsert) {
+		this.likeInsert = likeInsert;
+	}
 
+
+	
 	
 
 }
