@@ -127,6 +127,12 @@ hr {
 	border-top: 1px solid #eee;
 }
 
+td{
+height: 35px;
+}
+
+
+
 /*작성자 입력란  */
 input {
 	border-top: none;
@@ -134,6 +140,10 @@ input {
 	border-right: none;
 	border-bottom: 1px solid lightgrey;
 	width: 100%;
+}
+
+#inputTdHidden{
+	border-bottom : 1px solid white;
 }
 
 
@@ -233,29 +243,27 @@ input {
 			<form method="post" enctype="multipart/form-data">
 				<table id="boardlistTable">
 					<tr>
-						<td></td>
-						<td><input type="hidden" id="uidx" name="uidx"
+						<td colspan="2" id="inputTdHidden"><input type="hidden" id="uidx" name="uidx"
 							value="${loginInfo.uidx }" readonly></td>
 					</tr>
 					<tr>
-						<td><label for="uname">이름</label></td>
-						<td><input type="text" id="uname" name="uname"
+						<td colspan="2" id="inputTdHidden"><input type="hidden" id="uname" name="uname"
 							value="${loginInfo.uname }" readonly></td>
 					</tr>
 					<tr>
 						<td><label for="btitle">제목</label></td>
-						<td><input type="text" id="btitle" name="btitle" required></td>
+						<td id="inputTd"><input type="text" id="btitle" name="btitle" required></td>
 					</tr>
 
 					<tr>
 						<td><label for="pidx">일정</label></td>
-						<td><a id="myBtn"> <input type="text" name="pidx"
+						<td id="inputTd"><a id="myBtn"> <input type="text" name="pidx"
 								id="pidx" class="pidx"> <span class="mptitle"></span></a></td>
 
 					</tr>
 					<tr>
 						<td><label for="bmsg">메시지</label></td>
-						<td><textarea name="bmsg" id="bmsg" rows="10" cols="20"
+						<td id="inputTd"><textarea name="bmsg" id="bmsg" rows="10" cols="20"
 								required></textarea></td>
 					</tr>
 
@@ -263,11 +271,11 @@ input {
 
 					<tr>
 						<td><label for="bphoto1">사진</label></td>
-						<td><input type="file" name="bphoto1" id="bphoto1"></td>
+						<td id="inputTd"><input type="file" name="bphoto1" id="bphoto1"></td>
 
 					</tr>
 					<tr>
-						<td><label for="bphoto2">사진</label></td>
+						<td id="inputTd"><label for="bphoto2">사진</label></td>
 						<td><input type="file" name="bphoto2" id="bphoto2"></td>
 					</tr>
 					<tr>
