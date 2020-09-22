@@ -10,18 +10,27 @@
 </head>
 <body>
 
+<c:if test="${result gt 0}">
 
+	<script>
 	
-		<c:if test="${result gt 0}">
+	alert('게시글이 성공적으로 수정되었습니다.');
+	 location.href = '<c:url value="/board/boardList"/>';
 
-		</c:if>
-
-		<c:if test="${result lt 1}">
-
+	</script>
 		
+	
+	
+	</c:if>
+	
+	<c:if test="${result lt 1}">
+	<script>
+	
+	alert('확인 후 다시 시도해주세요.');
+	location.href = '<c:url value="/board/boardList"/>';
 	</script>
 	
-</c:if>
+	</c:if>
 
 </body>
 </html>

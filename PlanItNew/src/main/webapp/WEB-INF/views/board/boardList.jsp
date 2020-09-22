@@ -207,6 +207,8 @@ img {
 	width: 50px;
 }
 
+
+
 /* 글쓰기 버튼 */
 #writeButton {
 	position: relative;
@@ -264,7 +266,7 @@ img {
 
 				<table id="boardlistTable">
 					<c:if test="${not empty listView.boardList }">
-						<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
+						
 
 						<tr>
 							<td colspan="3">제목</td>
@@ -279,11 +281,11 @@ img {
 							<c:set var="i" value="0" />
 							<c:set var="j" value="1" />
 							<c:forEach items="${listView.boardList}" var="board">
-
+<c:url value="${initParam['memberUploadPath']}" var="imagePath" />
 
 								<tr class="boardUser">
-									<td id="boardListProfileTd"><img
-										src="${imagePath}/${board.uphoto}"></td>
+									<td id="boardListProfileTd">
+									<img									src="${imagePath}/${board.uphoto}"></td>
 
 
 
@@ -374,7 +376,7 @@ img {
 		<!--3번  끝-->
 		<div class="light-button button-wrapper" id="writeButton">
 			<div class="button">
-				<span class="span" font-size="15px"> 글쓰기 </span>
+				<a href="<c:url value="/board/boardWrite"/>" class="span" font-size="15px"> 글쓰기 </span>
 			</div>
 		</div>
 	</div>
@@ -404,7 +406,7 @@ $(document).ready(function(){
       console.log(param);
 
       $.ajax({
-         url: 'http://localhost:8080/it/board/like',
+         url: '/it/board/like',
          type: "POST",
          data: param,
          success:
@@ -438,7 +440,7 @@ $(document).ready(function(){
          
       if($(e).prop('checked')){
       $.ajax({
-      url: 'http://localhost:8080/it/board/boardView',
+      url: '/it/board/boardView',
       type: "post",
       data: {uidx:'${loginInfo.uidx}', 
             bidx: bidx },
@@ -456,7 +458,7 @@ $(document).ready(function(){
       
       }else if(!$(e).prop('checked')){
          $.ajax({
-            url: 'http://localhost:8080/it/board/boardView/'+${ loginInfo.uidx}+'/'+$(e).val(),
+            url: '/it/board/boardView/'+${ loginInfo.uidx}+'/'+$(e).val(),
             type: "delete",
             success:
             function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data
@@ -476,7 +478,7 @@ $(document).ready(function(){
    /* 순서 조정 */
 
    function boardDel(bidx) {
-      if (confirm('선택하신 회원 정보를 삭제하시겠습니까?')) {
+      if (confirm('선택하신 게시물을 삭제하시겠습니까?')) {
          location.href = 'boardDelete?bidx=' + bidx;
       }
 

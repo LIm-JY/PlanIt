@@ -11,6 +11,46 @@
  -->
 
 <style>
+/*전체를 감싸는 테그*/
+.boardListcontainer {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+	width: 500px !important;
+	height: 700px;
+	background-color: #FFFFFF;
+}
+
+#loginFormLogo {
+	margin-top: 10px;
+	margin-bottom: 0;
+	font-family: 'Montserrat Alternates', sans-serif;
+	float: left;
+}
+
+#ptext {
+	float: left;
+}
+
+#card-title {
+	color: #1ABC9C;
+	margin-top: 5px;
+	margin-bottom: -10px;
+}
+
+
+input:focus {outline:none;}
+input:focus::-webkit-input-placeholder {color:transparent; }
+
+
+
+
+
+
+
+
+
+
 #datechk {
 	 display: none; 
 }
@@ -42,11 +82,13 @@ body, html {
 	font-size: 20px;
 	border: white;
 	min-width: 360px;
-	width: 100%;
+	width: 80%;
 	height: 40px;
-	font-style: Arial;
 	top:0;
 	padding-left: 10px;
+	border-radius: 10px;
+	text-align: center;
+	background: whitesmoke;
 }
 
 #datepicker, #datepicker2 {
@@ -81,14 +123,21 @@ table>tbody>tr>td {
 
 #submit {
 	min-width: 358px;
-	width: 100%;
+	margin-left : auto;
+	margin-right : auto;
+	width : 300px;
 	height: 40px;
 	color: white;
 	font-size: 12px;
 	background-color: #BEBEBE;
 	border-radius: 5px 5px 5px 5px;
-	position: fixed; 
-	bottom: 0;
+}
+
+#titleDiv{
+width: 80%;
+			margin-left : auto;
+	margin-right : auto;
+	    background: whitesmoke;
 }
 
 
@@ -110,10 +159,31 @@ table>tbody>tr>td {
 
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+		<div class="boardListcontainer"
+		style="width: 20rem; border-radius: 20px;">
+		<!--1번  시작 : 전체 영역을 감싸는 태그 -->
+	
+	<div class="card-title" id="card-title" style="text-align: center;">
+			<!--2번시작 : 검색과 제목창시작  -->
 
+			<div id="boardListHeadTitle">
+				<h3 id="loginFormLogo" class="card-title text-center">Planner</h3>
+				<br> <br>
+				<p id="ptext" align="left">${loginInfo.uname}님의 플랜을 등록해 보세요.</p>
+			</div>
+			<br> <br>
+			<br> <br>
+		</div>
+<br> <br>
 		<form method="post" id="regForm" >
-		<input type="text" name="ptitle" placeholder="제목을 입력해주세요."
+		
+		<div id="titleDiv">
+		
+		<input type="text" name="ptitle" placeholder="플래너의 제목을 입력해주세요."
 				id="title" autocomplete="off">
+				
+				</div>
+		
 		<div id="main-center">
 			<input type="hidden" name="uidx" value="${loginInfo.uidx}">
 			  <br> <br>
@@ -138,11 +208,15 @@ table>tbody>tr>td {
 			<div id="checkmsg"></div>
 			
 			
-			</div>
-			
 			<input type="checkbox" name="datechk" id="datechk"> 
 			<input type="submit" id="submit" value="선택완료">
+			
+			</div>
+			
+			
 		</form>
+</div>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 
 
 </body>

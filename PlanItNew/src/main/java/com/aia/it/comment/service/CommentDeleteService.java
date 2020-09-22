@@ -16,22 +16,18 @@ public class CommentDeleteService {
    private SqlSessionTemplate sessionTemplate;
    
    
-   public String commentDelete(int cidx ) {
+   public int commentDelete(int cidx ) {
       
       dao = sessionTemplate.getMapper(CommentDaoInterface.class);
       int result = 0;
       
-      String msg=null;
       
       Comment comment = dao.selectByCidx(cidx);
       
       result = dao.commentDelete(comment);
       
       
-      msg = result > 0 ? "정상적으로 삭제되었습니다." : "요청하신 댓글이 존재하지 않습니다.";
-      
-      
-      return msg;
+      return result;
    }
 
 }

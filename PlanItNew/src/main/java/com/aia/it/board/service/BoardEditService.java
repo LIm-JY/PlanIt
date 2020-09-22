@@ -33,7 +33,7 @@ public class BoardEditService {
 		return board;
 	}
 	
-	public int boardEdit(BoardEditRequest editRequest, HttpServletRequest request) {
+	public int boardEdit(int bidx, BoardEditRequest editRequest, HttpServletRequest request) {
 		
 		dao = sessionTemplate.getMapper(BoardDaoInterface.class);
 
