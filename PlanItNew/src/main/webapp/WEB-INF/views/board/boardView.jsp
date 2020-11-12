@@ -13,9 +13,11 @@
 
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 	<br><br>
 	<table class="table" border="1">
+	
 		<tr>
 			<th>게시글 제목</th>
 			<th colspan="3">${viewBoard.btitle}</th>
@@ -40,7 +42,7 @@
 		<tr>	
 			<th>사진</th>
 			<th colspan="3"><img alt="사진 " src="${imagePath}/${viewBoard.bphoto2}"></th>
-
+		<%-- <h3>사진: <img id="bphoto2"  alt="프사 " src="<c:url value="${imagePath}/${viewBoard.bphoto2}"/>"></h3> --%>
 		</tr>
 	</table>
 	
@@ -120,6 +122,10 @@
 </body>
 </html>
 <script>
+
+function Hi(){  
+    setTimeout('location.reload()',10); 
+}
 
 
  /* function regComment(){
