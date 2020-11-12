@@ -7,7 +7,8 @@ public class LoginInfo {
 	private String uid;
 	private String uname; 
 	private String photo;
-	
+	private String uphonenum;
+	private char ukakao;
 	
 	
 	public LoginInfo() {
@@ -24,6 +25,14 @@ public class LoginInfo {
 		this.uid = uid;
 		this.uname = uname;
 		this.photo = photo;
+	}
+	
+	public LoginInfo(String uid, String uname, String uphonenum, String photo, char ukakao) {
+		this.uid = uid;
+		this.uname = uname;
+		this.uphonenum = uphonenum; 
+		this.photo = photo;
+		this.ukakao = ukakao;
 	}
 	
 	public String getUid() {
@@ -51,6 +60,15 @@ public class LoginInfo {
 	public void setUidx(int uidx) {
 		this.uidx = uidx;
 	}
+
+	public String getUphonenum() {
+		return uphonenum;
+	}
+
+	public char getUkakao() {
+		return ukakao;
+	}
+
 
 	
 	

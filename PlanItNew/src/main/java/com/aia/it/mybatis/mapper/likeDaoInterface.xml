@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aia.it.board.dao.LikeDaoInterface">
+
+
+	<resultMap id="resultLike"
+		type="com.aia.it.board.model.Like">
+
+		<id property="lidx" column="lidx" />
+		<result property="bidx" column="bidx" />
+		<result property="uidx" column="uidx" />
+	</resultMap>
+	
+
+
+	
+	<insert id="likeInsert1" 
+	parameterType="com.aia.it.board.model.Like" useGeneratedKeys="true"
+		keyProperty="lidx">
+		insert into planit.like(uidx, bidx)
+		values(#{uidx}, #{bidx})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from planit.like
+		where uidx = #{param1} and  bidx= #{param2}
+	</delete>
+
+	<select id="selectLike" resultType="int">
+		select count(*)
+		from planit.like
+		where uidx = #{param1} and bidx = #{param2}
+	</select>
+	
+		<select id="selectAllLike" resultType="int">
+		select count(uidx)
+		from planit.like
+		where bidx = #{bidx}
+	</select>
+	
+	
+	<select id="bAndMSelect" resultType="com.aia.it.board.model.LikeJoinMB">
+	select count(*) from planit.like l join planit.member m on l.uidx=m.uidx
+		where l.bidx = #{bidx}
+	</select>
+
+		<!-- 보드의 좋아요 카운트 -->
+	<select id="boardLikeCount" resultType="int">
+		select count(*) from planit.like where bidx=#{bidx}
+
+	</select>
+	
+	<!-- 보드의 좋아요 확인 -->
+	<select id="boardLikeCheck" resultType="int">
+		select count(uidx) from planit.like where bidx = #{param1} and uidx = #{param2}
+
+	</select>
+	
+	
+</mapper>

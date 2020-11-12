@@ -6,15 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.aia.it.planner.dao.PlannerDaoInterface">
 
 	<resultMap id="resultPlanner"
-			   type="com.aia.it.planner.model.Planner" >
-			   
-		<id property="pidx" column="pidx"/>		
-		<result property="ptitle" column="ptitle"/>	   
-		<result property="pstartdate" column="pstartdate"/>
-		<result property="penddate" column="penddate"/>
-		<result property="uidx" column="uidx"/>
+		type="com.aia.it.planner.model.Planner">
+
+		<id property="pidx" column="pidx" />
+		<result property="ptitle" column="ptitle" />
+		<result property="pstartdate" column="pstartdate" />
+		<result property="penddate" column="penddate" />
+		<result property="uidx" column="uidx" />
 	</resultMap>
-	
+
 	<resultMap id="resultPlannerJoinDaily"
 		type="com.aia.it.planner.model.PlannerJoinDaily">
 
@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dloc" column="dloc" />
 		<result property="dloclon" column="dloclon" />
 		<result property="dloclat" column="dloclat" />
+		<result property="daddr" column="daddr" />
 		<result property="dmsg" column="dmsg" />
 		<result property="dphoto" column="dphoto" />
 		<result property="dtype" column="dtype" />
@@ -33,76 +34,115 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="uidx" column="uidx" />
 		<result property="didx" column="didx" />
 
-	
-		</resultMap>
+
+	</resultMap>
 
 	<!-- 플래너 등록 -->
 	<insert id="insertPlanner"
-		parameterType="com.aia.it.planner.model.Planner" 
-		useGeneratedKeys="true"
-		keyProperty="pidx">
-		
+		parameterType="com.aia.it.planner.model.Planner"
+		useGeneratedKeys="true" keyProperty="pidx">
+
 		INSERT INTO planit.planner (ptitle, pstartdate, penddate, uidx)
-		VALUES (#{ptitle},#{pstartdate},#{penddate},#{uidx})
+		VALUES
+		(#{ptitle},#{pstartdate},#{penddate},#{uidx})
 
 	</insert>
-	
-	
+
+
 	<!-- 플래너의 전체 개수 구하기 -->
-	 <select id="totalCnt"
-			resultType="int">
-			
+	<select id="totalCnt" resultType="int">
+
 		select count(*) from planit.planner
-	
+
 	</select>
-	
+
 	<!-- deletePlannerByIdx -->
-	
-	
+
+
 	<!-- 플래너의 리스트 출력 by Uidx -->
 	<select id="selectPlannerByIdx" resultMap="resultPlanner">
-	select * from planit.planner where uidx=#{uidx} order by pidx desc
+		select * from planit.planner where uidx=#{uidx} order by pidx desc
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+	<!-- 플래너 삭제 -->
 	<delete id="deletePlannerByIdx">
-	
-	delete from planit.planner where pidx=#{pidx};
-	
+		delete from planit.planner where pidx=#{pidx}
 	</delete>
-	
-	
-	
-	
-	
+
+
+
 	<!-- 플래너의 전체 리스트 출력 -->
 	<select id="selectTotalList" resultMap="resultPlanner">
-	select * from planit.planner where order by pidx desc
+		select * from planit.planner order by pidx desc
 	</select>
-	
-	<!-- 데일리 리스트 출력  -->
+
+
+
+
+	<!-- 데일리 리스트 출력 -->
 	<select id="selectDailyList" resultMap="resultPlannerJoinDaily">
-		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+		select * from
+		planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx
+		where p.uidx=#{param1} and p.pidx=#{param2} order by ddate asc, ddidx
+		asc
 
 	</select>
 
 
-	<!-- 데일리 리스트 출력  -->
-	<select id="selectDailyJoinList" resultMap="resultPlannerJoinDaily">
-		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+	<!-- 데일리 리스트 출력 -->
+	<select id="selectDailyListQ" resultMap="resultPlannerJoinDaily">
+		select * from
+		planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx
+		where p.uidx=#{uidx}
 
 	</select>
 
-	
-	
 
 
-	
+	<!-- 여기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11 
+		서부터!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 플래너 검색기능포함 페이징처리다앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ -->
+	<!-- 전체게시글 개수 -->
+	<select id="totalCnt2" parameterType="map" resultType="int">
+		select count(*) from planit.planner where uidx=#{uidx}
+
+		<include refid="listSearch" />
+	</select>
+
+
+	<!-- 한페이지에 보이게 될 게시글 수 -->
+	<select id="selectList2" parameterType="map"
+		resultMap="resultPlanner">
+
+		select * from planit.planner
+		where uidx=#{uidx}
+		<include refid="listSearch" />
+
+		order by pidx desc
+		limit #{startRow}, #{count}
+
+	</select>
+
+	<sql id="listSearch">
+		<where>
+
+
+			<if test="searchType != null">
+
+				<if test="searchType == 'id'">
+					<include refid="whereID" />
+				</if>
+
+			</if>
+		</where>
+	</sql>
+
+	<sql id="whereID">
+		and ptitle like concat('%',#{keyword},'%')
+
+
+	</sql>
+
+
 
 </mapper>

@@ -16,10 +16,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pidx" column="pidx" />
 		<result property="uidx" column="uidx" />
 	</resultMap>
+	
+	<resultMap id="resultBoardJoinMember"
+		type="com.aia.it.board.model.BoardJoinMember">
+
+		<id property="bidx" column="bidx" />
+		<result property="btitle" column="btitle" />
+		<result property="bmsg" column="bmsg" />
+		<result property="bphoto1" column="bphoto1" />
+		<result property="bphoto2" column="bphoto2" />
+		<result property="uidx" column="uidx" />
+		<result property="uphoto" column="uphoto" />
+		<result property="uname" column="uname" />		
+		
+		</resultMap>
 
 	<!-- 게시글 입력 -->
 
 	<insert id="insertBoard"
+		parameterType="com.aia.it.board.model.Board" useGeneratedKeys="true"
+		keyProperty="bidx">
+		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2,pidx)
+		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2},#{pidx})
+	</insert>
+	
+	
+		<insert id="insertBoardNull"
 		parameterType="com.aia.it.board.model.Board" useGeneratedKeys="true"
 		keyProperty="bidx">
 		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2)
@@ -28,39 +50,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시판 리스트 출력 -->
 	<select id="selectTotalList" resultMap="resultBoard">
-		select * from
-		planit.board order by bidx desc
+		select * from planit.board order by bidx desc
 	</select>
 
 	<!-- 전체게시글 개수 -->
-	<select id="totalCnt" resultType="int">
-		select count(*) from
-		planit.board
+	<select id="totalCnt" parameterType="map" resultType="int">
+		select count(*) from planit.board b join planit.member m on b.uidx = m.uidx
+		
+		<include refid="listSearch"/>
 	</select>
 
 	<!-- 한페이지에 보이게 될 게시글 수 -->
-	<select id="selectList" resultMap="resultBoard">
-		select * from planit.board 
-		order by bidx desc limit #{param1}, #{param2}
+	<select id="selectList"  parameterType="map" resultMap="resultBoardJoinMember">
+	
+		select * from planit.board b join planit.member m on b.uidx = m.uidx
+		
+		<include refid="listSearch"/>
+		order by bidx desc
+		limit #{startRow}, #{count}
+		
 	</select>
+	
+	<sql id="listSearch">
+		<where>
+			<if test="searchType != null">
+				<if test="searchType == 'both'">
+					<include refid="whereID" />
+					<include refid="whereName" />
+				</if>
+				<if test="searchType == 'id'">
+					<include refid="whereID" />
+				</if>
+				<if test="searchType == 'name'">
+					<include refid="whereName" />
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="whereID">
+		or uname like concat('%',#{keyword},'%')
+
+
+	</sql>
+
+	<sql id="whereName">
+		or btitle like concat('%',#{keyword},'%')
+	</sql>
+	
 
 
 	<!-- 게시글 수정 -->
 
 	<update id="editBoard"
 		parameterType="com.aia.it.board.model.Board">
-		UPDATE planit.board
-		SET
-		btitle = #{btitle},
-		bmsg = #{bmsg},
-		
-		
-		bphoto1 = #{bphoto1},
-		bphoto2 = #{bphoto2}
-		WHERE bidx = #{bidx}
+		update planit.board
+		set
+		btitle = #{btitle},	bmsg = #{bmsg},	bphoto1 = #{bphoto1},
+		bphoto2 = #{bphoto2} WHERE (bidx = #{bidx})
 	</update>
 
 	<!-- 게시글 bidx로 조회 -->
+	<select id="selectByBidxJoin"
+		resultType="com.aia.it.board.model.BoardJoinMember">
+		select * from planit.board b join planit.member m on b.uidx = m.uidx where b.bidx=#{bidx}
+	</select>
+	
+		<!-- 게시글 bidx로 조회 -->
 	<select id="selectByBidx"
 		resultType="com.aia.it.board.model.Board">
 		select * from planit.board where bidx=#{bidx}
@@ -71,6 +127,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       delete from planit.board where bidx=#{bidx}
 	</delete>
    
-   <!-- 내가쓴 플래너 리스트 -->
+      <!-- 게시글 확인시 플래너가 있으면 플래너를 보여주기위한 카운트. -->
+   	<select id="selectByPidx"
+		resultType="int">
+		select count(*) from planit.board where pidx=#{pidx}
+	</select>
+	
+
  
 </mapper>
+
+

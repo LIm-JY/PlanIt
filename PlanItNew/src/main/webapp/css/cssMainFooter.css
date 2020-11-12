@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+
+
+/* footer nav 설장입니다.  */
+
+
+	footer{
+	/*하단에 위치고정 */
+	position : absolute;
+	bottom:  0;
+	}
+	
+	
+	.mainNav{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}	
+	
+	.mainNav li { 
+		display: inline; 
+		color: grey;
+		padding-left: 09px; 
+		padding-right: 09px; 
+		text-align: center;
+    }
+
+    .mainNav li a:hover  {
+		color: #E9967A;
+	}
+
+/* 	.mainPlanList a, .mainBoardList a{
+		color: #E9967A;
+	} */
+    
+    #mainNavSpan{
+    	color: grey;
+    	font-size: 9px; 
+    	position: relative; 
+    	top : -15px;
+    }
+    
+      
+    
+    
+ 

@@ -1,6 +1,8 @@
 
 package com.aia.it.comment.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aia.it.board.service.BoardListService;
 import com.aia.it.comment.model.Comment;
-import com.aia.it.comment.model.CommentRequest;
 import com.aia.it.comment.service.CommentService;
 
 @Controller
@@ -27,7 +29,9 @@ public class CommentController {
 	BoardListService bService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getCommentForm(HttpServletResponse response, HttpServletRequest request, Model model) {
+	public String getCommentForm(HttpServletResponse response, 
+			HttpServletRequest request, 
+			Model model) throws SQLException {
 
 		model.addAttribute("listView", bService.getView(request, response));
 
@@ -35,13 +39,16 @@ public class CommentController {
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String getComment(Comment comment, HttpServletRequest request, Model model) {
+	@RequestMapping(value = "/comment" , method = RequestMethod.POST)
+	public ModelAndView getComment(Comment comment, HttpServletRequest request, ModelAndView model) {
 		System.out.println("controller: " + comment);
+		int res=-1;
+		
+		res = cService.commentWrite(comment);
 
-		model.addAttribute("result", cService.commentWrite(comment));
-
-		return "comment/comment";
+		model.addObject("result", res);
+		model.setViewName("jsonView");
+		return model;
 
 	}
 

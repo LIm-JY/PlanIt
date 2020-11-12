@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/*만들어는 놨는데 적용은 안됨.. plannerList 에서는 적용되었다.
+ㅠㅠ  */
+
+html {
+	height: 100%;
+	}
+/* 
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding-top: 80px;
+	padding-bottom: 40px;
+	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+	background-repeat: no-repeat;
+}	 */
+	
+/* 이건 또 먹음.. */	
+/* header {
+		  height: 75px;
+		  padding: 1rem;
+		  color: white;
+		  background: #00CED1;
+		  font-weight: bold;
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+	} */

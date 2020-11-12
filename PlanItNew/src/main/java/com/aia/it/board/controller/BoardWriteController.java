@@ -31,7 +31,7 @@ public class BoardWriteController {
 			HttpServletRequest request
 			) {
 		
-		model.addAttribute("listView", listDailyService.getDailyView(session, request));
+		model.addAttribute("dailyList", listDailyService.getDailyView(session, request));
 
 		return "board/boardWriteForm";
 	}

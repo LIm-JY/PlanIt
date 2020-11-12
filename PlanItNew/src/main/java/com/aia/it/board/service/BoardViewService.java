@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aia.it.board.dao.BoardDaoInterface;
-import com.aia.it.board.model.Board;
+import com.aia.it.board.model.BoardJoinMember;
 
 @Service
 public class BoardViewService {
@@ -15,11 +15,11 @@ public class BoardViewService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	public Board getBoardInfo(int bidx) {
+	public BoardJoinMember getBoardInfo(int bidx) {
 		
 		dao = sessionTemplate.getMapper(BoardDaoInterface.class);
 	
-		return dao.selectByBidx(bidx);
+		return dao.selectByBidxJoin(bidx);
 	}
 
 }

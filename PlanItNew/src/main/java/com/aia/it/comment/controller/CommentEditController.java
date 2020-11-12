@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aia.it.board.model.BoardEditRequest;
 import com.aia.it.board.service.BoardEditService;
@@ -36,17 +37,16 @@ public class CommentEditController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String getCommentEdit(
+	public ModelAndView getCommentEdit(
 			Comment comment,
 			HttpServletRequest request,
-			Model model
+			ModelAndView model
 			) throws IllegalStateException, IOException, SQLException {
 		
-		System.out.println("controller: "+comment);
-		
-		model.addAttribute("result", editService.commentEdit(comment));
-				return "comment/commentEdit";
-		
+		int res = editService.commentEdit(comment);
+		model.addObject("result", res);
+		model.setViewName("jsonView");
+	return model;
 	}
 	
 

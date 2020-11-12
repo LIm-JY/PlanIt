@@ -2,6 +2,7 @@ package com.aia.it.board.model;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class BoardEditRequest {
 	
 	private int bidx;
@@ -12,10 +13,39 @@ public class BoardEditRequest {
 	private String oldFile1;
 	private String oldFile2;
 	private int uidx;//회원 닉네임
+	private String pidx;
 
 		
 	
 	
+	public BoardEditRequest() {
+	}
+	
+	
+	public BoardEditRequest(int bidx, String btitle, String bmsg, MultipartFile bphoto1, MultipartFile bphoto2,
+			String oldFile1, String oldFile2, int uidx, String pidx) {
+		this.bidx = bidx;
+		this.btitle = btitle;
+		this.bmsg = bmsg;
+		this.bphoto1 = bphoto1;
+		this.bphoto2 = bphoto2;
+		this.oldFile1 = oldFile1;
+		this.oldFile2 = oldFile2;
+		this.uidx = uidx;
+		this.pidx = pidx;
+	}
+
+
+	public String getPidx() {
+		return pidx;
+	}
+
+
+	public void setPidx(String pidx) {
+		this.pidx = pidx;
+	}
+
+
 	public int getBidx() {
 		return bidx;
 	}
@@ -65,13 +95,22 @@ public class BoardEditRequest {
 		this.uidx = uidx;
 	}
 	public Board toBoard() {
-		return new Board(bidx,btitle,bmsg,oldFile1, oldFile2  , null, 0, uidx);
+		int pidx = 0;
+		try {
+			pidx = Integer.parseInt(this.pidx);
+		} catch (Exception e) {
+			System.out.println("숫자 변경안됨");
+		}
+		return new Board(bidx,btitle, bmsg, oldFile1, oldFile2,null,pidx, uidx);
 	}
+
 	@Override
 	public String toString() {
 		return "BoardEditRequest [bidx=" + bidx + ", btitle=" + btitle + ", bmsg=" + bmsg + ", bphoto1=" + bphoto1
-				+ ", bphoto2=" + bphoto2 + ", oldFile1=" + oldFile1 + ", oldFile2=" + oldFile2 + ", uidx=" + uidx + "]";
+				+ ", bphoto2=" + bphoto2 + ", oldFile1=" + oldFile1 + ", oldFile2=" + oldFile2 + ", uidx=" + uidx
+				+ ", pidx=" + pidx + "]";
 	}
+
 	
 	
 	

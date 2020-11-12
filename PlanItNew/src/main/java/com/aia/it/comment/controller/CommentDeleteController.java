@@ -1,4 +1,3 @@
-
 package com.aia.it.comment.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aia.it.board.service.BoardDeleteService;
 import com.aia.it.comment.service.CommentDeleteService;
@@ -19,12 +19,13 @@ public class CommentDeleteController {
 	private CommentDeleteService deleteService;
 
 	@RequestMapping("/comment/commentDelete")
-	public String deleteComment(
+	public ModelAndView deleteComment(
 
-			@RequestParam("cidx") int cidx,  Model model) {
-
-		model.addAttribute("msg", deleteService.commentDelete(cidx));
-		return "comment/commentDelete";
+			@RequestParam("cidx") int cidx,  ModelAndView model) {
+		int result = deleteService.commentDelete(cidx);
+		model.addObject("result", result);
+		model.setViewName("jsonView");
+		return model;
 
 	}
 

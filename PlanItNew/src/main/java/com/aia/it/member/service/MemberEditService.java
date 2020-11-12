@@ -33,6 +33,10 @@ public class MemberEditService {
 		return member;
 	}
 	
+	
+	
+	
+	
 	public int memberEdit(int uidx, MemberEditRequest editRequest, HttpServletRequest request) {
 		
 		dao = template.getMapper(MemberDaoInterface.class); 		
@@ -41,11 +45,8 @@ public class MemberEditService {
 		
 		Member member = editRequest.toMember(); 
 		
-		System.out.println("입력 전 idx ->" + member.getUidx());
-
 		try {
 		MultipartFile file = editRequest.getPhoto(); 
-		System.out.println(editRequest);
 		
 		//사진 있을 때 물리적으로 저장, 없을 경우 기본이미지 파일의 경로를 저장
 		if(file != null && !file.isEmpty() && file.getSize() > 0) {
@@ -56,11 +57,10 @@ public class MemberEditService {
 			
 			File saveFile = new File(realPath, newFileName); 	
 			file.transferTo(saveFile);
-			System.out.println("저장완료: " + newFileName);
 		
 			member.setUphoto(newFileName); 
 			
-			//이전 페이지 삭제 
+			//이전 파 삭제 
 			File oldFile = new File(realPath, editRequest.getOldFile());
 			
 			if(oldFile.exists()) {
@@ -71,10 +71,8 @@ public class MemberEditService {
 			}
 		}
 	 catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 		}

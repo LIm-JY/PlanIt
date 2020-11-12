@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aia.it.member.model.MemberEditRequest;
 import com.aia.it.member.service.MemberEditService;
-import com.aia.it.member.service.MyPageViewService;
 
 @Controller
 @RequestMapping("/member/memberEdit")

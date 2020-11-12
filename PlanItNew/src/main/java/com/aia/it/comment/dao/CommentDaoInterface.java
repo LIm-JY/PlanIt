@@ -2,11 +2,7 @@ package com.aia.it.comment.dao;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
-import com.aia.it.board.model.Board;
 import com.aia.it.comment.model.Comment;
-import com.aia.it.comment.model.CommentRequest;
 
 public interface CommentDaoInterface {
 	
@@ -20,7 +16,7 @@ public interface CommentDaoInterface {
 	List<Comment> selectList(int bidx, int startRow, int count);
 	
 	//등록된 값을 int로 반환
-	int insertComment(Comment comment);
+	
 	
 	Comment selectByCidx(int cidx);
 
@@ -29,6 +25,8 @@ public interface CommentDaoInterface {
 	int commentDelete(Comment comment);
 
 	int editComment(Comment comment);
+
+	int insertComment(Comment comment);
 	
 
 }

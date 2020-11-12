@@ -4,26 +4,25 @@ import java.util.List;
 
 public class DailyOrderEdit {
 
-	private List<DailyOrderEditForm> DailyOrderEdit;
+	private List<DailyOrderEditForm> dailyOrderEdit;
 
 	public DailyOrderEdit() {
 	}
 
-	public DailyOrderEdit(List<DailyOrderEditForm> DailyOrderEdit) {
-		this.DailyOrderEdit = DailyOrderEdit;
+
+	public List<DailyOrderEditForm> getDailyOrderEdit() {
+		return dailyOrderEdit;
 	}
 
-	public List<DailyOrderEditForm> getOrderEdit() {
-		return DailyOrderEdit;
+
+	public void setDailyOrderEdit(List<DailyOrderEditForm> dailyOrderEdit) {
+		this.dailyOrderEdit = dailyOrderEdit;
 	}
 
-	public void setOrderEdit(List<DailyOrderEditForm> DailyOrderEdit) {
-		this.DailyOrderEdit = DailyOrderEdit;
-	}
 
 	@Override
 	public String toString() {
-		return "DailyOrderEdit [DailyOrderEdit=" + DailyOrderEdit + "]";
+		return "DailyOrderEdit [DailyOrderEdit=" + dailyOrderEdit + "]";
 	}
 	
 	

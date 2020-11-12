@@ -22,7 +22,6 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		
 	</beans:bean>
 	
 	<!-- 파일 업로드를 위해 multipartResolver bean 등록 -->

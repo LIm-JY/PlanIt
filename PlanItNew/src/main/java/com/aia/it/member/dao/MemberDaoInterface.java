@@ -3,6 +3,7 @@ package com.aia.it.member.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.aia.it.board.model.Board;
 import com.aia.it.member.model.Member;
 
 public interface MemberDaoInterface {
@@ -21,13 +22,16 @@ public interface MemberDaoInterface {
 	public List<Member> selectList(int starRow, int count);
 
 	// idx 기반 검색한 회원 정보 반환
-	public Member SelectByUidx(int uidx);
+	public Member selectByUidx(int uidx);
+		// 회원 정보 수정 
+	public int editMember(Member member);
 	
 
 	// 전체 게시물의 개수 : 검색 포함
 	public int totalCnt();
 
 	public Member selectByIdpw(String uid, String upw);
+	
 
 	int selectById(String uid);
 
@@ -38,6 +42,11 @@ public interface MemberDaoInterface {
 	// 회원 이메일 인증 처리
 	public int verify(String uid, String ucode);
 
+	//회원 휴면 계정
+	int memberDisabled(Member member);
+	
+	//회원 탈퇴
+	int memberDelete(Member member);
 	
 	
 

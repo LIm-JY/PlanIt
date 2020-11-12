@@ -9,18 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		id="resultMember">
 		<id property="uidx" column="uidx" />
 		<id property="uid" column="uid" />
-		<id property ="upw" column="upw" />
+		<id property="upw" column="upw" />
 	</resultMap>
 
+	
 	<select id="selectByIdpw"
 		resultType="com.aia.it.member.model.Member">
 		select * from planit.member where uid=#{param1} and
 		upw=#{param2}
 	</select>
-
-	<select id="selectByIdx"
+	
+	<select id="selectByUidx"
 		resultType="com.aia.it.member.model.Member">
-		select * from planit.member where uidx=#{id}
+		select * from planit.member where uidx=#{uidx}
 	</select>
 
 	<select id="selectTotalList" resultMap="resultMember">
@@ -54,14 +55,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		planit.member
 	</select>
 
-
+	<!--회원가입  -->
 	<insert id="insertMember"
 		parameterType="com.aia.it.member.model.Member" useGeneratedKeys="true"
 		keyProperty="uidx">
 
 		INSERT INTO planit.member (uid, upw, uname, uphonenum, uphoto, uverify)
 		VALUES (#{uid}, #{upw}, #{uname}, #{uphonenum}, #{uphoto},'Y')
-
 	</insert>
 	
 
@@ -71,6 +71,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update planit.member set uverify='Y'
 		where uid=#{param1} and ucode=#{param2}
 	</update>
+	
+	<!-- 회원 정보 수정-->
+	<update id = "editMember" parameterType="com.aia.it.member.model.Member" >
+		update planit.member set uname=#{uname}, upw=#{upw}, uphonenum=#{uphonenum}, uphoto=#{uphoto}
+		where (uidx = #{uidx})
+	
+	</update>
+	
+	<!-- 회원 휴면계정-->
+	<update id = "memberDisabled" parameterType="com.aia.it.member.model.Member" >
+		update planit.member set usignout= 'Y'
+		where (uidx = #{uidx})
+	
+	</update>
+	
 
 	<!--카카오 회원추가 -->
 	<insert id="insertKakaoMember"
@@ -82,5 +97,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	</insert>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete" parameterType="com.aia.it.member.model.Member">
+      delete from planit.member where uidx=#{uidx}
+	</delete>
+	
+	
 
 </mapper>

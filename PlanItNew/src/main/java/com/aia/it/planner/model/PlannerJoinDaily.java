@@ -9,6 +9,7 @@ public class PlannerJoinDaily {
 	   	private String dloc;
 		private String dloclon;
 		private String dloclat;
+		private String daddr;
 		private String dmsg;
 		private String dphoto;
 		private String dtype;
@@ -23,7 +24,7 @@ public class PlannerJoinDaily {
 		}
 
 		public PlannerJoinDaily(String ptitle, String pstartdate, String penddate, String dloc, String dloclon,
-				String dloclat, String dmsg, String dphoto, String dtype, String ddate, int ddidx, int pidx, int uidx,
+				String dloclat, String daddr, String dmsg, String dphoto, String dtype, String ddate, int ddidx, int pidx, int uidx,
 				int didx) {
 			this.ptitle = ptitle;
 			this.pstartdate = pstartdate;
@@ -31,6 +32,7 @@ public class PlannerJoinDaily {
 			this.dloc = dloc;
 			this.dloclon = dloclon;
 			this.dloclat = dloclat;
+			this.daddr = daddr;
 			this.dmsg = dmsg;
 			this.dphoto = dphoto;
 			this.dtype = dtype;
@@ -87,6 +89,14 @@ public class PlannerJoinDaily {
 
 		public void setDloclat(String dloclat) {
 			this.dloclat = dloclat;
+		}
+
+		public String getDaddr() {
+			return daddr;
+		}
+
+		public void setDaddr(String daddr) {
+			this.daddr = daddr;
 		}
 
 		public String getDmsg() {
@@ -156,11 +166,16 @@ public class PlannerJoinDaily {
 		@Override
 		public String toString() {
 			return "PlannerJoinDaily [ptitle=" + ptitle + ", pstartdate=" + pstartdate + ", penddate=" + penddate
-					+ ", dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", dmsg=" + dmsg
-					+ ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx=" + ddidx + ", pidx="
-					+ pidx + ", uidx=" + uidx + ", didx=" + didx + "]";
+					+ ", dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", daddr=" + daddr
+					+ ", dmsg=" + dmsg + ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx="
+					+ ddidx + ", pidx=" + pidx + ", uidx=" + uidx + ", didx=" + didx + "]";
 		}
 		
+		
+		
+		
+		
+
 		
 	
 	

@@ -38,14 +38,19 @@ public class BoardWriteService {
 		Board board = bRequest.toBoard();
 		
 		System.out.println(board);
-		
+		System.out.println("1bRequest.getPidx()"+bRequest.getPidx());
 		System.out.println("입력 전 IDX ===> "+board.getBidx());
 		
+			
+		
+		
+		//System.out.println("pidx111"+pidx);
 		try {
 			
 			MultipartFile file1 = bRequest.getBphoto1();
 			MultipartFile file2 = bRequest.getBphoto2();
 
+			
 
 
 			// 사진이 있다면 사진 파일을 물리적으로 저장하고, 없다면 기본 이미지 파일의 경로를 저장한다.
@@ -69,12 +74,7 @@ public class BoardWriteService {
 				board.setBphoto1(newFileName);
 				//board.setBphoto2(newFileName);
 
-			} else {
-				board.setBphoto1("defalult.png");
-				//board.setBphoto2("defalult.png");
-
-				
-			}
+			} 
 			
 			// 사진이 있다면 사진 파일을 물리적으로 저장하고, 없다면 기본 이미지 파일의 경로를 저장한다.
 			if (file2 != null && !file2.isEmpty() && file2.getSize() > 0) {
@@ -97,13 +97,10 @@ public class BoardWriteService {
 			//board.setBphoto1(newFileName);
 			board.setBphoto2(newFileName);
 
-		} else {
-			//board.setBphoto1("defalult.png");
-			board.setBphoto2("defalult.png");
-
-							
-		}
-
+		} 				
+		
+	
+			
 			result = dao.insertBoard(board);
 
 			System.out.println("입력 후 IDX ===> " + board.getBidx());
@@ -129,4 +126,4 @@ public class BoardWriteService {
 		
 	}
 
-}
+	}

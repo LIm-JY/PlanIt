@@ -9,9 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aia.it.daily.model.DailyList;
 import com.aia.it.member.model.LoginInfo;
 import com.aia.it.planner.dao.PlannerDaoInterface;
+import com.aia.it.planner.model.Planner;
 import com.aia.it.planner.model.PlannerJoinDaily;
 
 
@@ -25,7 +25,7 @@ public class DailyListService {
 
 	
 	List<PlannerJoinDaily> dailyList = null;
-	DailyList listView = null;
+
 	
 	public List<PlannerJoinDaily> getView(
 			 
@@ -38,39 +38,30 @@ public class DailyListService {
 		dao=sessionTemplate.getMapper(PlannerDaoInterface.class);
 		
 		
-	
-		/*
-		 * dailyList = dao.selectDailyList(uidx);
-		 * 
-		 * listView = new DailyList(dailyList);
-		 * System.out.println("나는 데일리의 리스트뷰!"+listView);
-		 */
+	System.out.println(dao.selectDailyList(uidx, pidx));
+
 		
-		return dao.selectDailyList(uidx);
+		return dao.selectDailyList(uidx, pidx);
 	}
 
 	
-	  public DailyList getDailyView( HttpSession session, HttpServletRequest
+	//내꺼
+	  public List<Planner> getDailyView( HttpSession session, HttpServletRequest
 	  request) {
 	  
 	  dao=sessionTemplate.getMapper(PlannerDaoInterface.class);
-	  
+	  List<Planner> dailyList = null;
 	  // 세션을 가져온다. session = request.getSession(true);
 	  
-	  //Member member = (Member) HttpSession.getAttribute("loginInfo"); 
 	  LoginInfo loginInfo=(LoginInfo) session.getAttribute("loginInfo");
-	  
-	  if(loginInfo != null) {
-	  
-	  // 세션이 있으면 세션에 있는 loginInfo의 uidx를 데려온다. 
-		  loginInfo.getUidx(); 
-		  //데려온 uidx를이용하여 플래너의 리스트를 출력해준다. 
-		  dailyList = dao.selectDailyList(loginInfo.getUidx()); }
+	
+		  dailyList = dao.selectPlannerByIdx(loginInfo.getUidx()); 
+		  
 	  
 	  
 	  //리스트에 uidx로 데려온 결과를 담아준다. listView = new DailyList(dailyList);
-	  System.out.println("나는 데일리의 리스트뷰!"+listView); 
-	  return listView; 
+	  System.out.println("나는 데일리의 리스트뷰!??"+loginInfo.getUidx()); 
+	  return dailyList; 
 	  }
 	 
 }
